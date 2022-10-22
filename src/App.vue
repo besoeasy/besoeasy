@@ -1,24 +1,28 @@
 <template>
-	<div class="container max-w-7xl mx-auto px-10">
-		<mainc />
-		<social />
-		<medium />
+	<div class="bg-yellow-50">
+		<div class="container max-w-7xl mx-auto px-10 py-40">
+			<mainx />
+
+			<music />
+
+			<social />
+
+			<contact />
+		</div>
 	</div>
 </template>
 
 <script>
-	import mainc from './components/main.vue';
+	import mainx from './components/main.vue';
+
+	import music from './components/music.vue';
+
+	import contact from './components/contact.vue';
 
 	import social from './components/social.vue';
 
-	import medium from './components/medium.vue';
-
 	export default {
 		name: 'App',
-		components: {
-			mainc,
-			social,
-			medium,
-		},
+		components: { mainx, music, contact, social },
 	};
 </script>

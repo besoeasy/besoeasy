@@ -28,10 +28,10 @@
 
 			console.log(data);
 
-			const { city, country } = data;
+			const { city } = data;
 
 			if (city) {
-				this.email = city + '-' + country;
+				this.email = city;
 			}
 		},
 	};

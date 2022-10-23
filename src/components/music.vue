@@ -6,7 +6,7 @@
 			</div>
 			<div class="m-auto">
 				<p class="text-4xl my-6 text-left uppercase">
-					<span class="text-yellow-500">Playing </span> 🎵<br /><br />
+					<span class="text-yellow-500">Listening </span> 🎵<br /><br />
 					{{ song }}
 				</p>
 			</div>

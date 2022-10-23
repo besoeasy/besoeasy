@@ -2,6 +2,10 @@
 	<div class="py-5 lg:py-10">
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-2">
 			<div class="m-auto">
+				<lottie-player src="ani/social.json" background="transparent" speed="1" loop autoplay></lottie-player>
+			</div>
+
+			<div class="m-auto">
 				<p class="text-4xl text-left uppercase"><span class="text-yellow-500">CONNECT</span> ON SOCIAL</p>
 				<br />
 				<div class="grid grid-cols-2 md:grid-cols-5">
@@ -32,10 +36,6 @@
 						</a>
 					</div>
 				</div>
-			</div>
-
-			<div class="m-auto">
-				<lottie-player src="ani/social.json" background="transparent" speed="1" loop autoplay></lottie-player>
 			</div>
 		</div>
 	</div>

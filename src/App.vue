@@ -1,6 +1,6 @@
 <template>
-	<div class="m-auto container">
-		<div class="grid grid-cols-2 min-h-screen">
+	<div class="m-auto container px-10">
+		<div class="grid grid-cols-1 md:grid-cols-2 min-h-screen">
 			<div class="m-auto transform hover:scale-150 transition duration-1000">
 				<name class="my-3" />
 				<social class="my-2" />

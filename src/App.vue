@@ -1,28 +1,25 @@
 <template>
-	<div class="bg-yellow-50">
-		<div class="container max-w-7xl mx-auto px-10 py-40">
-			<mainx />
+	<div class="m-auto container">
+		<div class="grid grid-cols-2 min-h-screen">
+			<div class="m-auto transform hover:scale-150 transition duration-1000">
+				<name class="my-3" />
+				<social class="my-2" />
 
-			<music />
-
-			<social />
-
-			<contact />
+				<contact class="my-3" />
+			</div>
+			<div class="my-auto"><lottie-player src="index.json" background="transparent" speed="1" loop autoplay></lottie-player></div>
 		</div>
 	</div>
 </template>
 
 <script>
-	import mainx from './components/main.vue';
-
-	import music from './components/music.vue';
+	import name from './components/name.vue';
 
 	import contact from './components/contact.vue';
 
 	import social from './components/social.vue';
 
 	export default {
-		name: 'App',
-		components: { mainx, music, contact, social },
+		components: { name, contact, social },
 	};
 </script>

@@ -1,18 +1,5 @@
 <template>
-	<div class="py-5 lg:py-10">
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-			<div class="m-auto">
-				<lottie-player src="ani/contact.json" background="transparent" speed="1" loop autoplay></lottie-player>
-			</div>
-			<div class="m-auto">
-				<p class="text-4xl my-6 text-left uppercase">
-					<span class="text-yellow-500">Email</span> Me 👇<br /><br />
-					<span class="text-yellow-500">{{ email }}</span
-					>@besoeasy.com
-				</p>
-			</div>
-		</div>
-	</div>
+	<div>Email : {{ email }}@besoeasy.com</div>
 </template>
 
 <script>
@@ -31,7 +18,7 @@
 			const { city } = data;
 
 			if (city) {
-				this.email = city;
+				this.email = city.toLowerCase();
 			}
 		},
 	};

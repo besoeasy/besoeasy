@@ -1,8 +1,13 @@
+<script setup>
+	import ContactEmail from './components/ContactEmail.vue';
+	import SocialLinks from './components/SocialLinks.vue';
+</script>
+
 <template>
 	<div class="flex justify-center items-center h-screen bg-yellow-50">
 		<div class="m-auto max-w-7xl p-10">
 			<div class="grid grid-cols-1 lg:grid-cols-2">
-				<div class="m-auto hidden md:block"><lottie-player src="https://assets5.lottiefiles.com/packages/lf20_rmizwv6a.json" background="transparent" speed="1" loop="" autoplay=""></lottie-player></div>
+				<div class="m-auto hidden md:block"><lottie-player src="ani.json" background="transparent" speed="1" loop="" autoplay=""></lottie-player></div>
 
 				<div class="m-auto">
 					<div class="text-left">
@@ -26,15 +31,3 @@
 		</div>
 	</div>
 </template>
-
-<script>
-	import ContactEmail from './components/ContactEmail.vue';
-	import SocialLinks from './components/SocialLinks.vue';
-
-	export default {
-		components: {
-			SocialLinks,
-			ContactEmail,
-		},
-	};
-</script>

@@ -7,7 +7,7 @@
 
 	export default {
 		data() {
-			return { email: 'a@besoeasy.com' };
+			return { email: 'a' };
 		},
 
 		async mounted() {

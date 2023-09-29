@@ -1,5 +1,7 @@
 <template>
-	<div>Email : {{ email }}@besoeasy.com</div>
+	<div>
+		<p class="text-xl bg-yellow-200 text-center">Email : {{ email }}@besoeasy.com</p>
+	</div>
 </template>
 
 <script>

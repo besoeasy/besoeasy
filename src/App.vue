@@ -5,7 +5,7 @@
 
 <template>
 	<div class="flex justify-center items-center h-screen">
-		<div class="m-auto container p-10">
+		<div class="m-auto max-w-5xl p-10">
 			<div class="grid grid-cols-1 lg:grid-cols-2">
 				<div class="hidden md:block m-auto">
 					<div class="hover:transform hover:scale-110 hover:transition-transform hover:duration-800">

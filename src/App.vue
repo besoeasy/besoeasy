@@ -110,7 +110,7 @@ const changeBackgroundColor = () => {
   setTimeout(() => {
     targetColor.value = "#ffffff";
     console.log("reset");
-  }, 6 * 1000);
+  }, 4 * 1000);
 };
 
 const backgroundColor = computed(() => {
@@ -126,6 +126,6 @@ setInterval(() => {
 
 <style>
 .transition-colors {
-  transition: background-color 6s ease; 
+  transition: background-color 3s ease; 
 }
 </style>

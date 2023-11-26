@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<p>Email : {{ email }}@besoeasy.com</p>
+		<p>{{ email }}@besoeasy.com</p>
 	</div>
 </template>
 

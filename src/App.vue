@@ -4,8 +4,8 @@
 		@click="changeBackgroundColor"
 		:style="{ backgroundColor: backgroundColor }"
 	>
-		<div class="container px-4 mx-auto">
-			<div class="flex flex-wrap lg:items-center -m-8">
+		<div class="container px-4 m-auto">
+			<div class="flex flex-wrap lg:items-center min-h-screen">
 				<div class="w-full md:w-1/2 p-8">
 					<div class="max-w-max mx-auto transform hover:-translate-y-1 transition duration-500">
 						<img class="rounded-2xl transition duration-500" src="/me.png" alt="" />
@@ -21,9 +21,7 @@
 							fill="none"
 							xmlns="http://www.w3.org/2000/svg"
 						></svg>
-						<p
-							class="mb-8 text-2xl font-semibold tracking-tight leading-7 text-gray-700 sm:leading-10"
-						>
+						<p class="mb-8 text-xl font-mono tracking-tight leading-7 text-gray-700 sm:leading-10">
 							<span
 								>I am a seasoned full-stack developer with a primary focus on fintech
 								and automation. Proficient in a wide range of programming languages, I

@@ -8,7 +8,7 @@
 			<div class="flex flex-wrap lg:items-center -m-8">
 				<div class="w-full md:w-1/2 p-8">
 					<div class="max-w-max mx-auto transform hover:-translate-y-1 transition duration-500">
-						<img class="rounded-2xl transition duration-500" src="/me.jpg" alt="" />
+						<img class="rounded-2xl transition duration-500" src="/me.png" alt="" />
 					</div>
 				</div>
 				<div class="w-full md:w-1/2 p-8">

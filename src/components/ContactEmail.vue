@@ -1,7 +1,5 @@
 <template>
-	<div>
-		<p>{{ email }}@besoeasy.com</p>
-	</div>
+	<div>{{ email }}@besoeasy.com</div>
 </template>
 
 <script>

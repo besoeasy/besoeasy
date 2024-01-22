@@ -1,20 +1,20 @@
 <template>
-	<div :style="{ backgroundImage: `url(${wave1})`, backgroundSize: 'cover' }" class="min-h-screen">
-		<div class="px-4 m-auto max-w-7xl">
-			<div class="flex flex-wrap lg:items-center min-h-screen">
-				<div class="w-full md:w-2/3 p-8">
+	<div :style="{ backgroundImage: `url(${wave1})`, backgroundSize: 'cover' }">
+		<div class="p-4 m-auto container">
+			<div class="flex gap-10 lg:items-center min-h-screen">
+				<div class="w-full md:w-1/2">
 					<div class="m-auto transform hover:-translate-y-1 transition duration-500">
 						<img class="rounded-2xl border-solid border-8 border-white" src="/me.png" alt="" />
 					</div>
 				</div>
-				<div class="w-full md:w-1/3 p-8">
+				<div class="w-full md:w-1/2">
 					<div class="m-auto">
-						<div class="font-bold text-3xl mb-2">AMAN SINGH KATAL</div>
-						<div class="text-sm mb-8 rounded-2xl font-extralight">
+						<div class="font-bold text-3xl lg:text-5xl mb-2 text-pretty">AMAN SINGH KATAL</div>
+						<div class="text-xl mb-8">
 							<ContactEmail />
 						</div>
 
-						<div class="mb-8 text-lg font-mono">
+						<div class="mb-8 text-lg lg:text-2xl text-gray-800">
 							I am a seasoned full-stack developer with a primary focus on fintech and
 							automation. Proficient in a wide range of programming languages, I have
 							collaborated with 70+ organizations, delivering mission-critical applications

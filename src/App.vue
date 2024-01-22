@@ -1,7 +1,7 @@
 <template>
 	<div :style="{ backgroundImage: `url(${wave1})`, backgroundSize: 'cover' }">
 		<div class="p-4 m-auto container">
-			<div class="flex flex-auto gap-10 lg:items-center min-h-screen">
+			<div class="flex flex-col sm:flex-row gap-10 lg:items-center min-h-screen">
 				<div class="w-full md:w-1/2">
 					<div class="m-auto transform hover:-translate-y-1 transition duration-500">
 						<img class="rounded-2xl border-solid border-8 border-white" src="/me.png" alt="" />

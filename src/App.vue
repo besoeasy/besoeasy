@@ -9,7 +9,7 @@
 				</div>
 				<div class="w-full md:w-1/2">
 					<div class="m-auto">
-						<div class="font-bold text-3xl lg:text-5xl mb-2 text-pretty">AMAN SINGH KATAL</div>
+						<div class="font-bold text-2xl lg:text-5xl mb-2 text-pretty">AMAN SINGH KATAL</div>
 						<div class="text-xl mb-8">
 							<ContactEmail />
 						</div>

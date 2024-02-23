@@ -1,6 +1,6 @@
 <template>
-	<div class="p-2 m-auto max-w-7xl">
-		<div class="flex sm:flex-col lg:flex-row gap-10 items-center justify-center min-h-screen">
+	<div class="p-5 m-auto max-w-7xl">
+		<div class="flex sm:flex-row flex-col gap-10 items-center justify-center min-h-screen">
 			<div class="w-full md:w-1/2">
 				<div class="m-auto transform hover:-translate-y-1 transition duration-500">
 					<img class="rounded-2xl" src="/me.png" alt="" />

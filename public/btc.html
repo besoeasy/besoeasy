@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-yellow-50 flex justify-center items-center h-screen">
+    <div class="bg-white p-4 rounded-2xl shadow-lg">
+        <div class="flex justify-center m-2">
+            <img id="qr-code" src="" alt="QR Code" class="w-96 h-96">
+        </div>
+        <p id="bitcoin-address" class="text-center text-gray-700 font-bold mt-3"></p>
+    </div>
+
+    <script>
+        const bitcoinAddresses = [
+            "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2",
+            "3J98t1WpEZ73CNmQviecrnyiWrnqRhWNLy",
+            "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq"
+        ];
+
+        const qrCodeImg = document.getElementById('qr-code');
+        const bitcoinAddressElement = document.getElementById('bitcoin-address');
+
+        function generateQRCode(address) {
+            qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=700x700&data=${address}`;
+        }
+
+        function displayBitcoinAddress() {
+            const randomIndex = Math.floor(Math.random() * bitcoinAddresses.length);
+            const selectedAddress = bitcoinAddresses[randomIndex];
+            bitcoinAddressElement.textContent = selectedAddress;
+            generateQRCode(selectedAddress);
+        }
+
+        qrCodeImg.addEventListener('click', displayBitcoinAddress);
+
+        displayBitcoinAddress();
+    </script>
+</body>
+
+</html>

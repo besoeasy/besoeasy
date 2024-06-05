@@ -22,6 +22,9 @@
 
 					<div class="space-y-3 leading-6 text-left xl:space-y-5 uppercase">
 						<div class="relative inline-block mr-3">
+							<Sbut textinput="Nostr" SocialLinks="https://njump.me/npub176qdmkxp8uww4wfwm56ftu8uuarmhqxzwrsgr7qvwsqma7mzmf7qu9ktln" />
+						</div>
+						<div class="relative inline-block mr-3">
 							<Sbut textinput="Telegram" SocialLinks="https://t.me/besoeasy" />
 						</div>
 						<div class="relative inline-block mr-3">

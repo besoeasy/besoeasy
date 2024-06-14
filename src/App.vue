@@ -39,9 +39,6 @@
 						<div class="relative inline-block mr-3">
 							<Sbut textinput="Steam" SocialLinks="https://steamcommunity.com/id/besoeasy" />
 						</div>
-						<div class="relative inline-block mr-3">
-							<Sbut textinput="Medium" SocialLinks="https://besoeasy.medium.com/" />
-						</div>
 					</div>
 				</div>
 			</div>

@@ -1,12 +1,10 @@
 <template>
   <div>
-    <a :href="SocialLinks">
-      <div
-        class="relative inline-block px-4 py-2 text-sm font-bold text-center text-black no-underline whitespace-no-wrap align-middle bg-white border-2 border-gray-900 border-solid rounded-md shadow-xs cursor-pointer select-none hover:bg-black hover:shadow-xs hover:text-white focus:shadow-xs transform transition-transform duration-300 hover:scale-105"
-      >
-        {{ textinput }}
-      </div></a
-    >
+ 
+<a :href="SocialLinks" class="group relative inline-block focus:outline-none focus:ring"><span class="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-yellow-300 transition-transform group-hover:translate-x-0 group-hover:translate-y-0"></span><span class="relative inline-block border-2 border-current px-8 py-3 text-sm font-bold uppercase tracking-widest text-black group-active:text-opacity-75"> {{ textinput }} </span></a>
+
+
+
   </div>
 </template>
 

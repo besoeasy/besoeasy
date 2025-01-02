@@ -48,7 +48,7 @@ import ContactEmail from "./components/ContactEmail.vue";
 import Sbut from "./components/Sbut.vue";
 
 const socialLinks = reactive({
-  NOSTR: "https://nosta.me/besoeasy@zaps.lol",
+  NOSTR: "https://nosta.me/besoeasy@nsec.app",
   Telegram: "https://t.me/besoeasy",
   Github: "https://github.com/besoeasy",
   Linkedin: "https://www.linkedin.com/in/besoeasy",

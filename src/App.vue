@@ -51,7 +51,6 @@ const socialLinksObj = {
   NOSTR: "https://nosta.me/besoeasy@nsec.app",
   Telegram: "https://t.me/besoeasy",
   Github: "https://github.com/besoeasy",
-  BITCOIN: "https://coinos.io/BeSoEasy",
 };
 
 function shuffle(array) {

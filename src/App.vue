@@ -29,7 +29,7 @@
 
           <div class="space-y-3 leading-6 text-left xl:space-y-5 uppercase">
             <div
-              v-for="(url, name) in socialLinks"
+              v-for="([name, url], idx) in socialLinks"
               :key="name"
               class="relative inline-block mr-3"
             >
@@ -43,14 +43,24 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { ref } from "vue";
 import ContactEmail from "./components/ContactEmail.vue";
 import Sbut from "./components/Sbut.vue";
 
-const socialLinks = reactive({
+const socialLinksObj = {
   NOSTR: "https://nosta.me/besoeasy@nsec.app",
   Telegram: "https://t.me/besoeasy",
   Github: "https://github.com/besoeasy",
   BITCOIN: "https://coinos.io/BeSoEasy",
-});
+};
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+const socialLinks = ref(shuffle(Object.entries(socialLinksObj)));
 </script>

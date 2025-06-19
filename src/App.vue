@@ -51,7 +51,6 @@ const socialLinks = reactive({
   NOSTR: "https://nosta.me/besoeasy@nsec.app",
   Telegram: "https://t.me/besoeasy",
   Github: "https://github.com/besoeasy",
-  Linkedin: "https://www.linkedin.com/in/besoeasy",
   BITCOIN: "https://coinos.io/BeSoEasy",
 });
 </script>

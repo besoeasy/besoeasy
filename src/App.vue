@@ -12,7 +12,7 @@
       </div>
       <div class="w-full md:w-2/5">
         <div class="m-auto">
-          <div class="text-2xl lg:text-4xl mb-2 text-pretty">
+          <div class="text-2xl lg:text-5xl mb-2 text-pretty">
             AMAN SINGH KATAL
           </div>
           <div class="text-xl mb-5 font-semibold">
@@ -52,5 +52,6 @@ const socialLinks = reactive({
   Telegram: "https://t.me/besoeasy",
   Github: "https://github.com/besoeasy",
   Linkedin: "https://www.linkedin.com/in/besoeasy",
+  BITCOIN: "https://coinos.io/BeSoEasy",
 });
 </script>

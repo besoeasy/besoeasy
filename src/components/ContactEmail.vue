@@ -1,25 +1,25 @@
 <template>
-	<div>{{ email }}@besoeasy.com</div>
+  <div>{{ email }}@besoeasy.com</div>
 </template>
 
 <script>
-	import axios from 'axios';
+import axios from "axios";
 
-	export default {
-		data() {
-			return { email: 'a' };
-		},
+export default {
+  data() {
+    return { email: "a" };
+  },
 
-		async mounted() {
-			const { data } = await axios.get('https://ipapi.co/json/');
+  async mounted() {
+    const { data } = await axios.get("https://ipapi.co/json/");
 
-			console.log(data);
+    console.log(data);
 
-			const { city } = data;
+    const { city } = data;
 
-			if (city) {
-				this.email = city.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
-			}
-		},
-	};
+    if (city) {
+      this.email = city.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+    }
+  },
+};
 </script>

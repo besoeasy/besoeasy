@@ -59,8 +59,8 @@
 
 <script setup>
 import { ref } from "vue";
-import ContactEmail from "./components/ContactEmail.vue";
-import Sbut from "./components/Sbut.vue";
+import ContactEmail from "@/components/ContactEmail.vue";
+import Sbut from "@/components/Sbut.vue";
 import { Code2, DollarSign, Zap, Layers, Users, ShieldCheck } from "lucide-vue-next";
 
 const socialLinksObj = {

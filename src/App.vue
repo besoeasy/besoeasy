@@ -17,7 +17,7 @@
             <ContactEmail />
           </div>
 
-          <div class="mb-5 text-lg text-gray-800 relative h-[180px] md:h-[160px]">
+          <div class="mb-8 text-base sm:text-lg text-gray-800 relative h-[280px] sm:h-[220px] md:h-[160px]">
             <!-- Show hovered description when hovering over social buttons -->
             <transition 
               enter-active-class="transition-all duration-500 ease-out"
@@ -29,7 +29,7 @@
             >
               <div 
                 v-if="hoveredDescription" 
-                class="absolute inset-0 text-2xl md:text-3xl font-bold text-gray-600 flex items-center"
+                class="absolute inset-0 text-xl sm:text-2xl md:text-3xl font-bold text-gray-600 flex items-center"
               >
                 {{ hoveredDescription }}
               </div>

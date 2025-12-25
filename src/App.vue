@@ -9,7 +9,7 @@
       <div class="w-full md:w-2/5">
         <div class="m-auto">
           <div
-            class="text-2xl lg:text-5xl mb-2 text-pretty font-extrabold animate-pulse hover:animate-bounce hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-orange-500 hover:via-red-500 hover:to-pink-500 transition-all duration-500 cursor-pointer"
+            class="text-2xl lg:text-5xl mb-2 text-pretty font-extrabold animate-pulse hover:animate-bounce hover:text-transparent hover:bg-clip-text hover:bg-linear-to-r hover:from-orange-500 hover:via-red-500 hover:to-pink-500 transition-all duration-500 cursor-pointer"
           >
             AMAN SINGH KATAL
           </div>
@@ -17,7 +17,7 @@
             <ContactEmail />
           </div>
 
-          <div class="mb-8 text-base sm:text-lg text-gray-800 relative h-[280px] sm:h-[220px] md:h-[160px]">
+          <div class="mb-8 text-base sm:text-lg text-gray-800 relative h-70 sm:h-55-[160px]">
             <!-- Show hovered description when hovering over social buttons -->
             <transition 
               enter-active-class="transition-all duration-500 ease-out"
@@ -107,7 +107,7 @@ const socialLinksObj = {
     description: "Connect with me on the decentralized social network"
   },
   Blog: {
-    url: "https://tinyurl.com/besoeasyblog",
+    url: "https://tinyurl.com/soeasyblog",
     description: "Read my thoughts, tutorials, and tech insights"
   },
   steam: {

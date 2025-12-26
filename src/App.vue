@@ -107,7 +107,7 @@ const socialLinksObj = {
     description: "Connect with me on the decentralized social network"
   },
   Blog: {
-    url: "https://tinyurl.com/soeasyblog",
+    url: "https://tinyurl.com/bdkfv8et",
     description: "Read my thoughts, tutorials, and tech insights"
   },
   steam: {

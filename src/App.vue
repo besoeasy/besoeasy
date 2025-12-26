@@ -17,19 +17,19 @@
             <ContactEmail />
           </div>
 
-          <div class="mb-8 text-base sm:text-lg text-gray-800 relative h-70 sm:h-55-[160px]">
+          <div class="mb-8 text-base sm:text-lg text-gray-800 relative" style="min-height: 160px;">
             <!-- Show hovered description when hovering over social buttons -->
             <transition 
               enter-active-class="transition-all duration-500 ease-out"
-              enter-from-class="opacity-0 transform scale-95"
-              enter-to-class="opacity-100 transform scale-100"
+              enter-from-class="opacity-0"
+              enter-to-class="opacity-100"
               leave-active-class="transition-all duration-300 ease-in"
-              leave-from-class="opacity-100 transform scale-100"
-              leave-to-class="opacity-0 transform scale-95"
+              leave-from-class="opacity-100"
+              leave-to-class="opacity-0"
             >
               <div 
                 v-if="hoveredDescription" 
-                class="absolute inset-0 text-xl sm:text-2xl md:text-3xl font-bold text-gray-600 flex items-center"
+                class="absolute inset-0 text-xl sm:text-2xl md:text-3xl font-bold text-gray-600 leading-relaxed flex items-center"
               >
                 {{ hoveredDescription }}
               </div>
@@ -38,11 +38,11 @@
             <!-- Default bio text -->
             <transition 
               enter-active-class="transition-all duration-500 ease-out"
-              enter-from-class="opacity-0 transform scale-95"
-              enter-to-class="opacity-100 transform scale-100"
+              enter-from-class="opacity-0"
+              enter-to-class="opacity-100"
               leave-active-class="transition-all duration-300 ease-in"
-              leave-from-class="opacity-100 transform scale-100"
-              leave-to-class="opacity-0 transform scale-95"
+              leave-from-class="opacity-100"
+              leave-to-class="opacity-0"
             >
               <div v-if="!hoveredDescription" class="absolute inset-0">
               I am a seasoned full-stack developer

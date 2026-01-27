@@ -100,21 +100,26 @@ import { Code2, DollarSign, Zap, Layers, Users, ShieldCheck } from "lucide-vue-n
 const socialLinksObj = {
   Github: {
     url: "https://github.com/besoeasy",
-    description: "Understand my projects on GitHub and maybe find inspiration for coding?"
+    description: "Dive into my code, side projects, and experiments—steal ideas, get inspired, or just lurk 👀"
   },
   NOSTR: {
     url: "https://nosta.me/besoeasy@zaps.lol",
-    description: "Connect with me on the decentralized social network"
+    description: "Find me on the decentralized side of the internet—uncensored thoughts and open conversations"
   },
   Blog: {
     url: "https://tinyurl.com/bdkfv8et",
-    description: "Read my thoughts, tutorials, and tech insights"
+    description: "Deep dives, tutorials, and tech rants straight from my brain to your screen"
   },
   steam: {
     url: "https://steamcommunity.com/id/besoeasy",
-    description: "Check out my gaming profile and let's play together"
+    description: "Games I play, hours I’ve lost, and maybe our next co-op session"
+  },
+  instagram: {
+    url: "https://instagram.com/besoeasy",
+    description: "Real life moments—if we’ve met or vibe, this is where we stay connected"
   }
 };
+
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {

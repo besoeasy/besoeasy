@@ -117,9 +117,12 @@ const socialLinksObj = {
   instagram: {
     url: "https://instagram.com/besoeasy",
     description: "Real life moments—if we’ve met or vibe, this is where we stay connected"
+  },
+  telegram: {
+    url: "https://t.me/besoeasy",
+    description: "Quick chats, random ideas, memes, or just say hi—I'm usually around here"
   }
 };
-
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {

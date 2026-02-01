@@ -107,7 +107,7 @@ const socialLinksObj = {
     description: "Find me on the decentralized side of the internet—uncensored thoughts and open conversations"
   },
   Blog: {
-    url: "https://tinyurl.com/bdkfv8et",
+    url: "https://blog.besoeasy.com/",
     description: "Deep dives, tutorials, and tech rants straight from my brain to your screen"
   },
   steam: {

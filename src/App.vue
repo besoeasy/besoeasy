@@ -99,7 +99,7 @@ import { Code2, DollarSign, Zap, Layers, Users, ShieldCheck } from "lucide-vue-n
 
 const socialLinksObj = {
   Github: {
-    url: "https://github.com/besoeasy",
+    url: "https://github.com/besoeasy?tab=repositories&q=&type=&language=&sort=stargazers",
     description: "Dive into my code, side projects, and experiments—steal ideas, get inspired, or just lurk 👀"
   },
   NOSTR: {

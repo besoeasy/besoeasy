@@ -27,6 +27,38 @@
       box-sizing: border-box;
     }
 
+    @keyframes rise-in {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes soft-float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    @keyframes pulse-ring {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(15, 23, 42, 0.04);
+      }
+
+      50% {
+        box-shadow: 0 0 0 10px rgba(15, 23, 42, 0);
+      }
+    }
+
     html {
       min-height: 100%;
       background: #ffffff;
@@ -67,6 +99,7 @@
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       background: #ffffff;
+      animation: rise-in 0.7s ease both;
     }
 
     .hero-panel {
@@ -74,6 +107,7 @@
       text-align: left;
       position: relative;
       overflow: hidden;
+      animation-delay: 0.05s;
     }
 
     .hero-panel::before {
@@ -88,6 +122,10 @@
     .side-panel {
       position: relative;
       z-index: 1;
+    }
+
+    .side-panel {
+      animation-delay: 0.16s;
     }
 
     .eyebrow-row {
@@ -112,6 +150,7 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--muted);
+      animation: rise-in 0.65s ease both;
     }
     
     h1 {
@@ -122,6 +161,8 @@
       letter-spacing: -0.03em;
       margin-bottom: 18px;
       color: var(--text);
+      animation: rise-in 0.75s ease both;
+      animation-delay: 0.12s;
     }
     
     p {
@@ -136,6 +177,8 @@
       margin: 0 0 20px 0;
       font-size: 18px;
       line-height: 1.75;
+      animation: rise-in 0.75s ease both;
+      animation-delay: 0.18s;
     }
 
     .stats {
@@ -150,6 +193,19 @@
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
       background: #fcfcfc;
+      animation: rise-in 0.75s ease both;
+    }
+
+    .stat-card:nth-child(1) {
+      animation-delay: 0.24s;
+    }
+
+    .stat-card:nth-child(2) {
+      animation-delay: 0.3s;
+    }
+
+    .stat-card:nth-child(3) {
+      animation-delay: 0.36s;
     }
 
     .stat-value {
@@ -188,7 +244,10 @@
       font-size: 15px;
       font-weight: 700;
       text-decoration: none;
+      gap: 10px;
       transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+      animation: rise-in 0.75s ease both;
+      animation-delay: 0.42s;
     }
 
     .showcase-button:hover {
@@ -210,10 +269,27 @@
       border-color: #1e293b;
     }
 
+    .button-icon,
+    .section-icon {
+      flex: 0 0 auto;
+      width: 18px;
+      height: 18px;
+    }
+
+    .showcase-button.primary .button-icon {
+      fill: currentColor;
+    }
+
+    .showcase-button:not(.primary) .button-icon {
+      fill: currentColor;
+    }
+
     .note {
       font-size: 14px;
       color: var(--muted-soft);
       margin-bottom: 0;
+      animation: rise-in 0.75s ease both;
+      animation-delay: 0.5s;
     }
 
     .crypto-box {
@@ -225,6 +301,9 @@
     }
 
     .crypto-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       font-size: 13px;
       font-weight: 700;
       letter-spacing: 0.08em;
@@ -240,6 +319,8 @@
       letter-spacing: -0.03em;
       color: var(--text);
       margin-bottom: 2px;
+      animation: rise-in 0.75s ease both;
+      animation-delay: 0.22s;
     }
 
     .qr-wrap {
@@ -249,6 +330,7 @@
       border: 1px solid var(--border);
       border-radius: 26px;
       background: #fcfcfc;
+      animation: pulse-ring 3.2s ease-in-out infinite;
     }
 
     .qr-code {
@@ -260,6 +342,7 @@
       border: 1px solid var(--border);
       border-radius: 22px;
       background: #ffffff;
+      animation: soft-float 4.5s ease-in-out infinite;
     }
 
     .wallet-address {
@@ -287,11 +370,29 @@
       border: 1px solid var(--border);
       border-radius: 16px;
       background: #fcfcfc;
+      animation: rise-in 0.75s ease both;
+    }
+
+    .mini-card:nth-child(1) {
+      animation-delay: 0.28s;
+    }
+
+    .mini-card:nth-child(2) {
+      animation-delay: 0.34s;
     }
 
     .mini-card strong,
     .mini-card span {
       display: block;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
     }
 
     .mini-card span {
@@ -383,8 +484,18 @@
           </div>
 
           <div class="button-group">
-            <a class="showcase-button primary" href="https://github.com/sponsors/besoeasy">GitHub Sponsors</a>
-            <a class="showcase-button" href="https://ko-fi.com/besoeasy">Ko-fi</a>
+            <a class="showcase-button primary" href="https://github.com/sponsors/besoeasy">
+              <svg class="button-icon" viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.66 7.66 0 0 1 8 4.77c.68 0 1.37.09 2.01.26 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"></path>
+              </svg>
+              <span>GitHub Sponsors</span>
+            </a>
+            <a class="showcase-button" href="https://ko-fi.com/besoeasy">
+              <svg class="button-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M2 6.75A2.75 2.75 0 0 1 4.75 4h10.77a4.48 4.48 0 0 1 0 8.96h-.31a6.22 6.22 0 0 1-12.44-.28V6.75Zm13.52 4.46a1.98 1.98 0 0 0 0-3.96h-.02v3.96h.02Zm-8.3.03c.5-1.2 2.19-1.2 2.7 0 .67 1.56 2.69 2.1 4 .98 1.11-.95 2.82-.03 2.64 1.42-.29 2.29-2.66 4.4-5.35 6.27-2.7-1.87-5.06-3.98-5.35-6.27-.18-1.45 1.53-2.37 2.64-1.42 1.31 1.12 3.33.58 4-.98Z"></path>
+              </svg>
+              <span>Ko-fi</span>
+            </a>
           </div>
 
           <p class="note">Choose the platform that fits you best.</p>
@@ -392,7 +503,12 @@
       </section>
 
       <aside class="side-panel crypto-box">
-        <p class="crypto-label">Bitcoin</p>
+        <p class="crypto-label">
+          <svg class="section-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M14.24 10.27c1.72-.62 2.8-1.8 2.55-3.76-.34-2.68-2.56-3.58-5.55-3.85V0H9.1v2.6H7.38V0H5.26v2.67H1.85v2.25h1.74c.63 0 .92.42.92.86v12.47c0 .36-.21.88-.86.88H1.85v2.25h3.41V24h2.12v-2.57H9.1V24h2.14v-2.63c3.6-.22 6.12-1.18 6.6-4.74.39-2.86-1.08-4.13-3.6-4.36ZM9.13 5.01c1.49 0 5.04-.17 5.04 2.19 0 2.28-3.55 2.02-5.04 2.02V5.01Zm0 11.97v-4.41c1.8 0 5.9-.3 5.9 2.2 0 2.45-4.1 2.21-5.9 2.21Z"></path>
+          </svg>
+          <span>Bitcoin</span>
+        </p>
         <h2 class="side-title">Scan or copy the wallet address.</h2>
         <p class="note">Useful if you prefer direct Bitcoin donations instead of platform-based sponsorship.</p>
 

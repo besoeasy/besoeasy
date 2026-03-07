@@ -5,70 +5,173 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thanks for Sponsoring 💖</title>
   <style>
+    :root {
+      --bg: #ffffff;
+      --surface: rgba(255, 255, 255, 0.96);
+      --surface-strong: #ffffff;
+      --border: rgba(15, 23, 42, 0.08);
+      --border-strong: rgba(15, 23, 42, 0.12);
+      --text: #0f172a;
+      --muted: #536076;
+      --muted-soft: #7b8798;
+      --accent: #0f172a;
+      --shadow: none;
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
+    html {
+      min-height: 100%;
+      background: #ffffff;
+    }
     
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
-      background: #ffffff;
-      color: #000000;
+      color: var(--text);
       display: flex;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      padding: 32px 20px;
+      width: 100%;
+      padding: 0;
+      background: #ffffff;
     }
     
     .container {
       width: 100%;
-      max-width: 560px;
-      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: 48px 32px;
-      border: 1px solid #e9e9e9;
-      border-radius: 20px;
+    }
+
+    .shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+      gap: 22px;
+      align-items: stretch;
+      width: 100%;
+      max-width: 1180px;
+    }
+
+    .hero-panel,
+    .side-panel {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
       background: #ffffff;
     }
-    
-    .eyebrow {
-      display: inline-block;
-      margin-bottom: 18px;
+
+    .hero-panel {
+      padding: 34px;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.015), transparent 28%);
+      pointer-events: none;
+    }
+
+    .hero-content,
+    .side-panel {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow,
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 0 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #ffffff;
       font-size: 12px;
       font-weight: 700;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #6b6b6b;
+      color: var(--muted);
     }
     
     h1 {
-      font-size: 40px;
-      font-weight: 600;
-      line-height: 1.1;
+      max-width: 11ch;
+      font-size: clamp(42px, 7vw, 76px);
+      font-weight: 800;
+      line-height: 0.96;
       letter-spacing: -0.03em;
       margin-bottom: 18px;
-      color: #000000;
+      color: var(--text);
     }
     
     p {
       font-size: 16px;
       line-height: 1.7;
       margin-bottom: 16px;
-      color: #4a4a4a;
+      color: var(--muted);
     }
 
     .lead {
-      max-width: 42ch;
-      margin: 0 auto 14px auto;
+      max-width: 54ch;
+      margin: 0 0 20px 0;
+      font-size: 18px;
+      line-height: 1.75;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 28px 0 24px 0;
+    }
+
+    .stat-card {
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: #fcfcfc;
+    }
+
+    .stat-value {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.03em;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--muted-soft);
     }
     
     .button-group {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin: 28px 0 18px 0;
+      gap: 12px;
+      margin: 0;
     }
 
     .showcase-button {
@@ -76,33 +179,49 @@
       align-items: center;
       justify-content: center;
       min-width: 200px;
+      min-height: 54px;
       padding: 14px 20px;
-      border: 1px solid #d9d9d9;
+      border: 1px solid var(--border-strong);
       border-radius: 999px;
       background: #ffffff;
-      color: #000000;
+      color: var(--text);
       font-size: 15px;
-      font-weight: 600;
+      font-weight: 700;
       text-decoration: none;
-      transition: border-color 0.2s ease, background-color 0.2s ease;
+      transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
     }
 
     .showcase-button:hover {
-      background: #f6f6f6;
-      border-color: #bcbcbc;
+      background: var(--surface-strong);
+      border-color: rgba(15, 23, 42, 0.22);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.09);
+      transform: translateY(-2px);
       text-decoration: none;
+    }
+
+    .showcase-button.primary {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+
+    .showcase-button.primary:hover {
+      background: #1e293b;
+      border-color: #1e293b;
     }
 
     .note {
       font-size: 14px;
-      color: #7a7a7a;
+      color: var(--muted-soft);
       margin-bottom: 0;
     }
 
     .crypto-box {
-      margin-top: 28px;
-      padding-top: 24px;
-      border-top: 1px solid #eeeeee;
+      display: grid;
+      gap: 16px;
+      align-content: start;
+      padding: 28px;
+      text-align: left;
     }
 
     .crypto-label {
@@ -110,18 +229,36 @@
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #6b6b6b;
-      margin-bottom: 10px;
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .side-title {
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .qr-wrap {
+      display: flex;
+      justify-content: center;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      background: #fcfcfc;
     }
 
     .qr-code {
       display: block;
-      width: 180px;
-      height: 180px;
-      margin: 0 auto 16px auto;
-      padding: 10px;
-      border: 1px solid #e4e4e4;
-      border-radius: 18px;
+      width: 220px;
+      height: 220px;
+      margin: 0;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
       background: #ffffff;
     }
 
@@ -129,69 +266,157 @@
       display: block;
       width: 100%;
       padding: 14px 16px;
-      border: 1px solid #e4e4e4;
+      border: 1px solid var(--border);
       border-radius: 14px;
-      background: #fafafa;
-      color: #111111;
+      background: rgba(248, 250, 252, 0.95);
+      color: var(--text);
       font-family: 'Courier New', monospace;
       font-size: 14px;
       line-height: 1.6;
       word-break: break-all;
     }
 
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .mini-card {
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #fcfcfc;
+    }
+
+    .mini-card strong,
+    .mini-card span {
+      display: block;
+    }
+
+    .mini-card span {
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--muted-soft);
+      line-height: 1.5;
+    }
+
     strong {
-      color: #111111;
+      color: var(--text);
       font-weight: 600;
     }
 
-    @media (max-width: 640px) {
-      .container {
-        padding: 36px 20px;
-        border-radius: 16px;
+    @media (max-width: 900px) {
+      .shell {
+        grid-template-columns: 1fr;
       }
 
       h1 {
-        font-size: 32px;
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 0;
+      }
+
+      .hero-panel,
+      .side-panel {
+        padding: 24px 20px;
+      }
+
+      .container {
+        padding: 24px 16px;
+      }
+
+      .hero-panel {
+        padding: 24px 20px;
       }
 
       .showcase-button {
         width: 100%;
+      }
+
+      .stats,
+      .mini-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .qr-code {
+        width: min(100%, 220px);
+        height: auto;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="eyebrow">Support</div>
-    <h1>Support Besoeasy</h1>
-    
-    <p class="lead">
-      Your sponsorship helps maintain my open-source projects and community servers. 
-      <strong>100% of funds go toward server costs</strong> — nothing for personal use.
-    </p>
-    
-    <p>
-      Monthly support helps keep services stable and easier to plan.
-    </p>
+    <div class="shell">
+      <section class="hero-panel">
+        <div class="hero-content">
+          <div class="eyebrow-row">
+            <div class="eyebrow">Open Source Funding</div>
+            <div class="pill">Besoeasy</div>
+          </div>
 
-    <div class="button-group">
-      <a class="showcase-button" href="https://github.com/sponsors/besoeasy">GitHub Sponsors</a>
-      <a class="showcase-button" href="https://ko-fi.com/besoeasy">Ko-fi</a>
-    </div>
-    
-    <p class="note">
-      Choose the platform you prefer.
-    </p>
+          <h1>Support the tools you actually use.</h1>
 
-    <div class="crypto-box">
-      <p class="crypto-label">Bitcoin</p>
-      <p class="note">If you want to donate with Bitcoin, use this address.</p>
-      <img
-        class="qr-code"
-        src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=bitcoin%3A3BeSoEasyTsQDanPV1JfSu1fUhjDWq8TdY"
-        alt="Bitcoin QR code for wallet address 3BeSoEasyTsQDanPV1JfSu1fUhjDWq8TdY"
-      >
-      <code class="wallet-address">3BeSoEasyTsQDanPV1JfSu1fUhjDWq8TdY</code>
+          <p class="lead">
+            Sponsorship keeps Besoeasy projects, community servers, and infrastructure online.
+            <strong>Every contribution goes toward running costs</strong>, not personal use.
+          </p>
+
+          <div class="stats">
+            <div class="stat-card">
+              <span class="stat-value">100%</span>
+              <span class="stat-label">Directed to hosting, services, and maintenance</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-value">Monthly</span>
+              <span class="stat-label">Preferred for stable planning and predictable uptime</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-value">Bitcoin</span>
+              <span class="stat-label">Also accepted for direct support and quick mobile scan</span>
+            </div>
+          </div>
+
+          <div class="button-group">
+            <a class="showcase-button primary" href="https://github.com/sponsors/besoeasy">GitHub Sponsors</a>
+            <a class="showcase-button" href="https://ko-fi.com/besoeasy">Ko-fi</a>
+          </div>
+
+          <p class="note">Choose the platform that fits you best.</p>
+        </div>
+      </section>
+
+      <aside class="side-panel crypto-box">
+        <p class="crypto-label">Bitcoin</p>
+        <h2 class="side-title">Scan or copy the wallet address.</h2>
+        <p class="note">Useful if you prefer direct Bitcoin donations instead of platform-based sponsorship.</p>
+
+        <div class="qr-wrap">
+          <img
+            class="qr-code"
+            src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=bitcoin%3A3BeSoEasyTsQDanPV1JfSu1fUhjDWq8TdY"
+            alt="Bitcoin QR code for wallet address 3BeSoEasyTsQDanPV1JfSu1fUhjDWq8TdY"
+          >
+        </div>
+
+        <code class="wallet-address">3BeSoEasyTsQDanPV1JfSu1fUhjDWq8TdY</code>
+
+        <div class="mini-grid">
+          <div class="mini-card">
+            <strong>Wallet Type</strong>
+            <span>Bitcoin mainnet address for direct donations.</span>
+          </div>
+          <div class="mini-card">
+            <strong>Mobile Friendly</strong>
+            <span>Scan the QR code with any wallet app to prefill the address.</span>
+          </div>
+        </div>
+      </aside>
     </div>
   </div>
 </body>

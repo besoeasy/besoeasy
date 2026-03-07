@@ -3,537 +3,460 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thanks for Sponsoring 💖</title>
+  <title>Support Besoeasy</title>
   <style>
-    :root {
-      --bg: #ffffff;
-      --surface: rgba(255, 255, 255, 0.96);
-      --surface-strong: #ffffff;
-      --border: rgba(15, 23, 42, 0.08);
-      --border-strong: rgba(15, 23, 42, 0.12);
-      --text: #0f172a;
-      --muted: #536076;
-      --muted-soft: #7b8798;
-      --accent: #0f172a;
-      --shadow: none;
-      --radius-xl: 32px;
-      --radius-lg: 24px;
-      --radius-md: 18px;
+    /* ── Reset ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      background: #fff;
+      color: #000;
+      font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'Courier New', monospace;
+      -webkit-font-smoothing: antialiased;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    /* ── Animations ── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes letterFloat {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50%       { transform: translateY(-3px) scale(1.009); }
+    }
+    @keyframes letterTilt {
+      0%, 100% { transform: rotate(0deg) translateY(0px); }
+      50%       { transform: rotate(-0.6deg) translateY(-1px); }
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; } 50% { opacity: 0; }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(0,0,0,0.06); }
+      50%       { box-shadow: 0 0 0 10px rgba(0,0,0,0); }
+    }
+    @keyframes floatQR {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-5px); }
+    }
+    @keyframes slideInSoft {
+      from { opacity: 0; transform: translateY(14px) scale(0.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    @keyframes rise-in {
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-      }
+    .fade-in { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+    .d1 { animation-delay: 80ms; }
+    .d2 { animation-delay: 180ms; }
+    .d3 { animation-delay: 280ms; }
+    .d4 { animation-delay: 380ms; }
+    .d5 { animation-delay: 480ms; }
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes soft-float {
-      0%, 100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-6px);
-      }
-    }
-
-    @keyframes pulse-ring {
-      0%, 100% {
-        box-shadow: 0 0 0 0 rgba(15, 23, 42, 0.04);
-      }
-
-      50% {
-        box-shadow: 0 0 0 10px rgba(15, 23, 42, 0);
-      }
-    }
-
-    html {
-      min-height: 100%;
-      background: #ffffff;
-    }
-    
+    /* ── Layout ── */
     body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      width: 100%;
-      padding: 0;
-      background: #ffffff;
-    }
-    
-    .container {
-      width: 100%;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 48px 32px;
+      padding: 40px 24px;
     }
 
     .shell {
-      display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
-      gap: 22px;
-      align-items: stretch;
       width: 100%;
-      max-width: 1180px;
+      max-width: 1100px;
+      display: grid;
+      grid-template-columns: 1fr 390px;
+      gap: 56px;
+      align-items: start;
     }
 
-    .hero-panel,
-    .side-panel {
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      background: #ffffff;
-      animation: rise-in 0.7s ease both;
-    }
-
-    .hero-panel {
-      padding: 34px;
-      text-align: left;
-      position: relative;
-      overflow: hidden;
-      animation-delay: 0.05s;
-    }
-
-    .hero-panel::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(15, 23, 42, 0.015), transparent 28%);
-      pointer-events: none;
-    }
-
-    .hero-content,
-    .side-panel {
-      position: relative;
-      z-index: 1;
-    }
-
-    .side-panel {
-      animation-delay: 0.16s;
-    }
-
-    .eyebrow-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 22px;
-    }
-
-    .eyebrow,
-    .pill {
+    /* ── Badge ── */
+    .badge {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      min-height: 34px;
-      padding: 0 14px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: #ffffff;
-      font-size: 12px;
+      gap: 8px;
+      border: 1px solid #e5e7eb;
+      border-radius: 9999px;
+      padding: 6px 14px;
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(10px);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #6b7280;
+      margin-bottom: 22px;
+      cursor: default;
+      transition: border-color 0.2s;
+    }
+    .badge:hover { border-color: #9ca3af; }
+    .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #111; animation: blink 2s ease-in-out infinite; }
+
+    /* ── Heading ── */
+    h1 {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: clamp(52px, 9vw, 96px);
+      font-weight: 800;
+      line-height: 0.93;
+      letter-spacing: -0.04em;
+      color: #000;
+      margin-bottom: 18px;
+    }
+    .letter { display: inline-block; will-change: transform; }
+    .l1 { animation: letterFloat 6.2s ease-in-out infinite; }
+    .l2 { animation: letterTilt  6.8s ease-in-out infinite; }
+    .l3 { animation: letterFloat 6.4s ease-in-out infinite 0.22s; }
+    .l4 { animation: letterTilt  7.1s ease-in-out infinite 0.34s; }
+    .l5 { animation: letterFloat 6.9s ease-in-out infinite 0.46s; }
+    .l6 { animation: letterTilt  7.4s ease-in-out infinite 0.15s; }
+    .l7 { animation: letterFloat 6.6s ease-in-out infinite 0.38s; }
+    .l8 { animation: letterTilt  7.0s ease-in-out infinite 0.55s; }
+
+    .subtitle {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: clamp(18px, 2.5vw, 24px);
+      font-weight: 600;
+      color: #9ca3af;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+
+    .desc {
+      font-size: 14px;
+      color: #6b7280;
+      line-height: 1.8;
+      max-width: 520px;
+      margin-bottom: 28px;
+    }
+
+    /* keyword underline */
+    .kw {
+      color: #111;
+      font-weight: 600;
+      position: relative;
+      display: inline-block;
+    }
+    .kw::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: -1px;
+      height: 2px;
+      background: linear-gradient(90deg, #000, #555);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.32s cubic-bezier(0.4,0,0.2,1);
+      border-radius: 2px;
+    }
+    .kw:hover::after { transform: scaleX(1); }
+
+    /* ── Stat cards ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .stat {
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 14px 16px;
+      cursor: default;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+    .stat:hover { border-color: #9ca3af; box-shadow: 0 4px 16px rgba(0,0,0,0.06); transform: translateY(-1px); }
+    .stat-val {
+      display: block;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: #000;
+      letter-spacing: -0.04em;
+      margin-bottom: 4px;
+    }
+    .stat-lbl { font-size: 11px; color: #9ca3af; line-height: 1.5; }
+
+    /* ── Buttons ── */
+    .cta-group { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: inherit;
+      text-decoration: none;
+      color: #374151;
+      background: #fff;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+    .btn:hover { border-color: #9ca3af; background: #f9fafb; box-shadow: 0 4px 12px rgba(0,0,0,0.07); transform: translateY(-1px); }
+    .btn svg { width: 15px; height: 15px; flex-shrink: 0; fill: currentColor; }
+    .btn-primary { background: #000; color: #fff; border-color: #000; }
+    .btn-primary:hover { background: #1f2937; border-color: #1f2937; box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+
+    .note { font-size: 12px; color: #9ca3af; }
+
+    /* ── Bitcoin card ── */
+    .btc-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #fff;
+      animation: slideInSoft 0.7s ease-out both 0.2s;
+    }
+    .card-chrome { border-bottom: 1px solid #f3f4f6; background: #fafafa; }
+    .chrome-bar { display: flex; align-items: center; gap: 6px; padding: 10px 16px; }
+    .dot-r { width: 11px; height: 11px; border-radius: 50%; background: rgba(239,68,68,0.7); }
+    .dot-y { width: 11px; height: 11px; border-radius: 50%; background: rgba(251,191,36,0.7); }
+    .dot-g { width: 11px; height: 11px; border-radius: 50%; background: rgba(34,197,94,0.7); }
+    .chrome-title { margin-left: 8px; font-size: 11px; color: #9ca3af; letter-spacing: 0.04em; }
+
+    .card-body { padding: 22px; display: grid; gap: 14px; }
+
+    .btc-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--muted);
-      animation: rise-in 0.65s ease both;
+      color: #6b7280;
     }
-    
-    h1 {
-      max-width: 11ch;
-      font-size: clamp(42px, 7vw, 76px);
-      font-weight: 800;
-      line-height: 0.96;
-      letter-spacing: -0.03em;
-      margin-bottom: 18px;
-      color: var(--text);
-      animation: rise-in 0.75s ease both;
-      animation-delay: 0.12s;
-    }
-    
-    p {
-      font-size: 16px;
-      line-height: 1.7;
-      margin-bottom: 16px;
-      color: var(--muted);
-    }
+    .btc-label svg { width: 13px; height: 13px; fill: currentColor; }
 
-    .lead {
-      max-width: 54ch;
-      margin: 0 0 20px 0;
-      font-size: 18px;
-      line-height: 1.75;
-      animation: rise-in 0.75s ease both;
-      animation-delay: 0.18s;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin: 28px 0 24px 0;
-    }
-
-    .stat-card {
-      padding: 18px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      background: #fcfcfc;
-      animation: rise-in 0.75s ease both;
-    }
-
-    .stat-card:nth-child(1) {
-      animation-delay: 0.24s;
-    }
-
-    .stat-card:nth-child(2) {
-      animation-delay: 0.3s;
-    }
-
-    .stat-card:nth-child(3) {
-      animation-delay: 0.36s;
-    }
-
-    .stat-value {
-      display: block;
-      margin-bottom: 6px;
+    .btc-title {
+      font-family: system-ui, -apple-system, sans-serif;
       font-size: 22px;
-      font-weight: 800;
-      color: var(--text);
+      font-weight: 700;
       letter-spacing: -0.03em;
+      color: #000;
     }
+    .btc-desc { font-size: 12px; color: #9ca3af; line-height: 1.65; }
 
-    .stat-label {
-      font-size: 13px;
-      line-height: 1.5;
-      color: var(--muted-soft);
-    }
-    
-    .button-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin: 0;
-    }
-
-    .showcase-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 200px;
-      min-height: 54px;
-      padding: 14px 20px;
-      border: 1px solid var(--border-strong);
-      border-radius: 999px;
-      background: #ffffff;
-      color: var(--text);
-      font-size: 15px;
-      font-weight: 700;
-      text-decoration: none;
-      gap: 10px;
-      transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-      animation: rise-in 0.75s ease both;
-      animation-delay: 0.42s;
-    }
-
-    .showcase-button:hover {
-      background: var(--surface-strong);
-      border-color: rgba(15, 23, 42, 0.22);
-      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.09);
-      transform: translateY(-2px);
-      text-decoration: none;
-    }
-
-    .showcase-button.primary {
-      background: var(--accent);
-      color: #ffffff;
-      border-color: var(--accent);
-    }
-
-    .showcase-button.primary:hover {
-      background: #1e293b;
-      border-color: #1e293b;
-    }
-
-    .button-icon,
-    .section-icon {
-      flex: 0 0 auto;
-      width: 18px;
-      height: 18px;
-    }
-
-    .showcase-button.primary .button-icon {
-      fill: currentColor;
-    }
-
-    .showcase-button:not(.primary) .button-icon {
-      fill: currentColor;
-    }
-
-    .note {
-      font-size: 14px;
-      color: var(--muted-soft);
-      margin-bottom: 0;
-      animation: rise-in 0.75s ease both;
-      animation-delay: 0.5s;
-    }
-
-    .crypto-box {
-      display: grid;
-      gap: 16px;
-      align-content: start;
-      padding: 28px;
-      text-align: left;
-    }
-
-    .crypto-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0;
-    }
-
-    .side-title {
-      font-size: 30px;
-      font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      color: var(--text);
-      margin-bottom: 2px;
-      animation: rise-in 0.75s ease both;
-      animation-delay: 0.22s;
-    }
-
-    .qr-wrap {
+    .qr-frame {
       display: flex;
       justify-content: center;
-      padding: 18px;
-      border: 1px solid var(--border);
-      border-radius: 26px;
-      background: #fcfcfc;
-      animation: pulse-ring 3.2s ease-in-out infinite;
+      padding: 16px;
+      border: 1px solid #f3f4f6;
+      border-radius: 18px;
+      background: #fafafa;
+      animation: pulseGlow 3.2s ease-in-out infinite;
     }
-
-    .qr-code {
+    .qr-frame img {
       display: block;
-      width: 220px;
-      height: 220px;
-      margin: 0;
-      padding: 12px;
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      background: #ffffff;
-      animation: soft-float 4.5s ease-in-out infinite;
+      width: 196px;
+      height: 196px;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      background: #fff;
+      padding: 10px;
+      animation: floatQR 4.5s ease-in-out infinite;
     }
 
-    .wallet-address {
-      display: block;
-      width: 100%;
-      padding: 14px 16px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: rgba(248, 250, 252, 0.95);
-      color: var(--text);
-      font-family: 'Courier New', monospace;
-      font-size: 14px;
-      line-height: 1.6;
-      word-break: break-all;
+    .address-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 13px;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      background: #f9fafb;
+      cursor: pointer;
+      transition: border-color 0.2s;
     }
-
-    .mini-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
+    .address-box:hover { border-color: #9ca3af; }
+    .address-code { flex: 1; font-size: 12px; font-family: inherit; color: #111; word-break: break-all; line-height: 1.5; }
+    .copy-btn {
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      background: #fff;
+      cursor: pointer;
+      color: #6b7280;
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
     }
+    .copy-btn:hover { border-color: #9ca3af; background: #f3f4f6; color: #111; }
+    .copy-btn svg { width: 12px; height: 12px; }
 
+    .mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .mini-card {
-      padding: 14px;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      background: #fcfcfc;
-      animation: rise-in 0.75s ease both;
+      border: 1px solid #f3f4f6;
+      border-radius: 10px;
+      padding: 11px 12px;
+      background: #fafafa;
+      transition: border-color 0.2s;
     }
+    .mini-card:hover { border-color: #e5e7eb; }
+    .mini-card strong { display: block; font-size: 11px; font-weight: 700; color: #111; margin-bottom: 4px; }
+    .mini-card span   { display: block; font-size: 11px; color: #9ca3af; line-height: 1.5; }
 
-    .mini-card:nth-child(1) {
-      animation-delay: 0.28s;
+    .card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 16px;
+      border-top: 1px solid #f3f4f6;
+      background: rgba(249,250,251,0.6);
+      font-size: 11px;
+      color: #9ca3af;
     }
+    .footer-dot { width: 6px; height: 6px; border-radius: 50%; background: #d1d5db; display: inline-block; margin-right: 5px; }
 
-    .mini-card:nth-child(2) {
-      animation-delay: 0.34s;
+    /* ── Responsive ── */
+    @media (max-width: 860px) {
+      .shell { grid-template-columns: 1fr; gap: 40px; }
     }
-
-    .mini-card strong,
-    .mini-card span {
-      display: block;
+    @media (max-width: 600px) {
+      body { padding: 20px 16px; }
+      .stats { grid-template-columns: 1fr; }
+      .btn { width: 100%; justify-content: center; }
+      .mini-grid { grid-template-columns: 1fr; }
     }
-
     @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation: none !important;
-        transition: none !important;
-      }
-    }
-
-    .mini-card span {
-      margin-top: 6px;
-      font-size: 13px;
-      color: var(--muted-soft);
-      line-height: 1.5;
-    }
-
-    strong {
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    @media (max-width: 900px) {
-      .shell {
-        grid-template-columns: 1fr;
-      }
-
-      h1 {
-        max-width: none;
-      }
-    }
-
-    @media (max-width: 640px) {
-      body {
-        padding: 0;
-      }
-
-      .hero-panel,
-      .side-panel {
-        padding: 24px 20px;
-      }
-
-      .container {
-        padding: 24px 16px;
-      }
-
-      .hero-panel {
-        padding: 24px 20px;
-      }
-
-      .showcase-button {
-        width: 100%;
-      }
-
-      .stats,
-      .mini-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .qr-code {
-        width: min(100%, 220px);
-        height: auto;
-      }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="shell">
-      <section class="hero-panel">
-        <div class="hero-content">
-          <div class="eyebrow-row">
-            <div class="eyebrow">Open Source Funding</div>
-            <div class="pill">Besoeasy</div>
-          </div>
+  <div class="shell">
 
-          <h1>Support the tools you actually use.</h1>
+    <!-- LEFT: Hero -->
+    <div>
+      <div class="badge fade-in">
+        <span class="badge-dot"></span>
+        Open Source Funding
+      </div>
 
-          <p class="lead">
-            Sponsorship keeps Besoeasy projects, community servers, and infrastructure online.
-            <strong>Every contribution goes toward running costs</strong>, not personal use.
-          </p>
+      <h1 class="fade-in d1">
+        <span aria-hidden="true">
+          <span class="letter l1">B</span><span class="letter l2">e</span><span
+          class="letter l3">S</span><span class="letter l4">o</span><span
+          class="letter l5">E</span><span class="letter l6">a</span><span
+          class="letter l7">s</span><span class="letter l8">y</span>
+        </span>
+      </h1>
 
-          <div class="stats">
-            <div class="stat-card">
-              <span class="stat-value">100%</span>
-              <span class="stat-label">Directed to hosting, services, and maintenance</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-value">Monthly</span>
-              <span class="stat-label">Preferred for stable planning and predictable uptime</span>
-            </div>
-            <div class="stat-card">
-              <span class="stat-value">Bitcoin</span>
-              <span class="stat-label">Also accepted for direct support and quick mobile scan</span>
-            </div>
-          </div>
+      <p class="subtitle fade-in d2">Support the tools you actually use.</p>
 
-          <div class="button-group">
-            <a class="showcase-button primary" href="https://github.com/sponsors/besoeasy">
-              <svg class="button-icon" viewBox="0 0 16 16" aria-hidden="true">
-                <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.66 7.66 0 0 1 8 4.77c.68 0 1.37.09 2.01.26 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"></path>
-              </svg>
-              <span>GitHub Sponsors</span>
-            </a>
-            <a class="showcase-button" href="https://ko-fi.com/besoeasy">
-              <svg class="button-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M2 6.75A2.75 2.75 0 0 1 4.75 4h10.77a4.48 4.48 0 0 1 0 8.96h-.31a6.22 6.22 0 0 1-12.44-.28V6.75Zm13.52 4.46a1.98 1.98 0 0 0 0-3.96h-.02v3.96h.02Zm-8.3.03c.5-1.2 2.19-1.2 2.7 0 .67 1.56 2.69 2.1 4 .98 1.11-.95 2.82-.03 2.64 1.42-.29 2.29-2.66 4.4-5.35 6.27-2.7-1.87-5.06-3.98-5.35-6.27-.18-1.45 1.53-2.37 2.64-1.42 1.31 1.12 3.33.58 4-.98Z"></path>
-              </svg>
-              <span>Ko-fi</span>
-            </a>
-          </div>
+      <p class="desc fade-in d2">
+        Sponsorship keeps open-source projects, community servers, and infrastructure running.
+        <span class="kw">100% of contributions go toward open source projects.</span> — nothing for personal use.
+      </p>
 
-          <p class="note">Choose the platform that fits you best.</p>
+      <div class="stats fade-in d3">
+        <div class="stat">
+          <span class="stat-val">100%</span>
+          <span class="stat-lbl">Directed to hosting and server maintenance</span>
         </div>
-      </section>
+        <div class="stat">
+          <span class="stat-val">Monthly</span>
+          <span class="stat-lbl">Preferred for stable planning and uptime</span>
+        </div>
+        <div class="stat">
+          <span class="stat-val">Bitcoin</span>
+          <span class="stat-lbl">Also accepted — scan the QR on the right</span>
+        </div>
+      </div>
 
-      <aside class="side-panel crypto-box">
-        <p class="crypto-label">
-          <svg class="section-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="currentColor" d="M14.24 10.27c1.72-.62 2.8-1.8 2.55-3.76-.34-2.68-2.56-3.58-5.55-3.85V0H9.1v2.6H7.38V0H5.26v2.67H1.85v2.25h1.74c.63 0 .92.42.92.86v12.47c0 .36-.21.88-.86.88H1.85v2.25h3.41V24h2.12v-2.57H9.1V24h2.14v-2.63c3.6-.22 6.12-1.18 6.6-4.74.39-2.86-1.08-4.13-3.6-4.36ZM9.13 5.01c1.49 0 5.04-.17 5.04 2.19 0 2.28-3.55 2.02-5.04 2.02V5.01Zm0 11.97v-4.41c1.8 0 5.9-.3 5.9 2.2 0 2.45-4.1 2.21-5.9 2.21Z"></path>
+      <div class="cta-group fade-in d4">
+        <a class="btn btn-primary" href="https://github.com/sponsors/besoeasy">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.66 7.66 0 0 1 8 4.77c.68 0 1.37.09 2.01.26 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
           </svg>
-          <span>Bitcoin</span>
-        </p>
-        <h2 class="side-title">Scan or copy the wallet address.</h2>
-        <p class="note">Useful if you prefer direct Bitcoin donations instead of platform-based sponsorship.</p>
+          GitHub Sponsors
+        </a>
+        <a class="btn" href="https://ko-fi.com/besoeasy">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M2 6.75A2.75 2.75 0 0 1 4.75 4h10.77a4.48 4.48 0 0 1 0 8.96h-.31a6.22 6.22 0 0 1-12.44-.28V6.75Zm13.52 4.46a1.98 1.98 0 0 0 0-3.96h-.02v3.96h.02Zm-8.3.03c.5-1.2 2.19-1.2 2.7 0 .67 1.56 2.69 2.1 4 .98 1.11-.95 2.82-.03 2.64 1.42-.29 2.29-2.66 4.4-5.35 6.27-2.7-1.87-5.06-3.98-5.35-6.27-.18-1.45 1.53-2.37 2.64-1.42 1.31 1.12 3.33.58 4-.98Z"/>
+          </svg>
+          Ko-fi
+        </a>
+      </div>
 
-        <div class="qr-wrap">
+      <p class="note fade-in d5">Choose the platform that fits you best — monthly support preferred.</p>
+    </div>
+
+    <!-- RIGHT: Bitcoin card (styled like Yantr's terminal widget) -->
+    <div class="btc-card">
+      <!-- Chrome bar -->
+      <div class="card-chrome">
+        <div class="chrome-bar">
+          <span class="dot-r"></span>
+          <span class="dot-y"></span>
+          <span class="dot-g"></span>
+          <span class="chrome-title">wallet — bitcoin mainnet</span>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="card-body">
+        <div class="btc-label">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M14.24 10.27c1.72-.62 2.8-1.8 2.55-3.76-.34-2.68-2.56-3.58-5.55-3.85V0H9.1v2.6H7.38V0H5.26v2.67H1.85v2.25h1.74c.63 0 .92.42.92.86v12.47c0 .36-.21.88-.86.88H1.85v2.25h3.41V24h2.12v-2.57H9.1V24h2.14v-2.63c3.6-.22 6.12-1.18 6.6-4.74.39-2.86-1.08-4.13-3.6-4.36ZM9.13 5.01c1.49 0 5.04-.17 5.04 2.19 0 2.28-3.55 2.02-5.04 2.02V5.01Zm0 11.97v-4.41c1.8 0 5.9-.3 5.9 2.2 0 2.45-4.1 2.21-5.9 2.21Z"/>
+          </svg>
+          Bitcoin
+        </div>
+
+        <h2 class="btc-title">Scan or copy to donate.</h2>
+        <p class="btc-desc">Direct Bitcoin donation — no account needed. Scan with any wallet app to prefill the address automatically.</p>
+
+        <div class="qr-frame">
           <img
-            class="qr-code"
-            src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=bitcoin%3A3BeSoEasyTsQDanPV1JfSu1fUhjDWq8TdY"
-            alt="Bitcoin QR code for wallet address 3BeSoEasyTsQDanPV1JfSu1fUhjDWq8TdY"
+            src="https://api.qrserver.com/v1/create-qr-code/?size=196x196&data=bitcoin%3A3BeSoEasyTsQDanPV1JfSu1fUhjDWq8TdY"
+            alt="Bitcoin QR code — 3BeSoEasyTsQDanPV1JfSu1fUhjDWq8TdY"
           >
         </div>
 
-        <code class="wallet-address">3BeSoEasyTsQDanPV1JfSu1fUhjDWq8TdY</code>
+        <div class="address-box" onclick="copyAddress(this)" title="Click to copy address" role="button" tabindex="0">
+          <code class="address-code">3BeSoEasyTsQDanPV1JfSu1fUhjDWq8TdY</code>
+          <button class="copy-btn" aria-label="Copy Bitcoin address">
+            <svg class="copy-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+            </svg>
+            <svg class="check-icon" style="display:none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+            </svg>
+          </button>
+        </div>
 
         <div class="mini-grid">
           <div class="mini-card">
             <strong>Wallet Type</strong>
-            <span>Bitcoin mainnet address for direct donations.</span>
+            <span>Bitcoin mainnet. Any compatible wallet works.</span>
           </div>
           <div class="mini-card">
-            <strong>Mobile Friendly</strong>
-            <span>Scan the QR code with any wallet app to prefill the address.</span>
+            <strong>Mobile Scan</strong>
+            <span>Camera scan prefills the address automatically.</span>
           </div>
         </div>
-      </aside>
+      </div>
+
+      <!-- Footer -->
+      <div class="card-footer">
+        <span><span class="footer-dot"></span>Bitcoin mainnet</span>
+        <span>3BeSoEasy…TdY</span>
+      </div>
     </div>
+
   </div>
+
+  <script>
+    function copyAddress(el) {
+      navigator.clipboard.writeText('3BeSoEasyTsQDanPV1JfSu1fUhjDWq8TdY').then(() => {
+        const btn = el.querySelector('.copy-btn');
+        btn.querySelector('.copy-icon').style.display = 'none';
+        btn.querySelector('.check-icon').style.display = 'block';
+        setTimeout(() => {
+          btn.querySelector('.copy-icon').style.display = '';
+          btn.querySelector('.check-icon').style.display = 'none';
+        }, 2000);
+      });
+    }
+  </script>
 </body>
 </html>

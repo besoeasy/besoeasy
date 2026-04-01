@@ -407,13 +407,13 @@
 
         <div class="qr-frame">
           <img
-            src="https://api.qrserver.com/v1/create-qr-code/?size=196x196&data=bitcoin%3A3BeSoEasyTsQDanPV1JfSu1fUhjDWq8TdY"
-            alt="Bitcoin QR code — 3BeSoEasyTsQDanPV1JfSu1fUhjDWq8TdY"
+            src="https://api.qrserver.com/v1/create-qr-code/?size=196x196&data=bitcoin%3Abc1qj3a5flxvdldd7mx9dyk78v42h0uv7ksv48kp8y"
+            alt="Bitcoin QR code — bc1qj3a5flxvdldd7mx9dyk78v42h0uv7ksv48kp8y"
           >
         </div>
 
         <div class="address-box" onclick="copyAddress(this)" title="Click to copy address" role="button" tabindex="0">
-          <code class="address-code">3BeSoEasyTsQDanPV1JfSu1fUhjDWq8TdY</code>
+          <code class="address-code">bc1qj3a5flxvdldd7mx9dyk78v42h0uv7ksv48kp8y</code>
           <button class="copy-btn" aria-label="Copy Bitcoin address">
             <svg class="copy-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
@@ -447,7 +447,7 @@
 
   <script>
     function copyAddress(el) {
-      navigator.clipboard.writeText('3BeSoEasyTsQDanPV1JfSu1fUhjDWq8TdY').then(() => {
+      navigator.clipboard.writeText('bc1qj3a5flxvdldd7mx9dyk78v42h0uv7ksv48kp8y').then(() => {
         const btn = el.querySelector('.copy-btn');
         btn.querySelector('.copy-icon').style.display = 'none';
         btn.querySelector('.check-icon').style.display = 'block';

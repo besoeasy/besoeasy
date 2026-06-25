@@ -74,7 +74,7 @@
             </transition>
           </div>
 
-          <div class="flex flex-col gap-3">
+          <div class="flex flex-row flex-wrap gap-x-6 gap-y-3">
             <a
               v-for="([name, data], idx) in socialLinks"
               :key="name"

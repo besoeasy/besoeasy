@@ -26,35 +26,24 @@
     />
     <meta property="twitter:image" content="https://besoeasy.com/me.png" />
 
-    <!-- Tailwind CSS CDN (pinned v3.4.17) -->
-    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <!-- Tailwind CSS via jsDelivr (@tailwindcss/browser v4) -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
 
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"] },
-            keyframes: {
-              namePulse: {
-                "0%, 100%": { opacity: "1" },
-                "50%": { opacity: "0.82" },
-              },
-            },
-            animation: {
-              "name-pulse": "namePulse 3s ease-in-out infinite",
-              "shimmer":    "shimmer 4s linear infinite",
-            },
-          },
-        },
-      };
-    </script>
-
     <style type="text/tailwindcss">
+      @theme {
+        --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+        --animate-name-pulse: namePulse 3s ease-in-out infinite;
+        --animate-shimmer: shimmer 4s linear infinite;
+      }
+      @keyframes namePulse {
+        0%, 100% { opacity: 1; }
+        50%       { opacity: 0.82; }
+      }
       @keyframes shimmer {
         0%   { background-position: 0% 50%; }
         50%  { background-position: 100% 50%; }

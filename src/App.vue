@@ -1,5 +1,6 @@
 <template>
   <div class="p-5 m-auto max-w-7xl">
+    <SkyBackground />
     <div class="flex sm:flex-row flex-col gap-10 items-center justify-center min-h-screen">
       <div class="w-full md:w-3/5">
         <div class="m-auto transform hover:-translate-y-2 hover:scale-105 hover:rotate-2 transition-all duration-500">
@@ -115,6 +116,7 @@
 <script setup>
 import { ref } from "vue";
 import ContactEmail from "@/components/ContactEmail.vue";
+import SkyBackground from "@/components/SkyBackground.vue";
 import { Code2, DollarSign, Zap, Layers, Users, ShieldCheck, BookOpen, ArrowRight, Github, Zap as ZapIcon, Gamepad2, Instagram, Send } from "lucide-vue-next";
 
 const socialLinksObj = {

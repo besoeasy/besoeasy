@@ -455,6 +455,188 @@
         document.getElementById('sky-label').textContent = labelText;
       })();
 
+      // ── Three.js particle-network background ─────────────────────────
+      (async () => {
+        const THREE = await import('https://esm.sh/three@latest');
+
+        const W = window.innerWidth, H = window.innerHeight;
+
+        // Renderer — sits behind everything
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(W, H);
+        renderer.setClearColor(0xffffff, 1);
+        Object.assign(renderer.domElement.style, {
+          position: 'fixed', top: 0, left: 0,
+          width: '100%', height: '100%',
+          zIndex: -2, pointerEvents: 'none',
+        });
+        document.body.appendChild(renderer.domElement);
+
+        const scene  = new THREE.Scene();
+        const camera = new THREE.OrthographicCamera(-W/2, W/2, H/2, -H/2, 0.1, 10);
+        camera.position.z = 1;
+
+        // ── Particles ─────────────────────────────────────────────────
+        const N       = 90;
+        const CONNECT = 130;   // px — max distance to draw a line
+        const REPEL_MOUSE   = 160;
+        const REPEL_CONTENT = 0; // computed after layout
+
+        // Get content zone bounding box (to repel particles from it)
+        const appEl    = document.getElementById('app') || document.body;
+        const appRect  = appEl.getBoundingClientRect();
+        // Convert to Three.js orthographic coords (centre = 0,0)
+        const ZONE = {
+          x0: appRect.left  - W/2,
+          x1: appRect.right - W/2,
+          y0: -(appRect.bottom - H/2),
+          y1: -(appRect.top    - H/2),
+          pad: 40,
+        };
+
+        // Scatter particles outside the content zone initially
+        function spawnParticle() {
+          let x, y, tries = 0;
+          do {
+            x = (Math.random() - 0.5) * W;
+            y = (Math.random() - 0.5) * H;
+            tries++;
+          } while (
+            tries < 20 &&
+            x > ZONE.x0 - ZONE.pad && x < ZONE.x1 + ZONE.pad &&
+            y > ZONE.y0 - ZONE.pad && y < ZONE.y1 + ZONE.pad
+          );
+          return {
+            x, y,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.4,
+          };
+        }
+
+        const particles = Array.from({ length: N }, spawnParticle);
+
+        // Dot geometry & material
+        const dotPositions = new Float32Array(N * 3);
+        const dotGeo = new THREE.BufferGeometry();
+        dotGeo.setAttribute('position', new THREE.BufferAttribute(dotPositions, 3));
+        const dotMat = new THREE.PointsMaterial({ size: 2.5, color: 0xd1d5db, sizeAttenuation: false });
+        scene.add(new THREE.Points(dotGeo, dotMat));
+
+        // Line geometry — pre-allocate max possible segments
+        const maxSegs   = (N * (N - 1)) / 2;
+        const linePositions = new Float32Array(maxSegs * 6);
+        const lineColors    = new Float32Array(maxSegs * 6); // per-vertex colour for fade
+        const lineGeo = new THREE.BufferGeometry();
+        lineGeo.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+        lineGeo.setAttribute('color',    new THREE.BufferAttribute(lineColors,    3));
+        const lineMat = new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.6 });
+        scene.add(new THREE.LineSegments(lineGeo, lineMat));
+
+        // ── Mouse ──────────────────────────────────────────────────────
+        let mx = 9999, my = 9999;
+        window.addEventListener('mousemove', e => {
+          mx =  e.clientX - W / 2;
+          my = -(e.clientY - H / 2);
+        });
+
+        // ── Resize ────────────────────────────────────────────────────
+        window.addEventListener('resize', () => {
+          const nW = window.innerWidth, nH = window.innerHeight;
+          renderer.setSize(nW, nH);
+          camera.left   = -nW/2; camera.right = nW/2;
+          camera.top    =  nH/2; camera.bottom = -nH/2;
+          camera.updateProjectionMatrix();
+        });
+
+        // ── Animate ───────────────────────────────────────────────────
+        const cW = W / 2, cH = H / 2;
+        function animate() {
+          requestAnimationFrame(animate);
+
+          let seg = 0;
+
+          for (let i = 0; i < N; i++) {
+            const p = particles[i];
+
+            // --- Mouse repulsion ---
+            const mdx = p.x - mx, mdy = p.y - my;
+            const md2 = mdx * mdx + mdy * mdy;
+            if (md2 < REPEL_MOUSE * REPEL_MOUSE && md2 > 0) {
+              const md = Math.sqrt(md2);
+              const f  = ((REPEL_MOUSE - md) / REPEL_MOUSE) * 1.8;
+              p.vx += (mdx / md) * f;
+              p.vy += (mdy / md) * f;
+            }
+
+            // --- Content zone repulsion (push away from app bounding box) ---
+            const inX = p.x > ZONE.x0 - ZONE.pad && p.x < ZONE.x1 + ZONE.pad;
+            const inY = p.y > ZONE.y0 - ZONE.pad && p.y < ZONE.y1 + ZONE.pad;
+            if (inX && inY) {
+              // Push toward nearest edge of zone
+              const dLeft  =  p.x - (ZONE.x0 - ZONE.pad);
+              const dRight = (ZONE.x1 + ZONE.pad) - p.x;
+              const dBot   =  p.y - (ZONE.y0 - ZONE.pad);
+              const dTop   = (ZONE.y1 + ZONE.pad) - p.y;
+              const minD   = Math.min(dLeft, dRight, dBot, dTop);
+              const str    = 0.25;
+              if      (minD === dLeft)  p.vx -= str;
+              else if (minD === dRight) p.vx += str;
+              else if (minD === dBot)   p.vy -= str;
+              else                      p.vy += str;
+            }
+
+            // --- Friction & speed cap ---
+            p.vx *= 0.92;
+            p.vy *= 0.92;
+            const spd = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+            if (spd > 2.5) { p.vx = (p.vx / spd) * 2.5; p.vy = (p.vy / spd) * 2.5; }
+
+            // --- Move ---
+            p.x += p.vx;
+            p.y += p.vy;
+
+            // --- Wrap at edges ---
+            if (p.x < -cW) p.x = cW;
+            if (p.x >  cW) p.x = -cW;
+            if (p.y < -cH) p.y = cH;
+            if (p.y >  cH) p.y = -cH;
+
+            // Update dot buffer
+            dotPositions[i * 3]     = p.x;
+            dotPositions[i * 3 + 1] = p.y;
+            dotPositions[i * 3 + 2] = 0;
+
+            // --- Lines to subsequent particles ---
+            for (let j = i + 1; j < N; j++) {
+              const q   = particles[j];
+              const dx  = p.x - q.x, dy = p.y - q.y;
+              const d2  = dx * dx + dy * dy;
+              if (d2 < CONNECT * CONNECT) {
+                const alpha = 1 - Math.sqrt(d2) / CONNECT; // 1=close, 0=far
+                const c     = 0.82 - alpha * 0.22;          // lighter=far, darker=close
+
+                const b = seg * 6;
+                linePositions[b]     = p.x; linePositions[b+1] = p.y; linePositions[b+2] = 0;
+                linePositions[b+3]   = q.x; linePositions[b+4] = q.y; linePositions[b+5] = 0;
+                // Per-vertex colour (RGB) — grey shade, faded by distance
+                lineColors[b]   = lineColors[b+1]   = lineColors[b+2]   = c;
+                lineColors[b+3] = lineColors[b+4]   = lineColors[b+5]   = c;
+                seg++;
+              }
+            }
+          }
+
+          dotGeo.attributes.position.needsUpdate = true;
+          lineGeo.attributes.position.needsUpdate = true;
+          lineGeo.attributes.color.needsUpdate    = true;
+          lineGeo.setDrawRange(0, seg * 2);
+
+          renderer.render(scene, camera);
+        }
+        animate();
+      })();
+
     </script>
   </body>
 </html>

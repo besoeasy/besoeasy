@@ -294,24 +294,18 @@
           }
         };
 
-        // Provider 1: ipapi.co
+        // Provider 1: ipwho.is
         try {
-          const d1 = await fetchTimeout("https://ipapi.co/json/");
-          if (d1.city && d1.latitude) return { city: d1.city, tz: d1.timezone, lat: d1.latitude, lon: d1.longitude };
+          const d1 = await fetchTimeout("https://ipwho.is/");
+          if (d1.city && d1.latitude) return { city: d1.city, tz: d1.timezone?.id || d1.timezone, lat: d1.latitude, lon: d1.longitude };
         } catch (e) {}
 
-        // Provider 2: ipwho.is
+        // Provider 2: ipinfo.io
         try {
-          const d2 = await fetchTimeout("https://ipwho.is/");
-          if (d2.city && d2.latitude) return { city: d2.city, tz: d2.timezone?.id || d2.timezone, lat: d2.latitude, lon: d2.longitude };
-        } catch (e) {}
-
-        // Provider 3: ipinfo.io
-        try {
-          const d3 = await fetchTimeout("https://ipinfo.io/json");
-          if (d3.city && d3.loc) {
-            const [lat, lon] = d3.loc.split(",").map(Number);
-            return { city: d3.city, tz: d3.timezone, lat, lon };
+          const d2 = await fetchTimeout("https://ipinfo.io/json");
+          if (d2.city && d2.loc) {
+            const [lat, lon] = d2.loc.split(",").map(Number);
+            return { city: d2.city, tz: d2.timezone, lat, lon };
           }
         } catch (e) {}
 

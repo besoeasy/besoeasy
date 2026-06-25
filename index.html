@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,7 +6,10 @@
     <title>Aman Singh Katal - BeSoEasy</title>
 
     <meta name="title" content="Aman Singh Katal - BeSoEasy" />
-    <meta name="description" content="I am a seasoned full-stack developer with a primary focus on fintech and automation. Proficient in a wide range of programming languages, I have collaborated with 70+ organizations, delivering mission-critical applications handling substantial financial and sensitive data. With a career spanning since 2013, my expertise in coding is exemplary." />
+    <meta
+      name="description"
+      content="I am a seasoned full-stack developer with a primary focus on fintech and automation. Proficient in a wide range of programming languages, I have collaborated with 70+ organizations, delivering mission-critical applications handling substantial financial and sensitive data. With a career spanning since 2013, my expertise in coding is exemplary."
+    />
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://besoeasy.com/" />
@@ -17,7 +20,10 @@
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://besoeasy.com/" />
     <meta property="twitter:title" content="Aman Singh Katal - BeSoEasy" />
-    <meta property="twitter:description" content="Seasoned full-stack developer, fintech &amp; automation specialist, 70+ orgs, mission-critical apps since 2013." />
+    <meta
+      property="twitter:description"
+      content="Seasoned full-stack developer, fintech &amp; automation specialist, 70+ orgs, mission-critical apps since 2013."
+    />
     <meta property="twitter:image" content="https://besoeasy.com/me.png" />
 
     <!-- Tailwind CSS CDN -->
@@ -32,20 +38,20 @@
       tailwind.config = {
         theme: {
           extend: {
-            fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+            fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"] },
             keyframes: {
               namePulse: {
-                '0%, 100%': { opacity: '1' },
-                '50%':       { opacity: '0.82' },
+                "0%, 100%": { opacity: "1" },
+                "50%": { opacity: "0.82" },
               },
               bodyPulse: {
-                '0%, 100%': { opacity: '1' },
-                '50%':       { opacity: '0.75' },
+                "0%, 100%": { opacity: "1" },
+                "50%": { opacity: "0.75" },
               },
             },
             animation: {
-              'name-pulse': 'namePulse 3s ease-in-out infinite',
-              'body-pulse': 'bodyPulse 3s ease-in-out infinite',
+              "name-pulse": "namePulse 3s ease-in-out infinite",
+              "body-pulse": "bodyPulse 3s ease-in-out infinite",
             },
           },
         },
@@ -54,129 +60,161 @@
 
     <!-- Only what Tailwind can't express: group-hover child transitions & SVG class -->
     <style>
-      .photo-img { transition: transform 0.5s ease; }
-      .photo-wrap:hover .photo-img { transform: translateY(-8px) scale(1.05) rotate(2deg); }
+      .photo-img {
+        transition: transform 0.5s ease;
+      }
+      .photo-wrap:hover .photo-img {
+        transform: translateY(-8px) scale(1.05) rotate(2deg);
+      }
 
-      .bio-default  { transition: opacity 0.35s ease; }
-      .bio-hover-text { transition: opacity 0.35s ease; }
+      .bio-default {
+        transition: opacity 0.35s ease;
+      }
+      .bio-hover-text {
+        transition: opacity 0.35s ease;
+      }
 
-      .social-icon svg { transition: transform 0.25s; }
-      .social-link:hover .social-icon svg { transform: scale(1.1); }
+      .social-icon svg {
+        transition: transform 0.25s;
+      }
+      .social-link:hover .social-icon svg {
+        transform: scale(1.1);
+      }
 
-      .social-arrow { transition: opacity 0.25s, transform 0.25s; }
-      .social-link:hover .social-arrow { opacity: 1 !important; transform: translateX(0) !important; }
+      .social-arrow {
+        transition:
+          opacity 0.25s,
+          transform 0.25s;
+      }
+      .social-link:hover .social-arrow {
+        opacity: 1 !important;
+        transform: translateX(0) !important;
+      }
 
-      .social-underline { transition: border-color 0.25s; }
-      .social-link:hover .social-underline { border-color: #111827; }
+      .social-underline {
+        transition: border-color 0.25s;
+      }
+      .social-link:hover .social-underline {
+        border-color: #111827;
+      }
 
-      .sky-disc { animation: bodyPulse 3s ease-in-out infinite; }
-      @keyframes bodyPulse { 0%,100%{opacity:1} 50%{opacity:.75} }
+      .sky-disc {
+        animation: bodyPulse 3s ease-in-out infinite;
+      }
+      @keyframes bodyPulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.75;
+        }
+      }
     </style>
   </head>
 
   <body class="font-sans bg-white text-gray-900 antialiased min-h-screen">
-
     <!-- Sky background -->
     <div class="fixed bottom-0 left-0 w-full pointer-events-none -z-10 select-none">
-      <svg id="sky-svg" viewBox="0 0 1000 500" class="w-full block" style="height:48vh"
-           preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
+      <svg id="sky-svg" viewBox="0 0 1000 500" class="w-full block" style="height: 48vh" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%"   stop-color="#fbbf24" stop-opacity="0.55"/>
-            <stop offset="60%"  stop-color="#fbbf24" stop-opacity="0.15"/>
-            <stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/>
+            <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.55" />
+            <stop offset="60%" stop-color="#fbbf24" stop-opacity="0.15" />
+            <stop offset="100%" stop-color="#fbbf24" stop-opacity="0" />
           </radialGradient>
           <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%"   stop-color="#c7d2fe" stop-opacity="0.5"/>
-            <stop offset="60%"  stop-color="#c7d2fe" stop-opacity="0.12"/>
-            <stop offset="100%" stop-color="#c7d2fe" stop-opacity="0"/>
+            <stop offset="0%" stop-color="#c7d2fe" stop-opacity="0.5" />
+            <stop offset="60%" stop-color="#c7d2fe" stop-opacity="0.12" />
+            <stop offset="100%" stop-color="#c7d2fe" stop-opacity="0" />
           </radialGradient>
           <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop id="ag0"   offset="0%"   stop-color="#f59e0b" stop-opacity="0"/>
-            <stop id="ag15"  offset="15%"  stop-color="#f59e0b" stop-opacity="0.35"/>
-            <stop id="ag50"  offset="50%"  stop-color="#f59e0b" stop-opacity="0.7"/>
-            <stop id="ag85"  offset="85%"  stop-color="#f59e0b" stop-opacity="0.35"/>
-            <stop id="ag100" offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+            <stop id="ag0" offset="0%" stop-color="#f59e0b" stop-opacity="0" />
+            <stop id="ag15" offset="15%" stop-color="#f59e0b" stop-opacity="0.35" />
+            <stop id="ag50" offset="50%" stop-color="#f59e0b" stop-opacity="0.7" />
+            <stop id="ag85" offset="85%" stop-color="#f59e0b" stop-opacity="0.35" />
+            <stop id="ag100" offset="100%" stop-color="#f59e0b" stop-opacity="0" />
           </linearGradient>
           <filter id="blur10" x="-60%" y="-60%" width="220%" height="220%">
-            <feGaussianBlur stdDeviation="10"/>
+            <feGaussianBlur stdDeviation="10" />
           </filter>
           <filter id="blur6" x="-40%" y="-40%" width="180%" height="180%">
-            <feGaussianBlur stdDeviation="6"/>
+            <feGaussianBlur stdDeviation="6" />
           </filter>
         </defs>
-        <line x1="0" y1="490" x2="1000" y2="490" stroke="#e5e7eb" stroke-width="1"/>
-        <path d="M -50 490 A 550 550 0 0 1 1050 490" fill="none" stroke="url(#arcGrad)"
-              stroke-width="1.5" stroke-dasharray="6 5"/>
+        <line x1="0" y1="490" x2="1000" y2="490" stroke="#e5e7eb" stroke-width="1" />
+        <path d="M -50 490 A 550 550 0 0 1 1050 490" fill="none" stroke="url(#arcGrad)" stroke-width="1.5" stroke-dasharray="6 5" />
         <g id="sky-ticks"></g>
         <g id="sky-body"></g>
-        <text id="sky-label" x="500" y="482" text-anchor="middle" font-size="11"
-              letter-spacing="1" font-family="ui-sans-serif,system-ui,sans-serif" fill="#9ca3af"></text>
+        <text
+          id="sky-label"
+          x="500"
+          y="482"
+          text-anchor="middle"
+          font-size="11"
+          letter-spacing="1"
+          font-family="ui-sans-serif,system-ui,sans-serif"
+          fill="#9ca3af"
+        ></text>
       </svg>
     </div>
 
     <!-- Main -->
     <div class="max-w-6xl mx-auto p-5">
       <div class="flex flex-col sm:flex-row items-center justify-center gap-10 min-h-screen">
-
         <!-- Photo -->
-        <div class="w-full sm:w-2/5 photo-wrap">
+        <div class="w-2/3 sm:w-2/5 photo-wrap">
           <img src="/me.png" alt="Aman Singh Katal" class="rounded-2xl w-full block photo-img" />
         </div>
 
         <!-- Content -->
-        <div class="w-full sm:w-3/5">
-
+        <div class="w-1/3 sm:w-3/5">
           <!-- Name -->
-          <div class="text-4xl lg:text-5xl font-extrabold mb-2 tracking-tight leading-tight
-                      animate-name-pulse cursor-pointer inline-block
-                      hover:animate-none hover:bg-gradient-to-r hover:from-orange-500
-                      hover:via-red-500 hover:to-pink-500 hover:bg-clip-text hover:text-transparent
-                      transition-all duration-300">
+          <div
+            class="text-4xl lg:text-5xl font-extrabold mb-2 tracking-tight leading-tight animate-name-pulse cursor-pointer inline-block hover:animate-none hover:bg-gradient-to-r hover:from-orange-500 hover:via-red-500 hover:to-pink-500 hover:bg-clip-text hover:text-transparent transition-all duration-300"
+          >
             AMAN SINGH KATAL
           </div>
 
           <!-- Email -->
-          <div id="hero-email" class="text-lg font-semibold mb-5 animate-name-pulse">
-            a@besoeasy.com
-          </div>
+          <div id="hero-email" class="text-lg font-semibold mb-5 animate-name-pulse">a@besoeasy.com</div>
 
           <!-- Bio box -->
-          <div class="relative mb-8" style="min-height:140px" id="bio-box">
+          <div class="relative mb-8" style="min-height: 140px" id="bio-box">
             <!-- Default bio -->
             <div id="bio-default" class="bio-default absolute inset-0 text-gray-800 leading-relaxed text-base sm:text-lg">
               I am a seasoned full-stack developer
               <span class="inline-flex items-center mx-1 cursor-default hover:scale-125 hover:rotate-12 transition-transform duration-300">
-                <i data-lucide="code-2" class="text-blue-600" style="width:20px;height:20px"></i>
+                <i data-lucide="code-2" class="text-blue-600" style="width: 20px; height: 20px"></i>
               </span>
               with a primary focus on fintech
               <span class="inline-flex items-center mx-1 cursor-default hover:scale-125 hover:rotate-12 transition-transform duration-300">
-                <i data-lucide="dollar-sign" class="text-green-600" style="width:20px;height:20px"></i>
+                <i data-lucide="dollar-sign" class="text-green-600" style="width: 20px; height: 20px"></i>
               </span>
               and automation
               <span class="inline-flex items-center mx-1 cursor-default hover:scale-125 hover:rotate-12 transition-transform duration-300">
-                <i data-lucide="zap" class="text-yellow-600" style="width:20px;height:20px"></i>
+                <i data-lucide="zap" class="text-yellow-600" style="width: 20px; height: 20px"></i>
               </span>
               . Proficient in a wide range of programming languages
               <span class="inline-flex items-center mx-1 cursor-default hover:scale-125 hover:rotate-12 transition-transform duration-300">
-                <i data-lucide="layers" class="text-purple-600" style="width:20px;height:20px"></i>
+                <i data-lucide="layers" class="text-purple-600" style="width: 20px; height: 20px"></i>
               </span>
               , I have collaborated with 70+ organizations
               <span class="inline-flex items-center mx-1 cursor-default hover:scale-125 hover:rotate-12 transition-transform duration-300">
-                <i data-lucide="users" class="text-orange-600" style="width:20px;height:20px"></i>
+                <i data-lucide="users" class="text-orange-600" style="width: 20px; height: 20px"></i>
               </span>
               , delivering mission-critical applications handling substantial financial and sensitive data
               <span class="inline-flex items-center mx-1 cursor-default hover:scale-125 hover:rotate-12 transition-transform duration-300">
-                <i data-lucide="shield-check" class="text-red-600" style="width:20px;height:20px"></i>
+                <i data-lucide="shield-check" class="text-red-600" style="width: 20px; height: 20px"></i>
               </span>
               .
             </div>
 
             <!-- Hover text -->
-            <div id="bio-hover-text"
-                 class="bio-hover-text absolute inset-0 opacity-0 pointer-events-none
-                        text-2xl sm:text-3xl font-bold text-gray-600 flex items-center leading-snug">
-            </div>
+            <div
+              id="bio-hover-text"
+              class="bio-hover-text absolute inset-0 opacity-0 pointer-events-none text-2xl sm:text-3xl font-bold text-gray-600 flex items-center leading-snug"
+            ></div>
           </div>
 
           <!-- Social links -->
@@ -185,55 +223,54 @@
           <!-- Blog -->
           <div class="mt-8 pt-6 border-t border-gray-200">
             <a href="/blog/" class="social-link group inline-flex items-center gap-3 text-gray-700 hover:text-black transition-colors duration-300">
-              <span class="social-icon"><i data-lucide="book-open" style="width:20px;height:20px"></i></span>
+              <span class="social-icon"><i data-lucide="book-open" style="width: 20px; height: 20px"></i></span>
               <span class="social-underline text-sm font-semibold uppercase tracking-widest border-b-2 border-transparent">
                 Blog — Thoughts &amp; Tutorials
               </span>
               <span class="social-arrow opacity-0 -translate-x-2 inline-flex items-center">
-                <i data-lucide="arrow-right" style="width:16px;height:16px"></i>
+                <i data-lucide="arrow-right" style="width: 16px; height: 16px"></i>
               </span>
             </a>
           </div>
-
         </div>
       </div>
     </div>
 
     <script type="module">
-      import * as lucide from 'https://esm.sh/lucide@latest';
+      import * as lucide from "https://esm.sh/lucide@latest";
       const { createIcons } = lucide;
 
       // ── Social data ──────────────────────────────────────────────────
       const SOCIALS = [
         {
-          name: 'Github',
-          url: 'https://github.com/besoeasy?tab=repositories&q=&type=&language=&sort=stargazers',
-          description: 'Dive into my code, side projects, and experiments—steal ideas, get inspired, or just lurk 👀',
-          lucide: 'git-branch',
+          name: "Github",
+          url: "https://github.com/besoeasy?tab=repositories&q=&type=&language=&sort=stargazers",
+          description: "Dive into my code, side projects, and experiments—steal ideas, get inspired, or just lurk 👀",
+          lucide: "git-branch",
         },
         {
-          name: 'NOSTR',
-          url: 'https://nosta.me/besoeasy@zaps.lol',
-          description: 'Find me on the decentralized side of the internet—uncensored thoughts and open conversations',
-          lucide: 'zap',
+          name: "NOSTR",
+          url: "https://nosta.me/besoeasy@zaps.lol",
+          description: "Find me on the decentralized side of the internet—uncensored thoughts and open conversations",
+          lucide: "zap",
         },
         {
-          name: 'Steam',
-          url: 'https://steamcommunity.com/id/besoeasy',
+          name: "Steam",
+          url: "https://steamcommunity.com/id/besoeasy",
           description: "Games I play, hours I've lost, and maybe our next co-op session",
-          lucide: 'joystick',
+          lucide: "joystick",
         },
         {
-          name: 'Instagram',
-          url: 'https://instagram.com/besoeasy',
+          name: "Instagram",
+          url: "https://instagram.com/besoeasy",
           description: "Real life moments—if we've met or vibe, this is where we stay connected",
-          lucide: 'camera',
+          lucide: "camera",
         },
         {
-          name: 'Telegram',
-          url: 'https://t.me/besoeasy',
+          name: "Telegram",
+          url: "https://t.me/besoeasy",
           description: "Quick chats, random ideas, memes, or just say hi—I'm usually around here",
-          lucide: 'message-circle',
+          lucide: "message-circle",
         },
       ];
 
@@ -243,19 +280,19 @@
         [SOCIALS[i], SOCIALS[j]] = [SOCIALS[j], SOCIALS[i]];
       }
 
-      const bioBox       = document.getElementById('bio-box');
-      const bioHoverText = document.getElementById('bio-hover-text');
-      const bioDefault   = document.getElementById('bio-default');
-      const socialLinks  = document.getElementById('social-links');
-      let hoverTimeout   = null;
+      const bioBox = document.getElementById("bio-box");
+      const bioHoverText = document.getElementById("bio-hover-text");
+      const bioDefault = document.getElementById("bio-default");
+      const socialLinks = document.getElementById("social-links");
+      let hoverTimeout = null;
 
       SOCIALS.forEach(({ name, url, description, lucide }) => {
-        const a = document.createElement('a');
-        a.href      = url;
-        a.target    = '_blank';
-        a.rel       = 'noopener noreferrer';
-        a.className = 'social-link group inline-flex items-center gap-3 text-gray-700 hover:text-black transition-colors duration-300';
-        a.id        = `social-${name.toLowerCase()}`;
+        const a = document.createElement("a");
+        a.href = url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.className = "social-link group inline-flex items-center gap-3 text-gray-700 hover:text-black transition-colors duration-300";
+        a.id = `social-${name.toLowerCase()}`;
         a.innerHTML = `
           <span class="social-icon"><i data-lucide="${lucide}" style="width:20px;height:20px"></i></span>
           <span class="social-underline text-sm font-semibold uppercase tracking-widest border-b-2 border-transparent">${name}</span>
@@ -264,19 +301,19 @@
           </span>
         `;
 
-        a.addEventListener('mouseenter', () => {
+        a.addEventListener("mouseenter", () => {
           clearTimeout(hoverTimeout);
           hoverTimeout = setTimeout(() => {
             bioHoverText.textContent = description;
-            bioDefault.style.opacity   = '0';
-            bioHoverText.style.opacity = '1';
+            bioDefault.style.opacity = "0";
+            bioHoverText.style.opacity = "1";
           }, 400);
         });
-        a.addEventListener('mouseleave', () => {
+        a.addEventListener("mouseleave", () => {
           clearTimeout(hoverTimeout);
-          bioDefault.style.opacity   = '1';
-          bioHoverText.style.opacity = '0';
-          bioHoverText.textContent   = '';
+          bioDefault.style.opacity = "1";
+          bioHoverText.style.opacity = "0";
+          bioHoverText.textContent = "";
         });
 
         socialLinks.appendChild(a);
@@ -288,18 +325,21 @@
       // ── Dynamic email ────────────────────────────────────────────────
       (async () => {
         try {
-          const res  = await fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(5000) });
+          const res = await fetch("https://ipapi.co/json/", { signal: AbortSignal.timeout(5000) });
           const data = await res.json();
           if (data.city) {
-            const slug = data.city.toLowerCase().replace(/[^a-z0-9]/g, '');
-            document.getElementById('hero-email').textContent = `${slug}@besoeasy.com`;
+            const slug = data.city.toLowerCase().replace(/[^a-z0-9]/g, "");
+            document.getElementById("hero-email").textContent = `${slug}@besoeasy.com`;
           }
         } catch (_) {}
       })();
 
       // ── Sky background ───────────────────────────────────────────────
-      const CX = 500, CY = 490, R = 550;
-      const SUNRISE = 6, SUNSET = 18;
+      const CX = 500,
+        CY = 490,
+        R = 550;
+      const SUNRISE = 6,
+        SUNSET = 18;
 
       function arcPos(hour) {
         const c = Math.max(SUNRISE, Math.min(SUNSET, hour));
@@ -308,7 +348,7 @@
       }
 
       function svgEl(tag, attrs = {}) {
-        const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+        const el = document.createElementNS("http://www.w3.org/2000/svg", tag);
         Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
         return el;
       }
@@ -316,26 +356,32 @@
       (async function initSky() {
         let localHour = new Date().getHours() + new Date().getMinutes() / 60;
         let temperature = null;
-        let labelText   = '';
+        let labelText = "";
 
         try {
-          const ipRes  = await fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(5000) });
+          const ipRes = await fetch("https://ipapi.co/json/", { signal: AbortSignal.timeout(5000) });
           const ipData = await ipRes.json();
-          const tz       = ipData.timezone;
-          const lat      = ipData.latitude;
-          const lon      = ipData.longitude;
-          const cityName = ipData.city || ipData.country_name || '';
+          const tz = ipData.timezone;
+          const lat = ipData.latitude;
+          const lon = ipData.longitude;
+          const cityName = ipData.city || ipData.country_name || "";
 
           if (tz) {
-            const parts = new Intl.DateTimeFormat('en-US', {
-              timeZone: tz, hour: 'numeric', minute: 'numeric', hour12: false,
+            const parts = new Intl.DateTimeFormat("en-US", {
+              timeZone: tz,
+              hour: "numeric",
+              minute: "numeric",
+              hour12: false,
             }).formatToParts(new Date());
-            const h = parseInt(parts.find(p => p.type === 'hour').value, 10);
-            const m = parseInt(parts.find(p => p.type === 'minute').value, 10);
+            const h = parseInt(parts.find((p) => p.type === "hour").value, 10);
+            const m = parseInt(parts.find((p) => p.type === "minute").value, 10);
             localHour = h + m / 60;
 
-            const displayTime = new Intl.DateTimeFormat('en-US', {
-              timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false,
+            const displayTime = new Intl.DateTimeFormat("en-US", {
+              timeZone: tz,
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: false,
             }).format(new Date());
             labelText = cityName ? `${cityName.toUpperCase()} · ${displayTime}` : displayTime;
           } else {
@@ -343,10 +389,9 @@
           }
 
           if (lat && lon) {
-            const wxRes  = await fetch(
-              `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`,
-              { signal: AbortSignal.timeout(5000) }
-            );
+            const wxRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`, {
+              signal: AbortSignal.timeout(5000),
+            });
             const wxData = await wxRes.json();
             if (wxData.current_weather?.temperature !== undefined) {
               temperature = Math.round(wxData.current_weather.temperature);
@@ -354,31 +399,40 @@
           }
         } catch (_) {}
 
-        const isDay    = localHour >= SUNRISE && localHour <= SUNSET;
-        const arcColor = isDay ? '#f59e0b' : '#818cf8';
+        const isDay = localHour >= SUNRISE && localHour <= SUNSET;
+        const arcColor = isDay ? "#f59e0b" : "#818cf8";
 
-        ['ag0','ag15','ag50','ag85','ag100'].forEach(id => {
+        ["ag0", "ag15", "ag50", "ag85", "ag100"].forEach((id) => {
           const el = document.getElementById(id);
-          if (el) el.setAttribute('stop-color', arcColor);
+          if (el) el.setAttribute("stop-color", arcColor);
         });
 
         // Ticks
-        const ticksG = document.getElementById('sky-ticks');
-        ticksG.innerHTML = '';
-        [6, 9, 12, 15, 18].forEach(h => {
+        const ticksG = document.getElementById("sky-ticks");
+        ticksG.innerHTML = "";
+        [6, 9, 12, 15, 18].forEach((h) => {
           const { x, y } = arcPos(h);
           const f = (h - SUNRISE) / (SUNSET - SUNRISE);
           const t = (1 - f) * Math.PI;
 
-          ticksG.appendChild(svgEl('line', {
-            x1: x, y1: y,
-            x2: CX + (R + 6) * Math.cos(t), y2: CY - (R + 6) * Math.sin(t),
-            stroke: '#d1d5db', 'stroke-width': 1, 'stroke-linecap': 'round',
-          }));
-          const lbl = svgEl('text', {
-            x: CX + (R + 22) * Math.cos(t), y: CY - (R + 22) * Math.sin(t) + 4,
-            'text-anchor': 'middle', 'font-size': 11,
-            'font-family': 'ui-sans-serif,system-ui,sans-serif', fill: '#d1d5db',
+          ticksG.appendChild(
+            svgEl("line", {
+              x1: x,
+              y1: y,
+              x2: CX + (R + 6) * Math.cos(t),
+              y2: CY - (R + 6) * Math.sin(t),
+              stroke: "#d1d5db",
+              "stroke-width": 1,
+              "stroke-linecap": "round",
+            }),
+          );
+          const lbl = svgEl("text", {
+            x: CX + (R + 22) * Math.cos(t),
+            y: CY - (R + 22) * Math.sin(t) + 4,
+            "text-anchor": "middle",
+            "font-size": 11,
+            "font-family": "ui-sans-serif,system-ui,sans-serif",
+            fill: "#d1d5db",
           });
           lbl.textContent = `${h}:00`;
           ticksG.appendChild(lbl);
@@ -388,43 +442,61 @@
         let bodyX, bodyY;
         if (isDay) {
           const { x, y } = arcPos(localHour);
-          bodyX = x; bodyY = y;
+          bodyX = x;
+          bodyY = y;
         } else {
-          const nf = localHour >= SUNSET
-            ? (localHour - SUNSET) / (24 - SUNSET + SUNRISE)
-            : (localHour + (24 - SUNSET)) / (24 - SUNSET + SUNRISE);
-          const t  = (1 - nf) * Math.PI;
+          const nf = localHour >= SUNSET ? (localHour - SUNSET) / (24 - SUNSET + SUNRISE) : (localHour + (24 - SUNSET)) / (24 - SUNSET + SUNRISE);
+          const t = (1 - nf) * Math.PI;
           bodyX = CX + R * 0.65 * Math.cos(t);
           bodyY = CY - R * 0.65 * Math.sin(t);
         }
 
-        const cel = document.getElementById('sky-body');
-        cel.innerHTML = '';
-        cel.appendChild(svgEl('circle', {
-          cx: bodyX, cy: bodyY, r: 70,
-          fill: isDay ? 'url(#sunGlow)' : 'url(#moonGlow)', filter: 'url(#blur10)',
-        }));
-        cel.appendChild(svgEl('circle', {
-          cx: bodyX, cy: bodyY, r: 26,
-          fill: isDay ? '#fbbf24' : '#e0e7ff', opacity: 0.25, filter: 'url(#blur6)',
-        }));
-        cel.appendChild(svgEl('circle', {
-          cx: bodyX, cy: bodyY, r: isDay ? 14 : 11,
-          fill: isDay ? '#f59e0b' : '#a5b4fc', class: 'sky-disc',
-        }));
+        const cel = document.getElementById("sky-body");
+        cel.innerHTML = "";
+        cel.appendChild(
+          svgEl("circle", {
+            cx: bodyX,
+            cy: bodyY,
+            r: 70,
+            fill: isDay ? "url(#sunGlow)" : "url(#moonGlow)",
+            filter: "url(#blur10)",
+          }),
+        );
+        cel.appendChild(
+          svgEl("circle", {
+            cx: bodyX,
+            cy: bodyY,
+            r: 26,
+            fill: isDay ? "#fbbf24" : "#e0e7ff",
+            opacity: 0.25,
+            filter: "url(#blur6)",
+          }),
+        );
+        cel.appendChild(
+          svgEl("circle", {
+            cx: bodyX,
+            cy: bodyY,
+            r: isDay ? 14 : 11,
+            fill: isDay ? "#f59e0b" : "#a5b4fc",
+            class: "sky-disc",
+          }),
+        );
 
         if (temperature !== null) {
-          const tmp = svgEl('text', {
-            x: bodyX, y: bodyY - 26, 'text-anchor': 'middle',
-            'font-size': 18, 'font-weight': 700,
-            'font-family': 'ui-sans-serif,system-ui,sans-serif',
-            fill: isDay ? '#92400e' : '#6366f1',
+          const tmp = svgEl("text", {
+            x: bodyX,
+            y: bodyY - 26,
+            "text-anchor": "middle",
+            "font-size": 18,
+            "font-weight": 700,
+            "font-family": "ui-sans-serif,system-ui,sans-serif",
+            fill: isDay ? "#92400e" : "#6366f1",
           });
           tmp.textContent = `${temperature}°C`;
           cel.appendChild(tmp);
         }
 
-        document.getElementById('sky-label').textContent = labelText;
+        document.getElementById("sky-label").textContent = labelText;
       })();
     </script>
   </body>

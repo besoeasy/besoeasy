@@ -117,6 +117,10 @@ const socialLinksObj = {
   telegram: {
     url: "https://t.me/besoeasy",
     description: "Quick chats, random ideas, memes, or just say hi—I'm usually around here"
+  },
+  Blog: {
+    url: "/blog/",
+    description: "Thoughts, tutorials, and deep dives—read what's on my mind"
   }
 };
 

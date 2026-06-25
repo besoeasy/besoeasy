@@ -50,13 +50,30 @@
               },
             },
             animation: {
-              "name-pulse": "namePulse 3s ease-in-out infinite",
-              "body-pulse": "bodyPulse 3s ease-in-out infinite",
+              "name-pulse":   "namePulse 3s ease-in-out infinite",
+              "body-pulse":   "bodyPulse 3s ease-in-out infinite",
+              "shimmer":      "shimmer 4s linear infinite",
             },
           },
         },
       };
     </script>
+
+    <style type="text/tailwindcss">
+      @keyframes shimmer {
+        0%   { background-position: 0% 50%; }
+        50%  { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      .name-gradient {
+        background: linear-gradient(270deg, #f97316, #ef4444, #ec4899, #f97316);
+        background-size: 300% 300%;
+        animation: shimmer 4s ease infinite;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+    </style>
 
     <!-- Only what Tailwind can't express: group-hover child transitions & SVG class -->
     <style>
@@ -163,12 +180,14 @@
         <div class="space-y-5">
 
           <!-- Name -->
-          <div class="text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight
-                      animate-name-pulse cursor-pointer inline-block
-                      hover:animate-none hover:bg-gradient-to-r hover:from-orange-500
-                      hover:via-red-500 hover:to-pink-500 hover:bg-clip-text
-                      hover:text-transparent transition-all duration-300">
-            AMAN SINGH KATAL
+          <div class="cursor-default select-none">
+            <div class="text-5xl lg:text-6xl font-black tracking-tighter leading-none text-gray-900">
+              AMAN SINGH
+            </div>
+            <div class="text-5xl lg:text-6xl font-black tracking-tighter leading-none name-gradient">
+              KATAL
+            </div>
+            <div class="mt-3 h-[3px] w-14 rounded-full bg-gradient-to-r from-orange-400 via-rose-500 to-pink-500"></div>
           </div>
 
           <!-- Email -->

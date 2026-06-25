@@ -44,15 +44,10 @@
                 "0%, 100%": { opacity: "1" },
                 "50%": { opacity: "0.82" },
               },
-              bodyPulse: {
-                "0%, 100%": { opacity: "1" },
-                "50%": { opacity: "0.75" },
-              },
             },
             animation: {
-              "name-pulse":   "namePulse 3s ease-in-out infinite",
-              "body-pulse":   "bodyPulse 3s ease-in-out infinite",
-              "shimmer":      "shimmer 4s linear infinite",
+              "name-pulse": "namePulse 3s ease-in-out infinite",
+              "shimmer":    "shimmer 4s linear infinite",
             },
           },
         },
@@ -243,7 +238,7 @@
         [SOCIALS[i], SOCIALS[j]] = [SOCIALS[j], SOCIALS[i]];
       }
 
-      const bioBox = document.getElementById("bio-box");
+
       const bioHoverText = document.getElementById("bio-hover-text");
       const bioDefault = document.getElementById("bio-default");
       const socialLinks = document.getElementById("social-links");

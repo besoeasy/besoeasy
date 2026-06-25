@@ -152,69 +152,69 @@
 
     <!-- Main -->
     <div class="max-w-6xl mx-auto p-5">
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-10 min-h-screen">
-        <!-- Photo -->
-        <div class="w-full sm:w-2/3 photo-wrap">
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-12 items-center min-h-screen py-10">
+
+        <!-- Photo: 2 of 5 cols on desktop, full width on mobile -->
+        <div class="md:col-span-2 photo-wrap">
           <img src="/me.png" alt="Aman Singh Katal" class="rounded-2xl w-full block photo-img" />
         </div>
 
-        <!-- Content -->
-        <div class="w-full sm:w-1/3">
+        <!-- Content: 3 of 5 cols on desktop, full width on mobile -->
+        <div class="md:col-span-3 space-y-5">
+
           <!-- Name -->
-          <div
-            class="text-4xl lg:text-5xl font-extrabold mb-2 tracking-tight leading-tight animate-name-pulse cursor-pointer inline-block hover:animate-none hover:bg-gradient-to-r hover:from-orange-500 hover:via-red-500 hover:to-pink-500 hover:bg-clip-text hover:text-transparent transition-all duration-300"
-          >
+          <div class="text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight
+                      animate-name-pulse cursor-pointer inline-block
+                      hover:animate-none hover:bg-gradient-to-r hover:from-orange-500
+                      hover:via-red-500 hover:to-pink-500 hover:bg-clip-text
+                      hover:text-transparent transition-all duration-300">
             AMAN SINGH KATAL
           </div>
 
           <!-- Email -->
-          <div id="hero-email" class="text-lg font-semibold mb-5 animate-name-pulse">a@besoeasy.com</div>
+          <div id="hero-email" class="text-lg font-semibold animate-name-pulse">a@besoeasy.com</div>
 
-          <!-- Bio box -->
-          <div class="relative mb-8" style="min-height: 140px" id="bio-box">
-            <!-- Default bio -->
-            <div id="bio-default" class="bio-default absolute inset-0 text-gray-800 leading-relaxed text-base sm:text-lg">
+          <!-- Bio box: fixed height container, both layers absolute -->
+          <div class="relative" style="min-height:130px" id="bio-box">
+            <div id="bio-default" class="bio-default absolute inset-0 text-gray-700 leading-relaxed text-base">
               I am a seasoned full-stack developer
               <span class="inline-flex items-center mx-1 cursor-default hover:scale-125 hover:rotate-12 transition-transform duration-300">
-                <i data-lucide="code-2" class="text-blue-600" style="width: 20px; height: 20px"></i>
+                <i data-lucide="code-2" class="text-blue-600" style="width:20px;height:20px"></i>
               </span>
               with a primary focus on fintech
               <span class="inline-flex items-center mx-1 cursor-default hover:scale-125 hover:rotate-12 transition-transform duration-300">
-                <i data-lucide="dollar-sign" class="text-green-600" style="width: 20px; height: 20px"></i>
+                <i data-lucide="dollar-sign" class="text-green-600" style="width:20px;height:20px"></i>
               </span>
               and automation
               <span class="inline-flex items-center mx-1 cursor-default hover:scale-125 hover:rotate-12 transition-transform duration-300">
-                <i data-lucide="zap" class="text-yellow-600" style="width: 20px; height: 20px"></i>
+                <i data-lucide="zap" class="text-yellow-600" style="width:20px;height:20px"></i>
               </span>
               . Proficient in a wide range of programming languages
               <span class="inline-flex items-center mx-1 cursor-default hover:scale-125 hover:rotate-12 transition-transform duration-300">
-                <i data-lucide="layers" class="text-purple-600" style="width: 20px; height: 20px"></i>
+                <i data-lucide="layers" class="text-purple-600" style="width:20px;height:20px"></i>
               </span>
               , I have collaborated with 70+ organizations
               <span class="inline-flex items-center mx-1 cursor-default hover:scale-125 hover:rotate-12 transition-transform duration-300">
-                <i data-lucide="users" class="text-orange-600" style="width: 20px; height: 20px"></i>
+                <i data-lucide="users" class="text-orange-600" style="width:20px;height:20px"></i>
               </span>
               , delivering mission-critical applications handling substantial financial and sensitive data
               <span class="inline-flex items-center mx-1 cursor-default hover:scale-125 hover:rotate-12 transition-transform duration-300">
-                <i data-lucide="shield-check" class="text-red-600" style="width: 20px; height: 20px"></i>
+                <i data-lucide="shield-check" class="text-red-600" style="width:20px;height:20px"></i>
               </span>
               .
             </div>
-
-            <!-- Hover text -->
-            <div
-              id="bio-hover-text"
-              class="bio-hover-text absolute inset-0 opacity-0 pointer-events-none text-2xl sm:text-3xl font-bold text-gray-600 flex items-center leading-snug"
-            ></div>
+            <div id="bio-hover-text"
+                 class="bio-hover-text absolute inset-0 opacity-0 pointer-events-none
+                        text-xl font-bold text-gray-600 flex items-center leading-snug"></div>
           </div>
 
           <!-- Social links -->
           <div class="flex flex-wrap gap-x-6 gap-y-3" id="social-links"></div>
 
           <!-- Blog -->
-          <div class="mt-8 pt-6 border-t border-gray-200">
+          <div class="pt-5 border-t border-gray-200">
             <a href="/blog/" class="social-link group inline-flex items-center gap-3 text-gray-700 hover:text-black transition-colors duration-300">
-              <span class="social-icon"><i data-lucide="book-open" style="width: 20px; height: 20px"></i></span>
+              <span class="social-icon"><i data-lucide="book-open" style="width:20px;height:20px"></i></span>
               <span class="social-underline text-sm font-semibold uppercase tracking-widest border-b-2 border-transparent">
                 Blog — Thoughts &amp; Tutorials
               </span>

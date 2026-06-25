@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,41 +8,556 @@
     <meta name="title" content="Aman Singh Katal - BeSoEasy" />
     <meta
       name="description"
-      content="		I am a seasoned full-stack developer with a primary focus on fintech and
-  automation. Proficient in a wide range of programming languages, I have
-  collaborated with 70+ organizations, delivering mission-critical applications
-  handling substantial financial and sensitive data. With a career spanning since
-  2013, my expertise in coding is exemplary."
+      content="I am a seasoned full-stack developer with a primary focus on fintech and automation. Proficient in a wide range of programming languages, I have collaborated with 70+ organizations, delivering mission-critical applications handling substantial financial and sensitive data. With a career spanning since 2013, my expertise in coding is exemplary."
     />
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://besoeasy.com/" />
     <meta property="og:title" content="Aman Singh Katal - BeSoEasy" />
-    <meta
-      property="og:description"
-      content="I am a seasoned full-stack developer with a primary focus on fintech and
-    automation. Proficient in a wide range of programming languages, I have
-    collaborated with 70+ organizations, delivering mission-critical applications
-    handling substantial financial and sensitive data. With a career spanning since
-    2013, my expertise in coding is exemplary. "
-    />
+    <meta property="og:description" content="Seasoned full-stack developer, fintech &amp; automation specialist, 70+ orgs, mission-critical apps since 2013." />
     <meta property="og:image" content="https://besoeasy.com/me.png" />
 
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://besoeasy.com/" />
     <meta property="twitter:title" content="Aman Singh Katal - BeSoEasy" />
-    <meta
-      property="twitter:description"
-      content="		I am a seasoned full-stack developer with a primary focus on fintech and
-    automation. Proficient in a wide range of programming languages, I have
-    collaborated with 70+ organizations, delivering mission-critical applications
-    handling substantial financial and sensitive data. With a career spanning since
-    2013, my expertise in coding is exemplary."
-    />
+    <meta property="twitter:description" content="Seasoned full-stack developer, fintech &amp; automation specialist, 70+ orgs, mission-critical apps since 2013." />
     <meta property="twitter:image" content="https://besoeasy.com/me.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      :root {
+        --ink: #111827;
+        --ink-muted: #6b7280;
+        --border: #e5e7eb;
+      }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+        background: #ffffff;
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      /* ── Layout ─────────────────────────────────────── */
+      #app {
+        max-width: 80rem;
+        margin: 0 auto;
+        padding: 1.25rem;
+      }
+
+      .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+        min-height: 100vh;
+      }
+
+      @media (min-width: 640px) {
+        .hero          { flex-direction: row; }
+        .hero-photo    { width: 40%; }
+        .hero-content  { width: 60%; }
+      }
+
+      /* ── Photo ─────────────────────────────────────── */
+      .hero-photo { width: 100%; }
+      .hero-photo img {
+        border-radius: 1rem;
+        width: 100%;
+        display: block;
+        transition: transform 0.5s ease;
+      }
+      .hero-photo:hover img {
+        transform: translateY(-8px) scale(1.05) rotate(2deg);
+      }
+
+      /* ── Content ───────────────────────────────────── */
+      .hero-content { width: 100%; }
+
+      .hero-name {
+        font-size: clamp(1.5rem, 5vw, 3rem);
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+        animation: namePulse 3s ease-in-out infinite;
+        cursor: pointer;
+        display: inline-block;
+      }
+      .hero-name:hover {
+        animation: none;
+        background: linear-gradient(to right, #f97316, #ef4444, #ec4899);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      @keyframes namePulse {
+        0%, 100% { opacity: 1; }
+        50%       { opacity: 0.82; }
+      }
+
+      .hero-email {
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        animation: namePulse 3s ease-in-out infinite;
+      }
+
+      /* ── Bio ───────────────────────────────────────── */
+      .bio-box {
+        position: relative;
+        min-height: 140px;
+        margin-bottom: 2rem;
+      }
+
+      .bio-default,
+      .bio-hover-text {
+        position: absolute;
+        inset: 0;
+        transition: opacity 0.35s ease;
+        line-height: 1.65;
+      }
+
+      .bio-default {
+        font-size: clamp(0.88rem, 1.8vw, 1.05rem);
+        color: #1f2937;
+      }
+
+      .bio-hover-text {
+        opacity: 0;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #4b5563;
+        display: flex;
+        align-items: center;
+        pointer-events: none;
+      }
+
+      .bio-box.hovered .bio-default    { opacity: 0; }
+      .bio-box.hovered .bio-hover-text { opacity: 1; }
+
+      /* ── Inline icon in bio ────────────────────────── */
+      .bio-icon {
+        display: inline-flex;
+        align-items: center;
+        vertical-align: middle;
+        margin: 0 0.15rem;
+        cursor: default;
+        transition: transform 0.25s ease;
+      }
+      .bio-icon:hover { transform: scale(1.3) rotate(12deg); }
+      .bio-icon i     { display: flex; }
+
+      /* Lucide resets inside bio icons */
+      .bio-icon i svg { width: 20px; height: 20px; display: block; }
+
+      /* ── Social links ──────────────────────────────── */
+      .social-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.25rem 1.5rem;
+      }
+
+      .social-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        text-decoration: none;
+        color: #374151;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        transition: color 0.25s;
+      }
+      .social-link i     { display: flex; }
+      .social-link i svg { width: 20px; height: 20px; transition: transform 0.25s; }
+      .social-link:hover { color: #111; }
+      .social-link:hover i svg { transform: scale(1.1); }
+
+      .social-label {
+        border-bottom: 2px solid transparent;
+        transition: border-color 0.25s;
+      }
+      .social-link:hover .social-label { border-color: #111; }
+
+      .social-arrow {
+        display: inline-flex;
+        align-items: center;
+        opacity: 0;
+        transform: translateX(-6px);
+        transition: opacity 0.25s, transform 0.25s;
+      }
+      .social-arrow i     { display: flex; }
+      .social-arrow i svg { width: 16px; height: 16px; }
+      .social-link:hover .social-arrow { opacity: 1; transform: translateX(0); }
+
+      /* ── Blog link ─────────────────────────────────── */
+      .blog-section {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border);
+      }
+
+      /* ── Sky background ────────────────────────────── */
+      #sky-bg {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        pointer-events: none;
+        z-index: -10;
+        user-select: none;
+      }
+      #sky-bg svg { width: 100%; height: 48vh; display: block; }
+
+      @keyframes bodyPulse {
+        0%, 100% { opacity: 1; }
+        50%       { opacity: 0.75; }
+      }
+      .sky-disc { animation: bodyPulse 3s ease-in-out infinite; }
+    </style>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+
+    <!-- ── Sky background ─────────────────────────────── -->
+    <div id="sky-bg">
+      <svg id="sky-svg" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMax meet"
+           xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#fbbf24" stop-opacity="0.55"/>
+            <stop offset="60%"  stop-color="#fbbf24" stop-opacity="0.15"/>
+            <stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#c7d2fe" stop-opacity="0.5"/>
+            <stop offset="60%"  stop-color="#c7d2fe" stop-opacity="0.12"/>
+            <stop offset="100%" stop-color="#c7d2fe" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop id="ag0"   offset="0%"   stop-color="#f59e0b" stop-opacity="0"/>
+            <stop id="ag15"  offset="15%"  stop-color="#f59e0b" stop-opacity="0.35"/>
+            <stop id="ag50"  offset="50%"  stop-color="#f59e0b" stop-opacity="0.7"/>
+            <stop id="ag85"  offset="85%"  stop-color="#f59e0b" stop-opacity="0.35"/>
+            <stop id="ag100" offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+          </linearGradient>
+          <filter id="blur10" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="10"/>
+          </filter>
+          <filter id="blur6" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="6"/>
+          </filter>
+        </defs>
+
+        <!-- Horizon -->
+        <line x1="0" y1="490" x2="1000" y2="490" stroke="#e5e7eb" stroke-width="1"/>
+        <!-- Arc -->
+        <path d="M 50 490 A 450 450 0 0 1 950 490" fill="none" stroke="url(#arcGrad)"
+              stroke-width="1.5" stroke-dasharray="6 5"/>
+
+        <g id="sky-ticks"></g>
+        <g id="sky-body"></g>
+        <text id="sky-label" x="500" y="482" text-anchor="middle" font-size="11"
+              letter-spacing="1" font-family="ui-sans-serif,system-ui,sans-serif"
+              fill="#9ca3af"></text>
+      </svg>
+    </div>
+
+    <!-- ── Main ────────────────────────────────────────── -->
+    <div id="app">
+      <div class="hero">
+
+        <!-- Photo -->
+        <div class="hero-photo">
+          <img src="/me.png" alt="Aman Singh Katal" />
+        </div>
+
+        <!-- Content -->
+        <div class="hero-content">
+          <div class="hero-name">AMAN SINGH KATAL</div>
+          <div class="hero-email" id="hero-email">a@besoeasy.com</div>
+
+          <!-- Bio -->
+          <div class="bio-box" id="bio-box">
+            <div class="bio-default" id="bio-default">
+              I am a seasoned full-stack developer
+              <span class="bio-icon"><i data-lucide="code-2" style="color:#2563eb"></i></span>
+              with a primary focus on fintech
+              <span class="bio-icon"><i data-lucide="dollar-sign" style="color:#16a34a"></i></span>
+              and automation
+              <span class="bio-icon"><i data-lucide="zap" style="color:#ca8a04"></i></span>
+              . Proficient in a wide range of programming languages
+              <span class="bio-icon"><i data-lucide="layers" style="color:#9333ea"></i></span>
+              , I have collaborated with 70+ organizations
+              <span class="bio-icon"><i data-lucide="users" style="color:#ea580c"></i></span>
+              , delivering mission-critical applications handling substantial financial
+              and sensitive data
+              <span class="bio-icon"><i data-lucide="shield-check" style="color:#dc2626"></i></span>
+              .
+            </div>
+            <div class="bio-hover-text" id="bio-hover-text"></div>
+          </div>
+
+          <!-- Social links (populated by JS for shuffle) -->
+          <div class="social-links" id="social-links"></div>
+
+          <!-- Blog -->
+          <div class="blog-section">
+            <a href="/blog/" class="social-link" id="blog-link">
+              <i data-lucide="book-open"></i>
+              <span class="social-label">Blog — Thoughts &amp; Tutorials</span>
+              <span class="social-arrow"><i data-lucide="arrow-right"></i></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import {
+        createIcons,
+        Code2, DollarSign, Zap, Layers, Users, ShieldCheck,
+        BookOpen, ArrowRight,
+        Github, Gamepad2, Instagram, Send,
+      } from 'https://esm.sh/lucide@latest';
+
+      // ── Social data ─────────────────────────────────────────────────
+      const SOCIALS = [
+        {
+          name: 'Github',
+          url: 'https://github.com/besoeasy?tab=repositories&q=&type=&language=&sort=stargazers',
+          description: 'Dive into my code, side projects, and experiments—steal ideas, get inspired, or just lurk 👀',
+          lucide: 'github',
+        },
+        {
+          name: 'NOSTR',
+          url: 'https://nosta.me/besoeasy@zaps.lol',
+          description: 'Find me on the decentralized side of the internet—uncensored thoughts and open conversations',
+          lucide: 'zap',
+        },
+        {
+          name: 'Steam',
+          url: 'https://steamcommunity.com/id/besoeasy',
+          description: "Games I play, hours I've lost, and maybe our next co-op session",
+          lucide: 'gamepad-2',
+        },
+        {
+          name: 'Instagram',
+          url: 'https://instagram.com/besoeasy',
+          description: "Real life moments—if we've met or vibe, this is where we stay connected",
+          lucide: 'instagram',
+        },
+        {
+          name: 'Telegram',
+          url: 'https://t.me/besoeasy',
+          description: 'Quick chats, random ideas, memes, or just say hi—I\'m usually around here',
+          lucide: 'send',
+        },
+      ];
+
+      // Shuffle
+      for (let i = SOCIALS.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [SOCIALS[i], SOCIALS[j]] = [SOCIALS[j], SOCIALS[i]];
+      }
+
+      // Build social link elements using data-lucide for icon hydration
+      const bioBox        = document.getElementById('bio-box');
+      const bioHoverText  = document.getElementById('bio-hover-text');
+      const socialLinks   = document.getElementById('social-links');
+      let hoverTimeout    = null;
+
+      SOCIALS.forEach(({ name, url, description, lucide }) => {
+        const a = document.createElement('a');
+        a.href      = url;
+        a.target    = '_blank';
+        a.rel       = 'noopener noreferrer';
+        a.className = 'social-link';
+        a.id        = `social-${name.toLowerCase()}`;
+        a.innerHTML = `
+          <i data-lucide="${lucide}"></i>
+          <span class="social-label">${name}</span>
+          <span class="social-arrow"><i data-lucide="arrow-right"></i></span>
+        `;
+
+        a.addEventListener('mouseenter', () => {
+          clearTimeout(hoverTimeout);
+          hoverTimeout = setTimeout(() => {
+            bioHoverText.textContent = description;
+            bioBox.classList.add('hovered');
+          }, 400);
+        });
+        a.addEventListener('mouseleave', () => {
+          clearTimeout(hoverTimeout);
+          bioBox.classList.remove('hovered');
+          bioHoverText.textContent = '';
+        });
+
+        socialLinks.appendChild(a);
+      });
+
+      // Hydrate ALL data-lucide elements on the page
+      createIcons({
+        icons: { Code2, DollarSign, Zap, Layers, Users, ShieldCheck, BookOpen, ArrowRight, Github, Gamepad2, Instagram, Send },
+      });
+
+      // ── Dynamic email via IP geolocation ────────────────────────────
+      (async () => {
+        try {
+          const res  = await fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(5000) });
+          const data = await res.json();
+          if (data.city) {
+            const slug = data.city.toLowerCase().replace(/[^a-z0-9]/g, '');
+            document.getElementById('hero-email').textContent = `${slug}@besoeasy.com`;
+          }
+        } catch (_) { /* keep default */ }
+      })();
+
+      // ── Sky background ───────────────────────────────────────────────
+      const CX = 500, CY = 490, R = 450;
+      const SUNRISE = 6, SUNSET = 18;
+
+      function arcPos(hour) {
+        const c = Math.max(SUNRISE, Math.min(SUNSET, hour));
+        const t = (1 - (c - SUNRISE) / (SUNSET - SUNRISE)) * Math.PI;
+        return { x: CX + R * Math.cos(t), y: CY - R * Math.sin(t) };
+      }
+
+      function svgEl(tag, attrs = {}) {
+        const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+        Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
+        return el;
+      }
+
+      (async function initSky() {
+        let localHour = new Date().getHours() + new Date().getMinutes() / 60;
+        let temperature = null;
+        let labelText   = '';
+
+        try {
+          const ipRes  = await fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(5000) });
+          const ipData = await ipRes.json();
+          const tz       = ipData.timezone;
+          const lat      = ipData.latitude;
+          const lon      = ipData.longitude;
+          const cityName = ipData.city || ipData.country_name || '';
+
+          if (tz) {
+            const parts = new Intl.DateTimeFormat('en-US', {
+              timeZone: tz, hour: 'numeric', minute: 'numeric', hour12: false,
+            }).formatToParts(new Date());
+            const h = parseInt(parts.find(p => p.type === 'hour').value, 10);
+            const m = parseInt(parts.find(p => p.type === 'minute').value, 10);
+            localHour = h + m / 60;
+
+            const displayTime = new Intl.DateTimeFormat('en-US', {
+              timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false,
+            }).format(new Date());
+            labelText = cityName ? `${cityName.toUpperCase()} · ${displayTime}` : displayTime;
+          } else {
+            labelText = cityName.toUpperCase();
+          }
+
+          if (lat && lon) {
+            const wxRes  = await fetch(
+              `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`,
+              { signal: AbortSignal.timeout(5000) }
+            );
+            const wxData = await wxRes.json();
+            if (wxData.current_weather?.temperature !== undefined) {
+              temperature = Math.round(wxData.current_weather.temperature);
+            }
+          }
+        } catch (_) { /* use browser defaults */ }
+
+        const isDay    = localHour >= SUNRISE && localHour <= SUNSET;
+        const arcColor = isDay ? '#f59e0b' : '#818cf8';
+
+        // Recolour arc gradient
+        ['ag0','ag15','ag50','ag85','ag100'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.setAttribute('stop-color', arcColor);
+        });
+
+        // Hour ticks
+        const ticksG = document.getElementById('sky-ticks');
+        ticksG.innerHTML = '';
+        [6, 9, 12, 15, 18].forEach(h => {
+          const { x, y } = arcPos(h);
+          const f = (h - SUNRISE) / (SUNSET - SUNRISE);
+          const t = (1 - f) * Math.PI;
+
+          ticksG.appendChild(svgEl('line', {
+            x1: x, y1: y,
+            x2: CX + (R + 6) * Math.cos(t), y2: CY - (R + 6) * Math.sin(t),
+            stroke: '#d1d5db', 'stroke-width': 1, 'stroke-linecap': 'round',
+          }));
+
+          const lbl = svgEl('text', {
+            x: CX + (R + 22) * Math.cos(t), y: CY - (R + 22) * Math.sin(t) + 4,
+            'text-anchor': 'middle', 'font-size': 11,
+            'font-family': 'ui-sans-serif,system-ui,sans-serif', fill: '#d1d5db',
+          });
+          lbl.textContent = `${h}:00`;
+          ticksG.appendChild(lbl);
+        });
+
+        // Celestial body position
+        let bodyX, bodyY;
+        if (isDay) {
+          const { x, y } = arcPos(localHour);
+          bodyX = x; bodyY = y;
+        } else {
+          const nf = localHour >= SUNSET
+            ? (localHour - SUNSET) / (24 - SUNSET + SUNRISE)
+            : (localHour + (24 - SUNSET)) / (24 - SUNSET + SUNRISE);
+          const t  = (1 - nf) * Math.PI;
+          bodyX = CX + R * 0.65 * Math.cos(t);
+          bodyY = CY - R * 0.65 * Math.sin(t);
+        }
+
+        const cel = document.getElementById('sky-body');
+        cel.innerHTML = '';
+        cel.appendChild(svgEl('circle', {
+          cx: bodyX, cy: bodyY, r: 70,
+          fill: isDay ? 'url(#sunGlow)' : 'url(#moonGlow)',
+          filter: 'url(#blur10)',
+        }));
+        cel.appendChild(svgEl('circle', {
+          cx: bodyX, cy: bodyY, r: 26,
+          fill: isDay ? '#fbbf24' : '#e0e7ff', opacity: 0.25, filter: 'url(#blur6)',
+        }));
+        cel.appendChild(svgEl('circle', {
+          cx: bodyX, cy: bodyY, r: isDay ? 14 : 11,
+          fill: isDay ? '#f59e0b' : '#a5b4fc', class: 'sky-disc',
+        }));
+
+        if (temperature !== null) {
+          const tmp = svgEl('text', {
+            x: bodyX, y: bodyY - 26, 'text-anchor': 'middle',
+            'font-size': 18, 'font-weight': 700,
+            'font-family': 'ui-sans-serif,system-ui,sans-serif',
+            fill: isDay ? '#92400e' : '#6366f1',
+          });
+          tmp.textContent = `${temperature}°C`;
+          cel.appendChild(tmp);
+        }
+
+        document.getElementById('sky-label').textContent = labelText;
+      })();
+    </script>
   </body>
 </html>

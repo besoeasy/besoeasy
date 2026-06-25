@@ -1,0 +1,75 @@
+name: Build & Deploy Blog
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Rebuild daily at 06:00 UTC to pick up new Nostr posts
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one deployment at a time
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Generate blog from Nostr
+        env:
+          NPUB: npub1x6au4qgw9t403yushl34tgngmgcaqv9yna7ywf8e6x4xf686ln7qc7y6wq
+        run: |
+          npx github:besoeasy/NostrPress
+
+      - name: Assemble site
+        run: |
+          mkdir -p dist
+
+          # Main page
+          cp index.html dist/index.html
+
+          # Root-level image/icon assets
+          for f in me.png favicon.ico favicon.svg; do
+            [ -f "$f" ] && cp "$f" dist/ || true
+          done
+
+          # Nostr / Flathub verification files
+          if [ -d .well-known ]; then
+            cp -r .well-known dist/.well-known
+          fi
+
+          # Generated blog
+          if [ -d blog ]; then
+            cp -r blog dist/blog
+          fi
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

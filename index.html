@@ -6,10 +6,7 @@
     <title>Aman Singh Katal - BeSoEasy</title>
 
     <meta name="title" content="Aman Singh Katal - BeSoEasy" />
-    <meta
-      name="description"
-      content="I am a seasoned full-stack developer with a primary focus on fintech and automation. Proficient in a wide range of programming languages, I have collaborated with 70+ organizations, delivering mission-critical applications handling substantial financial and sensitive data. With a career spanning since 2013, my expertise in coding is exemplary."
-    />
+    <meta name="description" content="I am a seasoned full-stack developer with a primary focus on fintech and automation. Proficient in a wide range of programming languages, I have collaborated with 70+ organizations, delivering mission-critical applications handling substantial financial and sensitive data. With a career spanning since 2013, my expertise in coding is exemplary." />
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://besoeasy.com/" />
@@ -23,219 +20,66 @@
     <meta property="twitter:description" content="Seasoned full-stack developer, fintech &amp; automation specialist, 70+ orgs, mission-critical apps since 2013." />
     <meta property="twitter:image" content="https://besoeasy.com/me.png" />
 
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
 
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+            keyframes: {
+              namePulse: {
+                '0%, 100%': { opacity: '1' },
+                '50%':       { opacity: '0.82' },
+              },
+              bodyPulse: {
+                '0%, 100%': { opacity: '1' },
+                '50%':       { opacity: '0.75' },
+              },
+            },
+            animation: {
+              'name-pulse': 'namePulse 3s ease-in-out infinite',
+              'body-pulse': 'bodyPulse 3s ease-in-out infinite',
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Only what Tailwind can't express: group-hover child transitions & SVG class -->
     <style>
-      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      .photo-img { transition: transform 0.5s ease; }
+      .photo-wrap:hover .photo-img { transform: translateY(-8px) scale(1.05) rotate(2deg); }
 
-      :root {
-        --ink: #111827;
-        --ink-muted: #6b7280;
-        --border: #e5e7eb;
-      }
+      .bio-default  { transition: opacity 0.35s ease; }
+      .bio-hover-text { transition: opacity 0.35s ease; }
 
-      html { scroll-behavior: smooth; }
+      .social-icon svg { transition: transform 0.25s; }
+      .social-link:hover .social-icon svg { transform: scale(1.1); }
 
-      body {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-        background: #ffffff;
-        color: var(--ink);
-        -webkit-font-smoothing: antialiased;
-        line-height: 1.6;
-        min-height: 100vh;
-      }
+      .social-arrow { transition: opacity 0.25s, transform 0.25s; }
+      .social-link:hover .social-arrow { opacity: 1 !important; transform: translateX(0) !important; }
 
-      /* ── Layout ─────────────────────────────────────── */
-      #app {
-        max-width: 80rem;
-        margin: 0 auto;
-        padding: 1.25rem;
-      }
+      .social-underline { transition: border-color 0.25s; }
+      .social-link:hover .social-underline { border-color: #111827; }
 
-      .hero {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 2.5rem;
-        min-height: 100vh;
-      }
-
-      @media (min-width: 640px) {
-        .hero          { flex-direction: row; }
-        .hero-photo    { width: 40%; }
-        .hero-content  { width: 60%; }
-      }
-
-      /* ── Photo ─────────────────────────────────────── */
-      .hero-photo { width: 100%; }
-      .hero-photo img {
-        border-radius: 1rem;
-        width: 100%;
-        display: block;
-        transition: transform 0.5s ease;
-      }
-      .hero-photo:hover img {
-        transform: translateY(-8px) scale(1.05) rotate(2deg);
-      }
-
-      /* ── Content ───────────────────────────────────── */
-      .hero-content { width: 100%; }
-
-      .hero-name {
-        font-size: clamp(1.5rem, 5vw, 3rem);
-        font-weight: 800;
-        margin-bottom: 0.5rem;
-        letter-spacing: -0.02em;
-        line-height: 1.1;
-        animation: namePulse 3s ease-in-out infinite;
-        cursor: pointer;
-        display: inline-block;
-      }
-      .hero-name:hover {
-        animation: none;
-        background: linear-gradient(to right, #f97316, #ef4444, #ec4899);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-
-      @keyframes namePulse {
-        0%, 100% { opacity: 1; }
-        50%       { opacity: 0.82; }
-      }
-
-      .hero-email {
-        font-size: 1.125rem;
-        font-weight: 600;
-        margin-bottom: 1.5rem;
-        animation: namePulse 3s ease-in-out infinite;
-      }
-
-      /* ── Bio ───────────────────────────────────────── */
-      .bio-box {
-        position: relative;
-        min-height: 140px;
-        margin-bottom: 2rem;
-      }
-
-      .bio-default,
-      .bio-hover-text {
-        position: absolute;
-        inset: 0;
-        transition: opacity 0.35s ease;
-        line-height: 1.65;
-      }
-
-      .bio-default {
-        font-size: clamp(0.88rem, 1.8vw, 1.05rem);
-        color: #1f2937;
-      }
-
-      .bio-hover-text {
-        opacity: 0;
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: #4b5563;
-        display: flex;
-        align-items: center;
-        pointer-events: none;
-      }
-
-      .bio-box.hovered .bio-default    { opacity: 0; }
-      .bio-box.hovered .bio-hover-text { opacity: 1; }
-
-      /* ── Inline icon in bio ────────────────────────── */
-      .bio-icon {
-        display: inline-flex;
-        align-items: center;
-        vertical-align: middle;
-        margin: 0 0.15rem;
-        cursor: default;
-        transition: transform 0.25s ease;
-      }
-      .bio-icon:hover { transform: scale(1.3) rotate(12deg); }
-      .bio-icon i     { display: flex; }
-
-      /* Lucide resets inside bio icons */
-      .bio-icon i svg { width: 20px; height: 20px; display: block; }
-
-      /* ── Social links ──────────────────────────────── */
-      .social-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1.25rem 1.5rem;
-      }
-
-      .social-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.55rem;
-        text-decoration: none;
-        color: #374151;
-        font-size: 0.8125rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        transition: color 0.25s;
-      }
-      .social-link i     { display: flex; }
-      .social-link i svg { width: 20px; height: 20px; transition: transform 0.25s; }
-      .social-link:hover { color: #111; }
-      .social-link:hover i svg { transform: scale(1.1); }
-
-      .social-label {
-        border-bottom: 2px solid transparent;
-        transition: border-color 0.25s;
-      }
-      .social-link:hover .social-label { border-color: #111; }
-
-      .social-arrow {
-        display: inline-flex;
-        align-items: center;
-        opacity: 0;
-        transform: translateX(-6px);
-        transition: opacity 0.25s, transform 0.25s;
-      }
-      .social-arrow i     { display: flex; }
-      .social-arrow i svg { width: 16px; height: 16px; }
-      .social-link:hover .social-arrow { opacity: 1; transform: translateX(0); }
-
-      /* ── Blog link ─────────────────────────────────── */
-      .blog-section {
-        margin-top: 2rem;
-        padding-top: 1.5rem;
-        border-top: 1px solid var(--border);
-      }
-
-      /* ── Sky background ────────────────────────────── */
-      #sky-bg {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        pointer-events: none;
-        z-index: -10;
-        user-select: none;
-      }
-      #sky-bg svg { width: 100%; height: 48vh; display: block; }
-
-      @keyframes bodyPulse {
-        0%, 100% { opacity: 1; }
-        50%       { opacity: 0.75; }
-      }
       .sky-disc { animation: bodyPulse 3s ease-in-out infinite; }
+      @keyframes bodyPulse { 0%,100%{opacity:1} 50%{opacity:.75} }
     </style>
   </head>
-  <body>
 
-    <!-- ── Sky background ─────────────────────────────── -->
-    <div id="sky-bg">
-      <svg id="sky-svg" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMax meet"
-           xmlns="http://www.w3.org/2000/svg">
+  <body class="font-sans bg-white text-gray-900 antialiased min-h-screen">
+
+    <!-- Sky background -->
+    <div class="fixed bottom-0 left-0 w-full pointer-events-none -z-10 select-none">
+      <svg id="sky-svg" viewBox="0 0 1000 500" class="w-full block" style="height:48vh"
+           preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
             <stop offset="0%"   stop-color="#fbbf24" stop-opacity="0.55"/>
@@ -261,86 +105,111 @@
             <feGaussianBlur stdDeviation="6"/>
           </filter>
         </defs>
-
-        <!-- Horizon -->
         <line x1="0" y1="490" x2="1000" y2="490" stroke="#e5e7eb" stroke-width="1"/>
-        <!-- Arc -->
         <path d="M 50 490 A 450 450 0 0 1 950 490" fill="none" stroke="url(#arcGrad)"
               stroke-width="1.5" stroke-dasharray="6 5"/>
-
         <g id="sky-ticks"></g>
         <g id="sky-body"></g>
         <text id="sky-label" x="500" y="482" text-anchor="middle" font-size="11"
-              letter-spacing="1" font-family="ui-sans-serif,system-ui,sans-serif"
-              fill="#9ca3af"></text>
+              letter-spacing="1" font-family="ui-sans-serif,system-ui,sans-serif" fill="#9ca3af"></text>
       </svg>
     </div>
 
-    <!-- ── Main ────────────────────────────────────────── -->
-    <div id="app">
-      <div class="hero">
+    <!-- Main -->
+    <div class="max-w-7xl mx-auto p-5">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-10 min-h-screen">
 
         <!-- Photo -->
-        <div class="hero-photo">
-          <img src="/me.png" alt="Aman Singh Katal" />
+        <div class="w-full sm:w-2/5 photo-wrap">
+          <img src="/me.png" alt="Aman Singh Katal" class="rounded-2xl w-full block photo-img" />
         </div>
 
         <!-- Content -->
-        <div class="hero-content">
-          <div class="hero-name">AMAN SINGH KATAL</div>
-          <div class="hero-email" id="hero-email">a@besoeasy.com</div>
+        <div class="w-full sm:w-3/5">
 
-          <!-- Bio -->
-          <div class="bio-box" id="bio-box">
-            <div class="bio-default" id="bio-default">
+          <!-- Name -->
+          <div class="text-4xl lg:text-5xl font-extrabold mb-2 tracking-tight leading-tight
+                      animate-name-pulse cursor-pointer inline-block
+                      hover:animate-none hover:bg-gradient-to-r hover:from-orange-500
+                      hover:via-red-500 hover:to-pink-500 hover:bg-clip-text hover:text-transparent
+                      transition-all duration-300">
+            AMAN SINGH KATAL
+          </div>
+
+          <!-- Email -->
+          <div id="hero-email" class="text-lg font-semibold mb-5 animate-name-pulse">
+            a@besoeasy.com
+          </div>
+
+          <!-- Bio box -->
+          <div class="relative mb-8" style="min-height:140px" id="bio-box">
+            <!-- Default bio -->
+            <div id="bio-default" class="bio-default absolute inset-0 text-gray-800 leading-relaxed text-base sm:text-lg">
               I am a seasoned full-stack developer
-              <span class="bio-icon"><i data-lucide="code-2" style="color:#2563eb"></i></span>
+              <span class="inline-flex items-center mx-1 cursor-default hover:scale-125 hover:rotate-12 transition-transform duration-300">
+                <i data-lucide="code-2" class="text-blue-600" style="width:20px;height:20px"></i>
+              </span>
               with a primary focus on fintech
-              <span class="bio-icon"><i data-lucide="dollar-sign" style="color:#16a34a"></i></span>
+              <span class="inline-flex items-center mx-1 cursor-default hover:scale-125 hover:rotate-12 transition-transform duration-300">
+                <i data-lucide="dollar-sign" class="text-green-600" style="width:20px;height:20px"></i>
+              </span>
               and automation
-              <span class="bio-icon"><i data-lucide="zap" style="color:#ca8a04"></i></span>
+              <span class="inline-flex items-center mx-1 cursor-default hover:scale-125 hover:rotate-12 transition-transform duration-300">
+                <i data-lucide="zap" class="text-yellow-600" style="width:20px;height:20px"></i>
+              </span>
               . Proficient in a wide range of programming languages
-              <span class="bio-icon"><i data-lucide="layers" style="color:#9333ea"></i></span>
+              <span class="inline-flex items-center mx-1 cursor-default hover:scale-125 hover:rotate-12 transition-transform duration-300">
+                <i data-lucide="layers" class="text-purple-600" style="width:20px;height:20px"></i>
+              </span>
               , I have collaborated with 70+ organizations
-              <span class="bio-icon"><i data-lucide="users" style="color:#ea580c"></i></span>
-              , delivering mission-critical applications handling substantial financial
-              and sensitive data
-              <span class="bio-icon"><i data-lucide="shield-check" style="color:#dc2626"></i></span>
+              <span class="inline-flex items-center mx-1 cursor-default hover:scale-125 hover:rotate-12 transition-transform duration-300">
+                <i data-lucide="users" class="text-orange-600" style="width:20px;height:20px"></i>
+              </span>
+              , delivering mission-critical applications handling substantial financial and sensitive data
+              <span class="inline-flex items-center mx-1 cursor-default hover:scale-125 hover:rotate-12 transition-transform duration-300">
+                <i data-lucide="shield-check" class="text-red-600" style="width:20px;height:20px"></i>
+              </span>
               .
             </div>
-            <div class="bio-hover-text" id="bio-hover-text"></div>
+
+            <!-- Hover text -->
+            <div id="bio-hover-text"
+                 class="bio-hover-text absolute inset-0 opacity-0 pointer-events-none
+                        text-2xl sm:text-3xl font-bold text-gray-600 flex items-center leading-snug">
+            </div>
           </div>
 
-          <!-- Social links (populated by JS for shuffle) -->
-          <div class="social-links" id="social-links"></div>
+          <!-- Social links -->
+          <div class="flex flex-wrap gap-x-6 gap-y-3" id="social-links"></div>
 
           <!-- Blog -->
-          <div class="blog-section">
-            <a href="/blog/" class="social-link" id="blog-link">
-              <i data-lucide="book-open"></i>
-              <span class="social-label">Blog — Thoughts &amp; Tutorials</span>
-              <span class="social-arrow"><i data-lucide="arrow-right"></i></span>
+          <div class="mt-8 pt-6 border-t border-gray-200">
+            <a href="/blog/" class="social-link group inline-flex items-center gap-3 text-gray-700 hover:text-black transition-colors duration-300">
+              <span class="social-icon"><i data-lucide="book-open" style="width:20px;height:20px"></i></span>
+              <span class="social-underline text-sm font-semibold uppercase tracking-widest border-b-2 border-transparent">
+                Blog — Thoughts &amp; Tutorials
+              </span>
+              <span class="social-arrow opacity-0 -translate-x-2 inline-flex items-center">
+                <i data-lucide="arrow-right" style="width:16px;height:16px"></i>
+              </span>
             </a>
           </div>
+
         </div>
       </div>
     </div>
 
     <script type="module">
-      import {
-        createIcons,
-        Code2, DollarSign, Zap, Layers, Users, ShieldCheck,
-        BookOpen, ArrowRight,
-        Github, Gamepad2, Instagram, Send,
-      } from 'https://esm.sh/lucide@latest';
+      import * as lucide from 'https://esm.sh/lucide@latest';
+      const { createIcons } = lucide;
 
-      // ── Social data ─────────────────────────────────────────────────
+      // ── Social data ──────────────────────────────────────────────────
       const SOCIALS = [
         {
           name: 'Github',
           url: 'https://github.com/besoeasy?tab=repositories&q=&type=&language=&sort=stargazers',
           description: 'Dive into my code, side projects, and experiments—steal ideas, get inspired, or just lurk 👀',
-          lucide: 'github',
+          lucide: 'git-branch',
         },
         {
           name: 'NOSTR',
@@ -352,19 +221,19 @@
           name: 'Steam',
           url: 'https://steamcommunity.com/id/besoeasy',
           description: "Games I play, hours I've lost, and maybe our next co-op session",
-          lucide: 'gamepad-2',
+          lucide: 'joystick',
         },
         {
           name: 'Instagram',
           url: 'https://instagram.com/besoeasy',
           description: "Real life moments—if we've met or vibe, this is where we stay connected",
-          lucide: 'instagram',
+          lucide: 'camera',
         },
         {
           name: 'Telegram',
           url: 'https://t.me/besoeasy',
-          description: 'Quick chats, random ideas, memes, or just say hi—I\'m usually around here',
-          lucide: 'send',
+          description: "Quick chats, random ideas, memes, or just say hi—I'm usually around here",
+          lucide: 'message-circle',
         },
       ];
 
@@ -374,47 +243,49 @@
         [SOCIALS[i], SOCIALS[j]] = [SOCIALS[j], SOCIALS[i]];
       }
 
-      // Build social link elements using data-lucide for icon hydration
-      const bioBox        = document.getElementById('bio-box');
-      const bioHoverText  = document.getElementById('bio-hover-text');
-      const socialLinks   = document.getElementById('social-links');
-      let hoverTimeout    = null;
+      const bioBox       = document.getElementById('bio-box');
+      const bioHoverText = document.getElementById('bio-hover-text');
+      const bioDefault   = document.getElementById('bio-default');
+      const socialLinks  = document.getElementById('social-links');
+      let hoverTimeout   = null;
 
       SOCIALS.forEach(({ name, url, description, lucide }) => {
         const a = document.createElement('a');
         a.href      = url;
         a.target    = '_blank';
         a.rel       = 'noopener noreferrer';
-        a.className = 'social-link';
+        a.className = 'social-link group inline-flex items-center gap-3 text-gray-700 hover:text-black transition-colors duration-300';
         a.id        = `social-${name.toLowerCase()}`;
         a.innerHTML = `
-          <i data-lucide="${lucide}"></i>
-          <span class="social-label">${name}</span>
-          <span class="social-arrow"><i data-lucide="arrow-right"></i></span>
+          <span class="social-icon"><i data-lucide="${lucide}" style="width:20px;height:20px"></i></span>
+          <span class="social-underline text-sm font-semibold uppercase tracking-widest border-b-2 border-transparent">${name}</span>
+          <span class="social-arrow opacity-0 -translate-x-2 inline-flex items-center">
+            <i data-lucide="arrow-right" style="width:16px;height:16px"></i>
+          </span>
         `;
 
         a.addEventListener('mouseenter', () => {
           clearTimeout(hoverTimeout);
           hoverTimeout = setTimeout(() => {
             bioHoverText.textContent = description;
-            bioBox.classList.add('hovered');
+            bioDefault.style.opacity   = '0';
+            bioHoverText.style.opacity = '1';
           }, 400);
         });
         a.addEventListener('mouseleave', () => {
           clearTimeout(hoverTimeout);
-          bioBox.classList.remove('hovered');
-          bioHoverText.textContent = '';
+          bioDefault.style.opacity   = '1';
+          bioHoverText.style.opacity = '0';
+          bioHoverText.textContent   = '';
         });
 
         socialLinks.appendChild(a);
       });
 
-      // Hydrate ALL data-lucide elements on the page
-      createIcons({
-        icons: { Code2, DollarSign, Zap, Layers, Users, ShieldCheck, BookOpen, ArrowRight, Github, Gamepad2, Instagram, Send },
-      });
+      // Hydrate all data-lucide elements (pass entire module — no named export guessing)
+      createIcons({ icons: lucide });
 
-      // ── Dynamic email via IP geolocation ────────────────────────────
+      // ── Dynamic email ────────────────────────────────────────────────
       (async () => {
         try {
           const res  = await fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(5000) });
@@ -423,7 +294,7 @@
             const slug = data.city.toLowerCase().replace(/[^a-z0-9]/g, '');
             document.getElementById('hero-email').textContent = `${slug}@besoeasy.com`;
           }
-        } catch (_) { /* keep default */ }
+        } catch (_) {}
       })();
 
       // ── Sky background ───────────────────────────────────────────────
@@ -481,18 +352,17 @@
               temperature = Math.round(wxData.current_weather.temperature);
             }
           }
-        } catch (_) { /* use browser defaults */ }
+        } catch (_) {}
 
         const isDay    = localHour >= SUNRISE && localHour <= SUNSET;
         const arcColor = isDay ? '#f59e0b' : '#818cf8';
 
-        // Recolour arc gradient
         ['ag0','ag15','ag50','ag85','ag100'].forEach(id => {
           const el = document.getElementById(id);
           if (el) el.setAttribute('stop-color', arcColor);
         });
 
-        // Hour ticks
+        // Ticks
         const ticksG = document.getElementById('sky-ticks');
         ticksG.innerHTML = '';
         [6, 9, 12, 15, 18].forEach(h => {
@@ -505,7 +375,6 @@
             x2: CX + (R + 6) * Math.cos(t), y2: CY - (R + 6) * Math.sin(t),
             stroke: '#d1d5db', 'stroke-width': 1, 'stroke-linecap': 'round',
           }));
-
           const lbl = svgEl('text', {
             x: CX + (R + 22) * Math.cos(t), y: CY - (R + 22) * Math.sin(t) + 4,
             'text-anchor': 'middle', 'font-size': 11,
@@ -515,7 +384,7 @@
           ticksG.appendChild(lbl);
         });
 
-        // Celestial body position
+        // Celestial body
         let bodyX, bodyY;
         if (isDay) {
           const { x, y } = arcPos(localHour);
@@ -533,8 +402,7 @@
         cel.innerHTML = '';
         cel.appendChild(svgEl('circle', {
           cx: bodyX, cy: bodyY, r: 70,
-          fill: isDay ? 'url(#sunGlow)' : 'url(#moonGlow)',
-          filter: 'url(#blur10)',
+          fill: isDay ? 'url(#sunGlow)' : 'url(#moonGlow)', filter: 'url(#blur10)',
         }));
         cel.appendChild(svgEl('circle', {
           cx: bodyX, cy: bodyY, r: 26,

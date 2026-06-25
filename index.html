@@ -115,57 +115,10 @@
         border-color: #111827;
       }
 
-      .sky-disc {
-        animation: bodyPulse 3s ease-in-out infinite;
-      }
-      @keyframes bodyPulse {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.75;
-        }
-      }
     </style>
   </head>
 
   <body class="font-sans bg-white text-gray-900 antialiased min-h-screen">
-    <!-- Sky background: simple horizon line strip -->
-    <div class="fixed bottom-0 left-0 w-full pointer-events-none -z-10 select-none">
-      <svg id="sky-svg" viewBox="0 0 1000 80" class="w-full block" style="height:80px"
-           xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%"   stop-color="#fbbf24" stop-opacity="0.55"/>
-            <stop offset="60%"  stop-color="#fbbf24" stop-opacity="0.15"/>
-            <stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/>
-          </radialGradient>
-          <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%"   stop-color="#c7d2fe" stop-opacity="0.5"/>
-            <stop offset="60%"  stop-color="#c7d2fe" stop-opacity="0.12"/>
-            <stop offset="100%" stop-color="#c7d2fe" stop-opacity="0"/>
-          </radialGradient>
-          <filter id="blur10" x="-60%" y="-60%" width="220%" height="220%">
-            <feGaussianBlur stdDeviation="10"/>
-          </filter>
-          <filter id="blur6" x="-40%" y="-40%" width="180%" height="180%">
-            <feGaussianBlur stdDeviation="6"/>
-          </filter>
-        </defs>
-
-        <!-- Horizon line -->
-        <line x1="0" y1="60" x2="1000" y2="60" stroke="#e5e7eb" stroke-width="1"/>
-
-        <!-- City · time label -->
-        <text id="sky-label" x="500" y="74" text-anchor="middle" font-size="10"
-              letter-spacing="1" font-family="ui-sans-serif,system-ui,sans-serif"
-              fill="#9ca3af"></text>
-
-        <!-- Celestial body (JS-rendered) -->
-        <g id="sky-body"></g>
-      </svg>
-    </div>
 
     <!-- Main -->
     <div class="max-w-6xl mx-auto p-5">
@@ -379,118 +332,6 @@
           document.getElementById("hero-email").textContent = `${slug}@besoeasy.com`;
         }
       });
-
-      // ── Sky background ───────────────────────────────────────────────
-      const LINE_Y  = 60;   // horizon y in the new 1000×80 viewBox
-      const LINE_X0 = 40;   // left margin
-      const LINE_X1 = 960;  // right margin
-      const SUNRISE = 6, SUNSET = 18;
-
-      // Map hour → x position along the line
-      function lineX(hour) {
-        const clamped  = Math.max(SUNRISE, Math.min(SUNSET, hour));
-        const fraction = (clamped - SUNRISE) / (SUNSET - SUNRISE);
-        return LINE_X0 + fraction * (LINE_X1 - LINE_X0);
-      }
-
-      function svgEl(tag, attrs = {}) {
-        const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
-        Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
-        return el;
-      }
-
-      (async function initSky() {
-        let localHour   = new Date().getHours() + new Date().getMinutes() / 60;
-        let temperature = null;
-        let labelText   = '';
-
-        try {
-          const loc = await locationPromise;
-          if (loc) {
-            const tz       = loc.tz;
-            const lat      = loc.lat;
-            const lon      = loc.lon;
-            const cityName = loc.city;
-
-            if (tz) {
-              const parts = new Intl.DateTimeFormat('en-US', {
-                timeZone: tz, hour: 'numeric', minute: 'numeric', hour12: false,
-              }).formatToParts(new Date());
-              const h = parseInt(parts.find(p => p.type === 'hour').value, 10);
-              const m = parseInt(parts.find(p => p.type === 'minute').value, 10);
-              localHour = h + m / 60;
-
-              const displayTime = new Intl.DateTimeFormat('en-US', {
-                timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false,
-              }).format(new Date());
-              labelText = cityName ? `${cityName.toUpperCase()} · ${displayTime}` : displayTime;
-            } else {
-              labelText = cityName.toUpperCase();
-            }
-
-            if (lat && lon) {
-              const wxRes  = await fetch(
-                `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`,
-                { signal: AbortSignal.timeout(5000) }
-              );
-              const wxData = await wxRes.json();
-              if (wxData.current_weather?.temperature !== undefined) {
-                temperature = Math.round(wxData.current_weather.temperature);
-              }
-            }
-          }
-        } catch (_) {}
-
-        const isDay = localHour >= SUNRISE && localHour <= SUNSET;
-
-        // X position of the celestial body
-        let bodyX;
-        if (isDay) {
-          bodyX = lineX(localHour);
-        } else {
-          // Night: moon drifts from right edge back to left edge across midnight
-          const nf = localHour >= SUNSET
-            ? (localHour - SUNSET) / (24 - SUNSET + SUNRISE)
-            : (localHour + (24 - SUNSET)) / (24 - SUNSET + SUNRISE);
-          bodyX = LINE_X1 - nf * (LINE_X1 - LINE_X0);
-        }
-
-        const cel = document.getElementById('sky-body');
-        cel.innerHTML = '';
-
-        // Glow halo
-        cel.appendChild(svgEl('circle', {
-          cx: bodyX, cy: LINE_Y, r: 44,
-          fill: isDay ? 'url(#sunGlow)' : 'url(#moonGlow)',
-          filter: 'url(#blur10)',
-        }));
-        // Soft ring
-        cel.appendChild(svgEl('circle', {
-          cx: bodyX, cy: LINE_Y, r: 18,
-          fill: isDay ? '#fbbf24' : '#e0e7ff',
-          opacity: 0.25, filter: 'url(#blur6)',
-        }));
-        // Disc
-        cel.appendChild(svgEl('circle', {
-          cx: bodyX, cy: LINE_Y, r: isDay ? 10 : 8,
-          fill: isDay ? '#f59e0b' : '#a5b4fc',
-          class: 'sky-disc',
-        }));
-
-        // Temperature above disc
-        if (temperature !== null) {
-          const tmp = svgEl('text', {
-            x: bodyX, y: LINE_Y - 18,
-            'text-anchor': 'middle', 'font-size': 13, 'font-weight': 700,
-            'font-family': 'ui-sans-serif,system-ui,sans-serif',
-            fill: isDay ? '#92400e' : '#6366f1',
-          });
-          tmp.textContent = `${temperature}°C`;
-          cel.appendChild(tmp);
-        }
-
-        document.getElementById('sky-label').textContent = labelText;
-      })();
 
 
 

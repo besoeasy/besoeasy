@@ -332,17 +332,53 @@
       // Hydrate all data-lucide elements (pass entire module — no named export guessing)
       createIcons({ icons: lucide });
 
-      // ── Dynamic email ────────────────────────────────────────────────
-      (async () => {
-        try {
-          const res = await fetch("https://ipapi.co/json/", { signal: AbortSignal.timeout(5000) });
-          const data = await res.json();
-          if (data.city) {
-            const slug = data.city.toLowerCase().replace(/[^a-z0-9]/g, "");
-            document.getElementById("hero-email").textContent = `${slug}@besoeasy.com`;
+      // ── IP Geolocation with Fallbacks ──────────────────────────────────
+      async function fetchLocation() {
+        const fetchTimeout = async (url) => {
+          const controller = new AbortController();
+          const id = setTimeout(() => controller.abort(), 4000);
+          try {
+            const res = await fetch(url, { signal: controller.signal });
+            if (!res.ok) throw new Error("HTTP error");
+            return await res.json();
+          } finally {
+            clearTimeout(id);
           }
-        } catch (_) {}
-      })();
+        };
+
+        // Provider 1: ipapi.co
+        try {
+          const d1 = await fetchTimeout("https://ipapi.co/json/");
+          if (d1.city && d1.latitude) return { city: d1.city, tz: d1.timezone, lat: d1.latitude, lon: d1.longitude };
+        } catch (e) {}
+
+        // Provider 2: ipwho.is
+        try {
+          const d2 = await fetchTimeout("https://ipwho.is/");
+          if (d2.city && d2.latitude) return { city: d2.city, tz: d2.timezone?.id || d2.timezone, lat: d2.latitude, lon: d2.longitude };
+        } catch (e) {}
+
+        // Provider 3: ipinfo.io
+        try {
+          const d3 = await fetchTimeout("https://ipinfo.io/json");
+          if (d3.city && d3.loc) {
+            const [lat, lon] = d3.loc.split(",").map(Number);
+            return { city: d3.city, tz: d3.timezone, lat, lon };
+          }
+        } catch (e) {}
+
+        return null;
+      }
+
+      const locationPromise = fetchLocation();
+
+      // ── Dynamic email ────────────────────────────────────────────────
+      locationPromise.then((loc) => {
+        if (loc && loc.city) {
+          const slug = loc.city.toLowerCase().replace(/[^a-z0-9]/g, "");
+          document.getElementById("hero-email").textContent = `${slug}@besoeasy.com`;
+        }
+      });
 
       // ── Sky background ───────────────────────────────────────────────
       const LINE_Y  = 60;   // horizon y in the new 1000×80 viewBox
@@ -369,37 +405,38 @@
         let labelText   = '';
 
         try {
-          const ipRes  = await fetch('https://ipapi.co/json/', { signal: AbortSignal.timeout(5000) });
-          const ipData = await ipRes.json();
-          const tz       = ipData.timezone;
-          const lat      = ipData.latitude;
-          const lon      = ipData.longitude;
-          const cityName = ipData.city || ipData.country_name || '';
+          const loc = await locationPromise;
+          if (loc) {
+            const tz       = loc.tz;
+            const lat      = loc.lat;
+            const lon      = loc.lon;
+            const cityName = loc.city;
 
-          if (tz) {
-            const parts = new Intl.DateTimeFormat('en-US', {
-              timeZone: tz, hour: 'numeric', minute: 'numeric', hour12: false,
-            }).formatToParts(new Date());
-            const h = parseInt(parts.find(p => p.type === 'hour').value, 10);
-            const m = parseInt(parts.find(p => p.type === 'minute').value, 10);
-            localHour = h + m / 60;
+            if (tz) {
+              const parts = new Intl.DateTimeFormat('en-US', {
+                timeZone: tz, hour: 'numeric', minute: 'numeric', hour12: false,
+              }).formatToParts(new Date());
+              const h = parseInt(parts.find(p => p.type === 'hour').value, 10);
+              const m = parseInt(parts.find(p => p.type === 'minute').value, 10);
+              localHour = h + m / 60;
 
-            const displayTime = new Intl.DateTimeFormat('en-US', {
-              timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false,
-            }).format(new Date());
-            labelText = cityName ? `${cityName.toUpperCase()} · ${displayTime}` : displayTime;
-          } else {
-            labelText = cityName.toUpperCase();
-          }
+              const displayTime = new Intl.DateTimeFormat('en-US', {
+                timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false,
+              }).format(new Date());
+              labelText = cityName ? `${cityName.toUpperCase()} · ${displayTime}` : displayTime;
+            } else {
+              labelText = cityName.toUpperCase();
+            }
 
-          if (lat && lon) {
-            const wxRes  = await fetch(
-              `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`,
-              { signal: AbortSignal.timeout(5000) }
-            );
-            const wxData = await wxRes.json();
-            if (wxData.current_weather?.temperature !== undefined) {
-              temperature = Math.round(wxData.current_weather.temperature);
+            if (lat && lon) {
+              const wxRes  = await fetch(
+                `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`,
+                { signal: AbortSignal.timeout(5000) }
+              );
+              const wxData = await wxRes.json();
+              if (wxData.current_weather?.temperature !== undefined) {
+                temperature = Math.round(wxData.current_weather.temperature);
+              }
             }
           }
         } catch (_) {}

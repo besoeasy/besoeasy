@@ -85,6 +85,20 @@
               <Sbut :textinput="name" :SocialLinks="data.url" />
             </div>
           </div>
+
+          <!-- Blog — internal navigation, separate from external social links -->
+          <div class="mt-8 pt-6 border-t border-gray-200">
+            <a
+              href="/blog/"
+              class="group inline-flex items-center gap-3 text-gray-700 hover:text-black transition-all duration-300"
+            >
+              <BookOpen :size="20" class="transition-transform duration-300 group-hover:scale-110" />
+              <span class="text-sm font-semibold uppercase tracking-widest border-b-2 border-transparent group-hover:border-black transition-all duration-300">
+                Blog — Thoughts &amp; Tutorials
+              </span>
+              <ArrowRight :size="16" class="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -95,7 +109,7 @@
 import { ref } from "vue";
 import ContactEmail from "@/components/ContactEmail.vue";
 import Sbut from "@/components/Sbut.vue";
-import { Code2, DollarSign, Zap, Layers, Users, ShieldCheck } from "lucide-vue-next";
+import { Code2, DollarSign, Zap, Layers, Users, ShieldCheck, BookOpen, ArrowRight } from "lucide-vue-next";
 
 const socialLinksObj = {
   Github: {
@@ -118,10 +132,6 @@ const socialLinksObj = {
     url: "https://t.me/besoeasy",
     description: "Quick chats, random ideas, memes, or just say hi—I'm usually around here"
   },
-  Blog: {
-    url: "/blog/",
-    description: "Thoughts, tutorials, and deep dives—read what's on my mind"
-  }
 };
 
 function shuffle(array) {

@@ -74,16 +74,23 @@
             </transition>
           </div>
 
-          <div class="space-y-3 leading-6 text-left xl:space-y-5 uppercase">
-            <div 
-              v-for="([name, data], idx) in socialLinks" 
-              :key="name" 
-              class="relative inline-block mr-3"
+          <div class="flex flex-col gap-3">
+            <a
+              v-for="([name, data], idx) in socialLinks"
+              :key="name"
+              :href="data.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group inline-flex items-center gap-3 text-gray-700 hover:text-black transition-all duration-300 w-fit"
               @mouseenter="handleMouseEnter(data.description)"
               @mouseleave="handleMouseLeave()"
             >
-              <Sbut :textinput="name" :SocialLinks="data.url" />
-            </div>
+              <component :is="data.icon" :size="20" class="transition-transform duration-300 group-hover:scale-110" />
+              <span class="text-sm font-semibold uppercase tracking-widest border-b-2 border-transparent group-hover:border-black transition-all duration-300">
+                {{ name }}
+              </span>
+              <ArrowRight :size="16" class="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+            </a>
           </div>
 
           <!-- Blog — internal navigation, separate from external social links -->
@@ -108,29 +115,33 @@
 <script setup>
 import { ref } from "vue";
 import ContactEmail from "@/components/ContactEmail.vue";
-import Sbut from "@/components/Sbut.vue";
-import { Code2, DollarSign, Zap, Layers, Users, ShieldCheck, BookOpen, ArrowRight } from "lucide-vue-next";
+import { Code2, DollarSign, Zap, Layers, Users, ShieldCheck, BookOpen, ArrowRight, Github, Zap as ZapIcon, Gamepad2, Instagram, Send } from "lucide-vue-next";
 
 const socialLinksObj = {
   Github: {
     url: "https://github.com/besoeasy?tab=repositories&q=&type=&language=&sort=stargazers",
-    description: "Dive into my code, side projects, and experiments—steal ideas, get inspired, or just lurk 👀"
+    description: "Dive into my code, side projects, and experiments—steal ideas, get inspired, or just lurk 👀",
+    icon: Github
   },
   NOSTR: {
     url: "https://nosta.me/besoeasy@zaps.lol",
-    description: "Find me on the decentralized side of the internet—uncensored thoughts and open conversations"
+    description: "Find me on the decentralized side of the internet—uncensored thoughts and open conversations",
+    icon: ZapIcon
   },
-  steam: {
+  Steam: {
     url: "https://steamcommunity.com/id/besoeasy",
-    description: "Games I play, hours I’ve lost, and maybe our next co-op session"
+    description: "Games I play, hours I've lost, and maybe our next co-op session",
+    icon: Gamepad2
   },
-  instagram: {
+  Instagram: {
     url: "https://instagram.com/besoeasy",
-    description: "Real life moments—if we’ve met or vibe, this is where we stay connected"
+    description: "Real life moments—if we've met or vibe, this is where we stay connected",
+    icon: Instagram
   },
-  telegram: {
+  Telegram: {
     url: "https://t.me/besoeasy",
-    description: "Quick chats, random ideas, memes, or just say hi—I'm usually around here"
+    description: "Quick chats, random ideas, memes, or just say hi—I'm usually around here",
+    icon: Send
   },
 };
 

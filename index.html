@@ -114,11 +114,11 @@
 
   <body class="font-sans bg-white text-gray-900 antialiased min-h-screen">
     <!-- Main -->
-    <div class="max-w-6xl mx-auto p-5">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center min-h-screen py-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center min-h-screen py-6 md:py-10">
         <!-- Photo: 2 of 5 cols on desktop, full width on mobile -->
-        <div class="photo-wrap">
-          <img src="/me.png" alt="Aman Singh Katal" class="rounded-2xl w-full block photo-img" />
+        <div class="photo-wrap order-first md:order-none">
+          <img src="/me.png" alt="Aman Singh Katal" class="rounded-2xl w-full max-h-[60vh] md:max-h-none object-cover object-top block photo-img" />
         </div>
 
         <!-- Content: 3 of 5 cols on desktop, full width on mobile -->
@@ -133,38 +133,38 @@
           </div>
 
 
-          <!-- Bio box: fixed height container, both layers absolute -->
-          <div class="relative" style="min-height: 130px" id="bio-box">
-            <div id="bio-default" class="bio-default absolute inset-0 text-gray-700 leading-relaxed text-base">
+          <!-- Bio box: relative container so it expands with content -->
+          <div class="relative" id="bio-box">
+            <div id="bio-default" class="bio-default text-gray-700 leading-relaxed text-sm sm:text-base">
               I am a seasoned full-stack developer
               <span class="inline-flex items-center mx-1 cursor-default hover:scale-125 hover:rotate-12 transition-transform duration-300">
-                <i data-lucide="code-2" class="text-blue-600" style="width: 20px; height: 20px"></i>
+                <i data-lucide="code-2" class="text-blue-600" style="width: 18px; height: 18px"></i>
               </span>
               with a primary focus on fintech
               <span class="inline-flex items-center mx-1 cursor-default hover:scale-125 hover:rotate-12 transition-transform duration-300">
-                <i data-lucide="dollar-sign" class="text-green-600" style="width: 20px; height: 20px"></i>
+                <i data-lucide="dollar-sign" class="text-green-600" style="width: 18px; height: 18px"></i>
               </span>
               and automation
               <span class="inline-flex items-center mx-1 cursor-default hover:scale-125 hover:rotate-12 transition-transform duration-300">
-                <i data-lucide="zap" class="text-yellow-600" style="width: 20px; height: 20px"></i>
+                <i data-lucide="zap" class="text-yellow-600" style="width: 18px; height: 18px"></i>
               </span>
               . Proficient in a wide range of programming languages
               <span class="inline-flex items-center mx-1 cursor-default hover:scale-125 hover:rotate-12 transition-transform duration-300">
-                <i data-lucide="layers" class="text-purple-600" style="width: 20px; height: 20px"></i>
+                <i data-lucide="layers" class="text-purple-600" style="width: 18px; height: 18px"></i>
               </span>
               , I have collaborated with 70+ organizations
               <span class="inline-flex items-center mx-1 cursor-default hover:scale-125 hover:rotate-12 transition-transform duration-300">
-                <i data-lucide="users" class="text-orange-600" style="width: 20px; height: 20px"></i>
+                <i data-lucide="users" class="text-orange-600" style="width: 18px; height: 18px"></i>
               </span>
               , delivering mission-critical applications handling substantial financial and sensitive data
               <span class="inline-flex items-center mx-1 cursor-default hover:scale-125 hover:rotate-12 transition-transform duration-300">
-                <i data-lucide="shield-check" class="text-red-600" style="width: 20px; height: 20px"></i>
+                <i data-lucide="shield-check" class="text-red-600" style="width: 18px; height: 18px"></i>
               </span>
               .
             </div>
             <div
               id="bio-hover-text"
-              class="bio-hover-text absolute inset-0 opacity-0 pointer-events-none text-xl font-bold text-gray-600 flex items-center leading-snug"
+              class="bio-hover-text hidden md:flex absolute inset-0 opacity-0 pointer-events-none text-xl font-bold text-gray-600 items-center leading-snug"
             ></div>
           </div>
 

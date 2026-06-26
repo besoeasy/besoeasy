@@ -205,30 +205,35 @@
           url: "https://github.com/besoeasy?tab=repositories&q=&type=&language=&sort=stargazers",
           description: "Dive into my code, side projects, and experiments—steal ideas, get inspired, or just lurk 👀",
           lucide: "git-branch",
+          color: "#24292e",
         },
         {
           name: "NOSTR",
           url: "https://nosta.me/besoeasy@zaps.lol",
           description: "Find me on the decentralized side of the internet—uncensored thoughts and open conversations",
           lucide: "zap",
+          color: "#8b5cf6",
         },
         {
           name: "Steam",
           url: "https://steamcommunity.com/id/besoeasy",
           description: "Games I play, hours I've lost, and maybe our next co-op session",
           lucide: "joystick",
+          color: "#1b87c5",
         },
         {
           name: "Instagram",
           url: "https://instagram.com/besoeasy",
           description: "Real life moments—if we've met or vibe, this is where we stay connected",
           lucide: "camera",
+          color: "#e1306c",
         },
         {
           name: "Telegram",
           url: "https://t.me/besoeasy",
           description: "Quick chats, random ideas, memes, or just say hi—I'm usually around here",
           lucide: "message-circle",
+          color: "#0088cc",
         },
       ];
 
@@ -243,7 +248,7 @@
       const socialLinks = document.getElementById("social-links");
       let hoverTimeout = null;
 
-      SOCIALS.forEach(({ name, url, description, lucide }) => {
+      SOCIALS.forEach(({ name, url, description, lucide, color }) => {
         const a = document.createElement("a");
         a.href = url;
         a.target = "_blank";
@@ -251,7 +256,7 @@
         a.className = "social-link group inline-flex items-center gap-3 text-gray-700 hover:text-black transition-colors duration-300";
         a.id = `social-${name.toLowerCase()}`;
         a.innerHTML = `
-          <span class="social-icon"><i data-lucide="${lucide}" style="width:20px;height:20px"></i></span>
+          <span class="social-icon" style="color:${color}"><i data-lucide="${lucide}" style="width:20px;height:20px"></i></span>
           <span class="social-underline text-sm font-semibold uppercase tracking-widest border-b-2 border-transparent">${name}</span>
           <span class="social-arrow opacity-0 -translate-x-2 inline-flex items-center">
             <i data-lucide="arrow-right" style="width:16px;height:16px"></i>

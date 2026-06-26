@@ -4,8 +4,7 @@ on:
   push:
     branches: [main]
   schedule:
-    # Rebuild daily at 06:00 UTC to pick up new Nostr posts
-    - cron: '0 6 * * *'
+   - cron: '0 6 */3 * *'
   workflow_dispatch:
 
 permissions:

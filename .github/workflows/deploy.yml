@@ -33,7 +33,7 @@ jobs:
         env:
           NPUB: npub1hznmntyj254kqhr079a5gt2wvhyll6rz6q67pyjres4lfkql22kq5ml6zh
         run: |
-          npx github:besoeasy/NostrPress
+          npx nostrpress
 
       - name: Assemble site
         run: |

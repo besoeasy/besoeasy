@@ -225,6 +225,24 @@
         transform: translateX(0);
       }
 
+      /* Mail command */
+      .mail-command {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: var(--gray-600);
+        transition: color 0.3s ease;
+      }
+
+      .mail-command:hover {
+        color: #000;
+      }
+
+      .mail-command .prompt {
+        font-weight: 700;
+        color: var(--rose-500);
+      }
+
       /* Footer links */
       .footer-links {
         padding-top: 1.25rem;
@@ -376,10 +394,8 @@
               <span class="social-underline">Articles &amp; Notes</span>
               <span class="social-arrow"><i data-lucide="arrow-right" style="width:16px;height:16px"></i></span>
             </a>
-            <a id="hero-email" href="mailto:a@besoeasy.com" class="social-link">
-              <span class="social-icon"><i data-lucide="mail" style="width:20px;height:20px"></i></span>
-              <span class="social-underline">a@besoeasy.com</span>
-              <span class="social-arrow"><i data-lucide="arrow-right" style="width:16px;height:16px"></i></span>
+            <a id="hero-email" href="mailto:a@besoeasy.com" class="mail-command">
+              <span class="prompt">$</span> echo <span id="hero-email-value">a@besoeasy.com</span>
             </a>
           </div>
 
@@ -550,7 +566,7 @@
           const email = `${slug}@besoeasy.com`;
           const anchor = document.getElementById("hero-email");
           anchor.href = `mailto:${email}`;
-          anchor.querySelector("span.social-underline").textContent = email;
+          document.getElementById("hero-email-value").textContent = email;
         }
       });
 

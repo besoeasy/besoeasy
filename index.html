@@ -384,7 +384,7 @@
 
           <!-- Recent Updates -->
           <div class="updates" id="updates" hidden>
-            <div class="updates-label"><span class="prompt">$</span> git log --oneline -5</div>
+            <div class="updates-label"><span class="prompt">$</span> git log --oneline -3</div>
             <ul class="updates-list" id="updates-list"></ul>
           </div>
         </div>
@@ -589,7 +589,7 @@
           const res = await fetch("https://api.github.com/users/besoeasy/events/public?per_page=30");
           if (!res.ok) throw new Error("GitHub API error");
           const events = await res.json();
-          const pushes = events.filter((e) => e.type === "PushEvent").slice(0, 5);
+          const pushes = events.filter((e) => e.type === "PushEvent").slice(0, 3);
 
           if (!pushes.length) return;
 

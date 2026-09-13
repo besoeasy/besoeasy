@@ -238,11 +238,16 @@
       .updates-label {
         padding-top: 1.25rem;
         border-top: 1px solid var(--gray-200);
-        font-size: 0.875rem;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.8125rem;
         font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
+        letter-spacing: 0;
         color: var(--gray-600);
+      }
+
+      .updates-label .prompt {
+        font-weight: 700;
+        color: var(--rose-500);
       }
 
       .updates-list {
@@ -379,7 +384,7 @@
 
           <!-- Recent Updates -->
           <div class="updates" id="updates" hidden>
-            <div class="updates-label">Recent Updates</div>
+            <div class="updates-label"><span class="prompt">$</span> git log --oneline -5</div>
             <ul class="updates-list" id="updates-list"></ul>
           </div>
         </div>

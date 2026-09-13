@@ -591,10 +591,10 @@
       const feedItems = [];
       let windowStart = 0;
       let rotationTimer = null;
+      let advanceTimeout = null;
 
       function buildItemLi({ repoShort, label, url, created_at }) {
         const li = document.createElement("li");
-        li.style.opacity = "0";
         li.innerHTML = `
           <a class="updates-repo" href="${url}" target="_blank" rel="noopener noreferrer">${escapeHtml(repoShort)}</a>
           <span class="updates-msg" title="${escapeHtml(label)}">${escapeHtml(label)}</span>
@@ -603,27 +603,35 @@
         return li;
       }
 
-      function renderWindow() {
+      function renderWindow(mode) {
+        const window = feedItems.slice(windowStart, windowStart + WINDOW);
         updatesList.innerHTML = "";
-        for (const item of feedItems.slice(windowStart, windowStart + WINDOW)) {
-          updatesList.appendChild(buildItemLi(item));
-        }
-        requestAnimationFrame(() => {
+        window.forEach((item, index) => {
+          const li = buildItemLi(item);
+          if (mode === "stagger" || index === 0) li.style.opacity = "0";
+          updatesList.appendChild(li);
+        });
+        [...updatesList.children].forEach((li, index) => {
+          const shouldFade = mode === "stagger" || index === 0;
+          if (!shouldFade) return;
           requestAnimationFrame(() => {
-            [...updatesList.children].forEach((li, index) => {
+            requestAnimationFrame(() => {
               setTimeout(() => {
                 li.style.opacity = "1";
-              }, index * 120);
+              }, mode === "stagger" ? index * 120 : 0);
             });
           });
         });
       }
 
       function fadeOutAndAdvance() {
-        for (const li of updatesList.children) li.style.opacity = "0";
-        setTimeout(() => {
-          windowStart = windowStart >= feedItems.length - WINDOW ? 0 : windowStart + 1;
-          renderWindow();
+        const leaving = updatesList.lastElementChild;
+        if (!leaving) return;
+        leaving.style.opacity = "0";
+        clearTimeout(advanceTimeout);
+        advanceTimeout = setTimeout(() => {
+          windowStart = windowStart <= 0 ? feedItems.length - WINDOW : windowStart - 1;
+          renderWindow("advance");
         }, FADE_MS);
       }
 
@@ -670,10 +678,11 @@
             })
           );
 
-          feedItems.push(...items.reverse());
+          feedItems.push(...items);
 
+          windowStart = Math.max(0, feedItems.length - WINDOW);
           updates.hidden = false;
-          renderWindow();
+          renderWindow("stagger");
           if (feedItems.length > WINDOW) startRotation();
         } catch (err) {
           updates.remove();

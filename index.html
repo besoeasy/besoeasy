@@ -263,6 +263,7 @@
         padding: 0.5rem 0;
         border-bottom: 1px solid var(--gray-200);
         font-size: 0.875rem;
+        transition: opacity 0.6s ease;
       }
 
       .updates-repo {
@@ -584,12 +585,59 @@
         return "now";
       }
 
+      const WINDOW = 3;
+      const ROTATION_MS = 6000;
+      const FADE_MS = 600;
+      const feedItems = [];
+      let windowStart = 0;
+      let rotationTimer = null;
+
+      function buildItemLi({ repoShort, label, url, created_at }) {
+        const li = document.createElement("li");
+        li.style.opacity = "0";
+        li.innerHTML = `
+          <a class="updates-repo" href="${url}" target="_blank" rel="noopener noreferrer">${escapeHtml(repoShort)}</a>
+          <span class="updates-msg" title="${escapeHtml(label)}">${escapeHtml(label)}</span>
+          <span class="updates-time">${timeAgo(created_at)}</span>
+        `;
+        return li;
+      }
+
+      function renderWindow() {
+        updatesList.innerHTML = "";
+        for (const item of feedItems.slice(windowStart, windowStart + WINDOW)) {
+          updatesList.appendChild(buildItemLi(item));
+        }
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            [...updatesList.children].forEach((li, index) => {
+              setTimeout(() => {
+                li.style.opacity = "1";
+              }, index * 120);
+            });
+          });
+        });
+      }
+
+      function fadeOutAndAdvance() {
+        for (const li of updatesList.children) li.style.opacity = "0";
+        setTimeout(() => {
+          windowStart = windowStart >= feedItems.length - WINDOW ? 0 : windowStart + 1;
+          renderWindow();
+        }, FADE_MS);
+      }
+
+      function startRotation() {
+        clearInterval(rotationTimer);
+        rotationTimer = setInterval(fadeOutAndAdvance, ROTATION_MS);
+      }
+
       async function loadUpdates() {
         try {
           const res = await fetch("https://api.github.com/users/besoeasy/events/public?per_page=30");
           if (!res.ok) throw new Error("GitHub API error");
           const events = await res.json();
-          const pushes = events.filter((e) => e.type === "PushEvent").slice(0, 3);
+          const pushes = events.filter((e) => e.type === "PushEvent").slice(0, 10);
 
           if (!pushes.length) return;
 
@@ -622,17 +670,11 @@
             })
           );
 
-          items.forEach(({ repoShort, label, url, created_at }) => {
-            const li = document.createElement("li");
-            li.innerHTML = `
-              <a class="updates-repo" href="${url}" target="_blank" rel="noopener noreferrer">${escapeHtml(repoShort)}</a>
-              <span class="updates-msg" title="${escapeHtml(label)}">${escapeHtml(label)}</span>
-              <span class="updates-time">${timeAgo(created_at)}</span>
-            `;
-            updatesList.appendChild(li);
-          });
+          feedItems.push(...items.reverse());
 
           updates.hidden = false;
+          renderWindow();
+          if (feedItems.length > WINDOW) startRotation();
         } catch (err) {
           updates.remove();
         }

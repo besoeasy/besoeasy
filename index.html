@@ -52,6 +52,8 @@
       body {
         margin: 0;
         padding: 0;
+        max-width: 100%;
+        overflow-x: clip;
       }
 
       body {
@@ -80,25 +82,38 @@
 
       /* Layout */
       .page {
+        width: 100%;
         max-width: 72rem;
+        min-width: 0;
         margin: 0 auto;
         padding: 1.5rem 1rem;
+        overflow-x: clip;
+        overflow-wrap: break-word;
       }
 
       .hero {
         display: grid;
-        grid-template-columns: 1fr;
-        gap: 2rem;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.5rem;
         align-items: center;
-        min-height: 100vh;
-        padding: 1.5rem 0;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        min-height: auto;
+        padding: 1rem 0 1.5rem;
+        overflow-x: clip;
       }
 
       .photo-wrap {
         order: -1;
+        min-width: 0;
+        max-width: 100%;
+        overflow: hidden;
+        border-radius: 1rem;
       }
 
       .photo-img {
+        display: block;
         width: 100%;
         max-height: 60vh;
         object-fit: cover;
@@ -111,18 +126,27 @@
         transform: translateY(-8px) scale(1.05) rotate(2deg);
       }
 
+      .content {
+        min-width: 0;
+        max-width: 100%;
+        overflow-wrap: break-word;
+      }
+
       .content > * + * {
         margin-top: 1.25rem;
       }
 
       /* Name */
       .name-line {
-        font-size: 1.875rem;
-        line-height: 1;
+        font-size: clamp(1.5rem, 7.5vw, 1.875rem);
+        line-height: 1.05;
         font-weight: 900;
         letter-spacing: -0.05em;
         cursor: default;
         user-select: none;
+        max-width: 100%;
+        overflow-wrap: break-word;
+        text-wrap: balance;
       }
 
       .name-bar {
@@ -136,6 +160,8 @@
       /* Bio */
       .bio-box {
         position: relative;
+        min-width: 0;
+        max-width: 100%;
       }
 
       .bio-default {
@@ -143,6 +169,8 @@
         line-height: 1.625;
         font-size: 0.875rem;
         transition: opacity 0.35s ease;
+        max-width: 100%;
+        overflow-wrap: break-word;
       }
 
       .bio-icon {
@@ -169,6 +197,8 @@
         align-items: center;
         line-height: 1.375;
         transition: opacity 0.35s ease;
+        max-width: 100%;
+        overflow-wrap: break-word;
       }
 
       /* Social links */
@@ -177,6 +207,8 @@
         flex-wrap: wrap;
         column-gap: 1.5rem;
         row-gap: 0.75rem;
+        min-width: 0;
+        max-width: 100%;
       }
 
       .social-link {
@@ -232,6 +264,10 @@
         font-weight: 600;
         color: var(--gray-600);
         transition: color 0.3s ease;
+        display: inline-block;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+        word-break: break-word;
       }
 
       .mail-command:hover {
@@ -250,9 +286,16 @@
         display: flex;
         flex-direction: column;
         gap: 0.75rem;
+        min-width: 0;
+        max-width: 100%;
       }
 
       /* Recent updates */
+      .updates {
+        min-width: 0;
+        max-width: 100%;
+      }
+
       .updates-label {
         padding-top: 1.25rem;
         border-top: 1px solid var(--gray-200);
@@ -261,6 +304,8 @@
         font-weight: 600;
         letter-spacing: 0;
         color: var(--gray-600);
+        max-width: 100%;
+        overflow-wrap: break-word;
       }
 
       .updates-label .prompt {
@@ -272,6 +317,8 @@
         list-style: none;
         margin: 0.75rem 0 0;
         padding: 0;
+        min-width: 0;
+        max-width: 100%;
       }
 
       .updates-list li {
@@ -282,12 +329,19 @@
         border-bottom: 1px solid var(--gray-200);
         font-size: 0.875rem;
         transition: opacity 0.6s ease;
+        min-width: 0;
+        max-width: 100%;
+        overflow: hidden;
       }
 
       .updates-repo {
         font-weight: 600;
         color: var(--gray-900);
         white-space: nowrap;
+        flex-shrink: 0;
+        max-width: 32vw;
+        overflow: hidden;
+        text-overflow: ellipsis;
         transition: color 0.3s ease;
       }
 
@@ -297,20 +351,42 @@
 
       .updates-msg {
         color: var(--gray-700);
+        flex: 1 1 auto;
+        min-width: 0;
+        max-width: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        min-width: 0;
       }
 
       .updates-time {
         margin-left: auto;
+        flex-shrink: 0;
         color: var(--gray-600);
         white-space: nowrap;
         font-variant-numeric: tabular-nums;
       }
 
       /* Responsive */
+      @media (max-width: 480px) {
+        .page {
+          padding: 1rem 0.875rem;
+        }
+        .updates-list li {
+          gap: 0.5rem;
+          font-size: 0.8125rem;
+        }
+        .updates-repo {
+          max-width: 28vw;
+        }
+        .updates-time {
+          font-size: 0.75rem;
+        }
+        .social-links {
+          column-gap: 1rem;
+        }
+      }
+
       @media (min-width: 640px) {
         .page {
           padding-left: 1.5rem;
@@ -326,6 +402,9 @@
           grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 3rem;
           padding: 2.5rem 0;
+          min-height: 100vh;
+          min-height: 100svh;
+          min-height: 100dvh;
         }
         .photo-wrap {
           order: 0;
@@ -335,6 +414,8 @@
         }
         .bio-hover-text {
           display: flex;
+          max-width: 100%;
+          overflow-wrap: break-word;
         }
       }
 
@@ -606,10 +687,17 @@
       const WINDOW = 3;
       const ROTATION_MS = 6000;
       const FADE_MS = 600;
+      const MAX_MSG_LEN = 72;
       const feedItems = [];
       let windowStart = 0;
       let rotationTimer = null;
       let advanceTimeout = null;
+
+      function truncateMsg(str) {
+        const clean = (str || "").trim().replace(/\s+/g, " ");
+        if (clean.length <= MAX_MSG_LEN) return clean;
+        return clean.slice(0, MAX_MSG_LEN - 1).trimEnd() + "…";
+      }
 
       function buildItemLi({ repoShort, label, url, created_at }) {
         const li = document.createElement("li");
@@ -676,13 +764,13 @@
               let message = "";
 
               if (event.payload?.commits?.length) {
-                message = event.payload.commits[0].message.split("\n")[0];
+                message = truncateMsg(event.payload.commits[0].message.split("\n")[0]);
               } else if (head) {
                 try {
                   const c = await fetch(`https://api.github.com/repos/${event.repo.name}/commits/${head}`);
                   if (c.ok) {
                     const data = await c.json();
-                    message = data.commit?.message?.split("\n")[0] || "";
+                    message = truncateMsg(data.commit?.message?.split("\n")[0] || "");
                   }
                 } catch (err) {}
               }

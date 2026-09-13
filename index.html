@@ -387,13 +387,8 @@
           <!-- Social links -->
           <div class="social-links" id="social-links"></div>
 
-          <!-- Blog + Email -->
+          <!-- Email -->
           <div class="footer-links">
-            <a href="https://blog.besoeasy.com" class="social-link">
-              <span class="social-icon"><i data-lucide="book-open" style="width:20px;height:20px"></i></span>
-              <span class="social-underline">Articles &amp; Notes</span>
-              <span class="social-arrow"><i data-lucide="arrow-right" style="width:16px;height:16px"></i></span>
-            </a>
             <a id="hero-email" href="mailto:a@besoeasy.com" class="mail-command">
               <span class="prompt">$</span> echo <span id="hero-email-value">a@besoeasy.com</span>
             </a>
@@ -414,6 +409,13 @@
 
       // ── Social data ──────────────────────────────────────────────────
       const SOCIALS = [
+        {
+          name: "Blog",
+          url: "https://blog.besoeasy.com",
+          description: "Articles &amp; notes — thoughts on code, fintech, and the trade",
+          lucide: "book-open",
+          color: "#ea580c",
+        },
         {
           name: "Github",
           url: "https://github.com/besoeasy?tab=repositories&q=&type=&language=&sort=stargazers",

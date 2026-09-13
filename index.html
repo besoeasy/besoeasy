@@ -285,7 +285,7 @@
 
         <!-- Content -->
         <div class="content">
-          <div id="name-line" class="name-line">AMAN SINGH KATAL</div>
+          <div id="name-line" class="name-line" aria-label="Aman Singh Katal">AMAN SINGH KATAL</div>
           <div class="name-bar"></div>
 
           <!-- Bio box: relative container so it expands with content -->
@@ -416,14 +416,34 @@
       // Hydrate all data-lucide elements (pass entire module — no named export guessing)
       createIcons({ icons: lucide });
 
-      // ── Random name words ────────────────────────────────────────────
+      // ── Scramble-decode name ──────────────────────────────────────────
       const nameLine = document.getElementById("name-line");
-      setInterval(() => {
-        const parts = ["AMAN"];
-        if (Math.random() < 0.5) parts.push("SINGH");
-        if (Math.random() < 0.5) parts.push("KATAL");
-        nameLine.textContent = parts.join(" ");
-      }, 2500);
+      const FULL_NAME = "AMAN SINGH KATAL";
+      const SCRAMBLE_CHARS = "!<>-_\\/[]{}—=+*^?#________";
+
+      let scrambleTimer = null;
+      function scrambleName(decay = 1 / 3) {
+        clearInterval(scrambleTimer);
+        let iteration = 0;
+        scrambleTimer = setInterval(() => {
+          nameLine.textContent = FULL_NAME.split("")
+            .map((char, index) => {
+              if (char === " " || index < iteration) return char;
+              return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+            })
+            .join("");
+          iteration += decay;
+          if (iteration >= FULL_NAME.length) {
+            clearInterval(scrambleTimer);
+            nameLine.textContent = FULL_NAME;
+          }
+        }, 30);
+      }
+
+      nameLine.addEventListener("mouseenter", () => {
+        scrambleName(1 / 4);
+      });
+      scrambleName();
 
       // ── IP Geolocation with Fallbacks ──────────────────────────────────
       async function fetchLocation() {

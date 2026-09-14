@@ -149,14 +149,6 @@
         text-wrap: balance;
       }
 
-      .name-bar {
-        margin-top: 0.75rem;
-        height: 3px;
-        width: 3.5rem;
-        border-radius: 9999px;
-        background: linear-gradient(90deg, var(--orange-400), var(--rose-500), var(--pink-500));
-      }
-
       /* Bio */
       .bio-box {
         position: relative;
@@ -201,21 +193,42 @@
         overflow-wrap: break-word;
       }
 
-      /* Social links */
-      .social-links {
+      /* Socials command */
+      .socials-command {
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--gray-200);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: var(--gray-600);
         display: flex;
         flex-wrap: wrap;
-        column-gap: 1.5rem;
-        row-gap: 0.75rem;
+        align-items: center;
+        column-gap: 0.75rem;
+        row-gap: 0.375rem;
         min-width: 0;
         max-width: 100%;
+      }
+
+      .socials-label {
+        white-space: nowrap;
+      }
+
+      .socials-label .prompt {
+        font-weight: 700;
+        color: var(--rose-500);
+      }
+
+      .social-links {
+        display: contents;
       }
 
       .social-link {
         display: inline-flex;
         align-items: center;
-        gap: 0.75rem;
-        color: var(--gray-700);
+        gap: 0.35rem;
+        color: var(--gray-600);
+        white-space: nowrap;
         transition: color 0.3s ease;
       }
 
@@ -223,38 +236,18 @@
         color: #000;
       }
 
+      .social-icon {
+        display: inline-flex;
+        align-items: center;
+      }
+
       .social-icon svg {
-        transition: transform 0.25s;
+        display: block;
+        transition: transform 0.25s ease;
       }
 
       .social-link:hover .social-icon svg {
-        transform: scale(1.1);
-      }
-
-      .social-underline {
-        font-size: 0.875rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        border-bottom: 2px solid transparent;
-        transition: border-color 0.25s;
-      }
-
-      .social-link:hover .social-underline {
-        border-color: #111827;
-      }
-
-      .social-arrow {
-        display: inline-flex;
-        align-items: center;
-        opacity: 0;
-        transform: translateX(-0.5rem);
-        transition: opacity 0.25s, transform 0.25s;
-      }
-
-      .social-link:hover .social-arrow {
-        opacity: 1;
-        transform: translateX(0);
+        transform: scale(1.15);
       }
 
       /* Mail command */
@@ -288,6 +281,93 @@
         gap: 0.75rem;
         min-width: 0;
         max-width: 100%;
+      }
+
+      /* Blog section */
+      .blog-section {
+        min-width: 0;
+        max-width: 100%;
+      }
+
+      .blog-label {
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--gray-200);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        letter-spacing: 0;
+        color: var(--gray-600);
+        max-width: 100%;
+        overflow-wrap: break-word;
+        display: block;
+        transition: color 0.3s ease;
+      }
+
+      .blog-label:hover {
+        color: #000;
+      }
+
+      .blog-label .prompt {
+        font-weight: 700;
+        color: var(--rose-500);
+      }
+
+      .blog-list {
+        list-style: none;
+        margin: 0.75rem 0 0;
+        padding: 0;
+        min-width: 0;
+        max-width: 100%;
+      }
+
+      .blog-list li {
+        display: flex;
+        align-items: baseline;
+        gap: 0.75rem;
+        padding: 0.5rem 0;
+        font-size: 0.875rem;
+        transition: opacity 0.6s ease;
+        min-width: 0;
+        max-width: 100%;
+        overflow: hidden;
+      }
+
+      .blog-tag {
+        font-weight: 600;
+        color: var(--gray-900);
+        white-space: nowrap;
+        flex-shrink: 0;
+        max-width: 32vw;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transition: color 0.3s ease;
+      }
+
+      .blog-tag:hover {
+        color: #000;
+      }
+
+      .blog-title {
+        color: var(--gray-700);
+        flex: 1 1 auto;
+        min-width: 0;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        transition: color 0.3s ease;
+      }
+
+      .blog-title:hover {
+        color: #000;
+      }
+
+      .blog-time {
+        margin-left: auto;
+        flex-shrink: 0;
+        color: var(--gray-600);
+        white-space: nowrap;
+        font-variant-numeric: tabular-nums;
       }
 
       /* Recent updates */
@@ -326,7 +406,6 @@
         align-items: baseline;
         gap: 0.75rem;
         padding: 0.5rem 0;
-        border-bottom: 1px solid var(--gray-200);
         font-size: 0.875rem;
         transition: opacity 0.6s ease;
         min-width: 0;
@@ -372,18 +451,22 @@
         .page {
           padding: 1rem 0.875rem;
         }
-        .updates-list li {
+        .updates-list li,
+        .blog-list li {
           gap: 0.5rem;
           font-size: 0.8125rem;
         }
-        .updates-repo {
+        .updates-repo,
+        .blog-tag {
           max-width: 28vw;
         }
-        .updates-time {
+        .updates-time,
+        .blog-time {
           font-size: 0.75rem;
         }
-        .social-links {
-          column-gap: 1rem;
+        .socials-command {
+          column-gap: 0.75rem;
+          row-gap: 0.375rem;
         }
       }
 
@@ -443,7 +526,6 @@
         <!-- Content -->
         <div class="content">
           <div id="name-line" class="name-line" aria-label="Aman Singh Katal">AMAN SINGH KATAL</div>
-          <div class="name-bar"></div>
 
           <!-- Bio box: relative container so it expands with content -->
           <div class="bio-box" id="bio-box">
@@ -466,13 +548,24 @@
           </div>
 
           <!-- Social links -->
-          <div class="social-links" id="social-links"></div>
+          <div class="socials-command">
+            <span class="socials-label"><span class="prompt">$</span> socials</span>
+            <div class="social-links" id="social-links"></div>
+          </div>
 
           <!-- Email -->
           <div class="footer-links">
             <a id="hero-email" href="mailto:a@besoeasy.com" class="mail-command">
               <span class="prompt">$</span> mail <span id="hero-email-value">a@besoeasy.com</span>
             </a>
+          </div>
+
+          <!-- Blog Posts -->
+          <div class="blog-section" id="blog-section" hidden>
+            <a href="https://blog.besoeasy.com" target="_blank" rel="noopener noreferrer" class="blog-label">
+              <span class="prompt">$</span> curl -s blog.besoeasy.com
+            </a>
+            <ul class="blog-list" id="blog-list"></ul>
           </div>
 
           <!-- Recent Updates -->
@@ -490,13 +583,6 @@
 
       // ── Social data ──────────────────────────────────────────────────
       const SOCIALS = [
-        {
-          name: "Blog",
-          url: "https://blog.besoeasy.com",
-          description: "Articles &amp; notes — thoughts on code, fintech, and the trade",
-          lucide: "book-open",
-          color: "#ea580c",
-        },
         {
           name: "Github",
           url: "https://github.com/besoeasy?tab=repositories&q=&type=&language=&sort=stargazers",
@@ -552,11 +638,7 @@
         a.rel = "noopener noreferrer";
         a.className = "social-link";
         a.id = `social-${name.toLowerCase()}`;
-        a.innerHTML = `
-          <span class="social-icon" style="color:${color}"><i data-lucide="${lucide}" style="width:20px;height:20px"></i></span>
-          <span class="social-underline">${name}</span>
-          <span class="social-arrow"><i data-lucide="arrow-right" style="width:16px;height:16px"></i></span>
-        `;
+        a.innerHTML = `<span class="social-icon" style="color:${color}"><i data-lucide="${lucide}" style="width:14px;height:14px"></i></span><span>${name}</span>`;
 
         a.addEventListener("mouseenter", () => {
           clearTimeout(hoverTimeout);
@@ -608,15 +690,63 @@
       });
       scrambleName();
 
+      // ── localStorage GET cache (15 min) ──────────────────────────────
+      const CACHE_TTL_MS = 15 * 60 * 1000;
+      const cacheKey = (url) => `besoeasy:cache:${url}`;
+
+      function readCache(url) {
+        try {
+          const raw = localStorage.getItem(cacheKey(url));
+          if (!raw) return null;
+          const parsed = JSON.parse(raw);
+          if (!parsed || !("timestamp" in parsed) || !("data" in parsed)) return null;
+          return parsed;
+        } catch {
+          return null;
+        }
+      }
+
+      function writeCache(url, data) {
+        try {
+          localStorage.setItem(cacheKey(url), JSON.stringify({ timestamp: Date.now(), data }));
+        } catch {}
+      }
+
+      function isFresh(entry) {
+        return entry && Date.now() - entry.timestamp < CACHE_TTL_MS;
+      }
+
+      async function fetchJsonCached(url, fetchOpts = {}) {
+        const cached = readCache(url);
+        if (isFresh(cached)) return cached.data;
+        try {
+          const res = await fetch(url, fetchOpts);
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const data = await res.json();
+          writeCache(url, data);
+          return data;
+        } catch (err) {
+          if (cached) return cached.data;
+          throw err;
+        }
+      }
+
       // ── IP Geolocation with Fallbacks ──────────────────────────────────
       async function fetchLocation() {
         const fetchTimeout = async (url) => {
+          const cached = readCache(url);
+          if (isFresh(cached)) return cached.data;
           const controller = new AbortController();
           const id = setTimeout(() => controller.abort(), 4000);
           try {
             const res = await fetch(url, { signal: controller.signal });
             if (!res.ok) throw new Error("HTTP error");
-            return await res.json();
+            const data = await res.json();
+            writeCache(url, data);
+            return data;
+          } catch (err) {
+            if (cached) return cached.data;
+            throw err;
           } finally {
             clearTimeout(id);
           }
@@ -670,18 +800,16 @@
       function timeAgo(iso) {
         const seconds = Math.floor((Date.now() - new Date(iso)) / 1000);
         if (seconds < 60) return "just now";
-        const units = [
-          ["m", 60],
-          ["h", 3600],
-          ["d", 86400],
-          ["w", 604800],
-          ["y", 31536000],
-        ];
-        for (const [label, size] of units) {
-          const value = Math.floor(seconds / size);
-          if (value >= 1) return `${value}${label} ago`;
-        }
-        return "now";
+        const minutes = Math.floor(seconds / 60);
+        if (minutes < 60) return `${minutes}m ago`;
+        const hours = Math.floor(minutes / 60);
+        if (hours < 24) return `${hours}h ago`;
+        const days = Math.floor(hours / 24);
+        if (days < 30) return `${days}d ago`;
+        const months = Math.floor(days / 30);
+        if (months < 12) return `${months}mo ago`;
+        const years = Math.floor(days / 365);
+        return `${years}y ago`;
       }
 
       const WINDOW = 3;
@@ -748,9 +876,7 @@
 
       async function loadUpdates() {
         try {
-          const res = await fetch("https://api.github.com/users/besoeasy/events/public?per_page=30");
-          if (!res.ok) throw new Error("GitHub API error");
-          const events = await res.json();
+          const events = await fetchJsonCached("https://api.github.com/users/besoeasy/events/public?per_page=30");
           const pushes = events.filter((e) => e.type === "PushEvent").slice(0, 10);
 
           if (!pushes.length) return;
@@ -767,11 +893,8 @@
                 message = truncateMsg(event.payload.commits[0].message.split("\n")[0]);
               } else if (head) {
                 try {
-                  const c = await fetch(`https://api.github.com/repos/${event.repo.name}/commits/${head}`);
-                  if (c.ok) {
-                    const data = await c.json();
-                    message = truncateMsg(data.commit?.message?.split("\n")[0] || "");
-                  }
+                  const data = await fetchJsonCached(`https://api.github.com/repos/${event.repo.name}/commits/${head}`);
+                  message = truncateMsg(data.commit?.message?.split("\n")[0] || "");
                 } catch (err) {}
               }
 
@@ -796,6 +919,93 @@
       }
 
       loadUpdates();
+
+      // ── Blog feed ─────────────────────────────────────────────────────
+      const blogSection = document.getElementById("blog-section");
+      const blogList = document.getElementById("blog-list");
+      const blogItems = [];
+      let blogWindowStart = 0;
+      let blogRotationTimer = null;
+      let blogAdvanceTimeout = null;
+
+      function formatTag(str) {
+        if (!str) return "Blog";
+        if (str.length <= 3) return str.toUpperCase();
+        return str.charAt(0).toUpperCase() + str.slice(1);
+      }
+
+      function buildBlogLi({ tag, title, url, date_published }) {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <a class="blog-tag" href="${url}" target="_blank" rel="noopener noreferrer">${escapeHtml(tag)}</a>
+          <a class="blog-title" href="${url}" target="_blank" rel="noopener noreferrer" title="${escapeHtml(title)}">${escapeHtml(title)}</a>
+          <span class="blog-time">${timeAgo(date_published)}</span>
+        `;
+        return li;
+      }
+
+      function renderBlogWindow(mode) {
+        const window = blogItems.slice(blogWindowStart, blogWindowStart + WINDOW);
+        blogList.innerHTML = "";
+        window.forEach((item, index) => {
+          const li = buildBlogLi(item);
+          if (mode === "stagger" || index === 0) li.style.opacity = "0";
+          blogList.appendChild(li);
+        });
+        [...blogList.children].forEach((li, index) => {
+          const shouldFade = mode === "stagger" || index === 0;
+          if (!shouldFade) return;
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              setTimeout(() => {
+                li.style.opacity = "1";
+              }, mode === "stagger" ? index * 120 : 0);
+            });
+          });
+        });
+      }
+
+      function fadeOutAndAdvanceBlog() {
+        const leaving = blogList.lastElementChild;
+        if (!leaving) return;
+        leaving.style.opacity = "0";
+        clearTimeout(blogAdvanceTimeout);
+        blogAdvanceTimeout = setTimeout(() => {
+          blogWindowStart = blogWindowStart <= 0 ? blogItems.length - WINDOW : blogWindowStart - 1;
+          renderBlogWindow("advance");
+        }, FADE_MS);
+      }
+
+      function startBlogRotation() {
+        clearInterval(blogRotationTimer);
+        blogRotationTimer = setInterval(fadeOutAndAdvanceBlog, ROTATION_MS);
+      }
+
+      async function loadBlog() {
+        try {
+          const data = await fetchJsonCached("https://blog.besoeasy.com/feed.json");
+          const items = (data.items || []).map((item) => ({
+            tag: formatTag(item.tags && item.tags[0] ? item.tags[0] : "Blog"),
+            title: item.title || "",
+            url: item.url || "https://blog.besoeasy.com",
+            date_published: item.date_published,
+          }));
+
+          if (!items.length) return;
+
+          blogItems.push(...items);
+          blogWindowStart = Math.max(0, blogItems.length - WINDOW);
+          blogSection.hidden = false;
+          renderBlogWindow("stagger");
+          if (blogItems.length > WINDOW) {
+            setTimeout(startBlogRotation, 3000);
+          }
+        } catch (err) {
+          blogSection.remove();
+        }
+      }
+
+      loadBlog();
     </script>
   </body>
 </html>

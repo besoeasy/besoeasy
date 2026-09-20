@@ -44,7 +44,6 @@
         --photo-border: rgba(0, 0, 0, 0.08);
         --photo-shadow: 0 20px 35px -15px rgba(0, 0, 0, 0.08);
         --status-dot: #16a34a;
-        --status-pulse: rgba(22, 163, 74, 0.35);
       }
 
       @media (prefers-color-scheme: dark) {
@@ -58,7 +57,6 @@
           --photo-border: rgba(255, 255, 255, 0.12);
           --photo-shadow: 0 20px 35px -15px rgba(0, 0, 0, 0.6);
           --status-dot: #22c55e;
-          --status-pulse: rgba(34, 197, 94, 0.4);
         }
       }
 
@@ -178,7 +176,7 @@
         margin-top: 1.35rem;
       }
 
-      /* Name & Status */
+      /* Name */
       .name-line {
         font-size: clamp(1.5rem, 7.5vw, 1.875rem);
         line-height: 1.05;
@@ -189,56 +187,6 @@
         max-width: 100%;
         overflow-wrap: break-word;
         text-wrap: balance;
-      }
-
-      .name-line + .status-line {
-        margin-top: 0.5rem;
-      }
-
-      .status-line {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-        font-size: 0.75rem;
-        font-weight: 500;
-        color: var(--gray-600);
-        user-select: none;
-        letter-spacing: -0.01em;
-      }
-
-      .status-dot {
-        position: relative;
-        display: inline-block;
-        width: 7px;
-        height: 7px;
-        border-radius: 9999px;
-        background-color: var(--status-dot);
-        flex-shrink: 0;
-      }
-
-      .status-dot::after {
-        content: "";
-        position: absolute;
-        inset: -3px;
-        border-radius: 9999px;
-        background-color: var(--status-pulse);
-        animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-      }
-
-      @keyframes pulse-ring {
-        0% {
-          transform: scale(0.8);
-          opacity: 0.9;
-        }
-        70% {
-          transform: scale(2.2);
-          opacity: 0;
-        }
-        100% {
-          transform: scale(2.2);
-          opacity: 0;
-        }
       }
 
       /* Bio */
@@ -699,9 +647,6 @@
         .photo-wrap:hover .photo-img {
           transform: none !important;
         }
-        .status-dot::after {
-          display: none !important;
-        }
         .social-link:hover {
           transform: none !important;
         }
@@ -741,10 +686,6 @@
         <!-- Content -->
         <div class="content">
           <div id="name-line" class="name-line" aria-label="Aman Singh Katal">AMAN SINGH KATAL</div>
-          <div class="status-line" aria-label="Available for advisory and contracts">
-            <span class="status-dot"></span>
-            <span>Available for fintech &amp; automation advisory</span>
-          </div>
 
           <!-- Bio box: relative container so it expands with content -->
           <div class="bio-box" id="bio-box">

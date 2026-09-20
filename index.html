@@ -33,6 +33,7 @@
 
     <style>
       :root {
+        --bg: #ffffff;
         --gray-900: #111827;
         --gray-700: #374151;
         --gray-600: #4b5563;
@@ -40,6 +41,25 @@
         --orange-400: #fb923c;
         --rose-500: #f43f5e;
         --pink-500: #ec4899;
+        --photo-border: rgba(0, 0, 0, 0.08);
+        --photo-shadow: 0 20px 35px -15px rgba(0, 0, 0, 0.08);
+        --status-dot: #16a34a;
+        --status-pulse: rgba(22, 163, 74, 0.35);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #09090b;
+          --gray-900: #f4f4f5;
+          --gray-700: #d4d4d8;
+          --gray-600: #a1a1aa;
+          --gray-200: #27272a;
+          --rose-500: #fb7185;
+          --photo-border: rgba(255, 255, 255, 0.12);
+          --photo-shadow: 0 20px 35px -15px rgba(0, 0, 0, 0.6);
+          --status-dot: #22c55e;
+          --status-pulse: rgba(34, 197, 94, 0.4);
+        }
       }
 
       *,
@@ -58,11 +78,22 @@
 
       body {
         font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-        background: #fff;
+        background: var(--bg);
         color: var(--gray-900);
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         min-height: 100vh;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      ::selection {
+        background: var(--gray-200);
+        color: var(--gray-900);
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--rose-500);
+        outline-offset: 2px;
       }
 
       a {
@@ -83,60 +114,67 @@
       /* Layout */
       .page {
         width: 100%;
-        max-width: 72rem;
+        max-width: 42rem;
         min-width: 0;
         margin: 0 auto;
-        padding: 1.5rem 1rem;
+        padding: 2.5rem 1.25rem 5rem;
         overflow-x: clip;
         overflow-wrap: break-word;
       }
 
       .hero {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr);
-        gap: 1.5rem;
-        align-items: center;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
         width: 100%;
         max-width: 100%;
         min-width: 0;
-        min-height: auto;
-        padding: 1rem 0 1.5rem;
-        overflow-x: clip;
+        padding: 0;
       }
 
       .photo-wrap {
-        order: -1;
-        min-width: 0;
+        width: 100%;
         max-width: 100%;
+        aspect-ratio: 1 / 1;
         overflow: hidden;
-        border-radius: 1rem;
+        border-radius: 1.25rem;
+        border: 1px solid var(--photo-border);
+        box-shadow: var(--photo-shadow);
+        background: var(--gray-200);
+      }
+
+      .photo-wrap picture {
+        display: block;
+        width: 100%;
+        height: 100%;
       }
 
       .photo-img {
         display: block;
         width: 100%;
-        max-height: 60vh;
+        height: 100%;
         object-fit: cover;
         object-position: top;
-        border-radius: 1rem;
-        transition: transform 0.5s ease;
+        border-radius: inherit;
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
       .photo-wrap:hover .photo-img {
-        transform: translateY(-8px) scale(1.05) rotate(2deg);
+        transform: scale(1.02);
       }
 
       .content {
+        width: 100%;
         min-width: 0;
         max-width: 100%;
         overflow-wrap: break-word;
       }
 
       .content > * + * {
-        margin-top: 1.25rem;
+        margin-top: 1.35rem;
       }
 
-      /* Name */
+      /* Name & Status */
       .name-line {
         font-size: clamp(1.5rem, 7.5vw, 1.875rem);
         line-height: 1.05;
@@ -147,6 +185,56 @@
         max-width: 100%;
         overflow-wrap: break-word;
         text-wrap: balance;
+      }
+
+      .name-line + .status-line {
+        margin-top: 0.5rem;
+      }
+
+      .status-line {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: var(--gray-600);
+        user-select: none;
+        letter-spacing: -0.01em;
+      }
+
+      .status-dot {
+        position: relative;
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        border-radius: 9999px;
+        background-color: var(--status-dot);
+        flex-shrink: 0;
+      }
+
+      .status-dot::after {
+        content: "";
+        position: absolute;
+        inset: -3px;
+        border-radius: 9999px;
+        background-color: var(--status-pulse);
+        animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+
+      @keyframes pulse-ring {
+        0% {
+          transform: scale(0.8);
+          opacity: 0.9;
+        }
+        70% {
+          transform: scale(2.2);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(2.2);
+          opacity: 0;
+        }
       }
 
       /* Bio */
@@ -168,13 +256,35 @@
       .bio-icon {
         display: inline-flex;
         align-items: center;
-        margin: 0 0.25rem;
+        margin: 0 0.2rem;
         cursor: default;
-        transition: transform 0.3s ease;
+        color: var(--gray-600);
+        vertical-align: -2px;
+        transition: transform 0.25s ease, color 0.25s ease;
       }
 
       .bio-icon:hover {
-        transform: scale(1.25) rotate(12deg);
+        transform: translateY(-2px) scale(1.18);
+        color: var(--gray-900);
+      }
+
+      .bio-icon[data-accent="code"]:hover {
+        color: #3b82f6;
+      }
+      .bio-icon[data-accent="fintech"]:hover {
+        color: #22c55e;
+      }
+      .bio-icon[data-accent="automation"]:hover {
+        color: #f59e0b;
+      }
+      .bio-icon[data-accent="stack"]:hover {
+        color: #a855f7;
+      }
+      .bio-icon[data-accent="teams"]:hover {
+        color: #f97316;
+      }
+      .bio-icon[data-accent="security"]:hover {
+        color: #ef4444;
       }
 
       .bio-hover-text {
@@ -233,7 +343,7 @@
       }
 
       .social-link:hover {
-        color: #000;
+        color: var(--gray-900);
       }
 
       .social-icon {
@@ -257,19 +367,28 @@
         font-weight: 600;
         color: var(--gray-600);
         transition: color 0.3s ease;
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
         max-width: 100%;
         overflow-wrap: anywhere;
         word-break: break-word;
+        cursor: pointer;
+        user-select: none;
       }
 
       .mail-command:hover {
-        color: #000;
+        color: var(--gray-900);
       }
 
       .mail-command .prompt {
         font-weight: 700;
         color: var(--rose-500);
+      }
+
+      .mail-copy-status {
+        color: var(--status-dot);
+        font-weight: 500;
       }
 
       /* Footer links */
@@ -287,6 +406,12 @@
       .blog-section {
         min-width: 0;
         max-width: 100%;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .blog-section.is-visible {
+        opacity: 1;
       }
 
       .blog-label {
@@ -304,7 +429,7 @@
       }
 
       .blog-label:hover {
-        color: #000;
+        color: var(--gray-900);
       }
 
       .blog-label .prompt {
@@ -344,7 +469,7 @@
       }
 
       .blog-tag:hover {
-        color: #000;
+        color: var(--gray-900);
       }
 
       .blog-title {
@@ -359,7 +484,7 @@
       }
 
       .blog-title:hover {
-        color: #000;
+        color: var(--gray-900);
       }
 
       .blog-time {
@@ -374,6 +499,12 @@
       .updates {
         min-width: 0;
         max-width: 100%;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .updates.is-visible {
+        opacity: 1;
       }
 
       .updates-label {
@@ -425,7 +556,15 @@
       }
 
       .updates-repo:hover {
-        color: #000;
+        color: var(--gray-900);
+      }
+
+      .updates-hash {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.75rem;
+        color: var(--gray-600);
+        letter-spacing: -0.01em;
+        flex-shrink: 0;
       }
 
       .updates-msg {
@@ -449,7 +588,13 @@
       /* Responsive */
       @media (max-width: 480px) {
         .page {
-          padding: 1rem 0.875rem;
+          padding: 1.5rem 1rem 3.5rem;
+        }
+        .hero {
+          gap: 1.5rem;
+        }
+        .photo-wrap {
+          border-radius: 1rem;
         }
         .updates-list li,
         .blog-list li {
@@ -459,6 +604,9 @@
         .updates-repo,
         .blog-tag {
           max-width: 28vw;
+        }
+        .updates-hash {
+          font-size: 0.6875rem;
         }
         .updates-time,
         .blog-time {
@@ -472,43 +620,41 @@
 
       @media (min-width: 640px) {
         .page {
-          padding-left: 1.5rem;
-          padding-right: 1.5rem;
+          padding: 3.5rem 1.5rem 5.5rem;
+        }
+        .hero {
+          gap: 2.25rem;
         }
         .bio-default {
           font-size: 1rem;
         }
+        .bio-hover-text {
+          display: flex;
+        }
       }
 
       @media (min-width: 768px) {
-        .hero {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 3rem;
-          padding: 2.5rem 0;
-          min-height: 100vh;
-          min-height: 100svh;
-          min-height: 100dvh;
-        }
-        .photo-wrap {
-          order: 0;
-        }
-        .photo-img {
-          max-height: none;
-        }
-        .bio-hover-text {
-          display: flex;
-          max-width: 100%;
-          overflow-wrap: break-word;
-        }
-      }
-
-      @media (min-width: 1024px) {
         .page {
-          padding-left: 2rem;
-          padding-right: 2rem;
+          padding: 4.5rem 1.5rem 6.5rem;
         }
         .name-line {
           font-size: 2.25rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+        .photo-wrap:hover .photo-img {
+          transform: none !important;
+        }
+        .status-dot::after {
+          display: none !important;
         }
       }
     </style>
@@ -520,28 +666,43 @@
       <div class="hero">
         <!-- Photo -->
         <div class="photo-wrap">
-          <img src="/me.png" alt="Aman Singh Katal" class="photo-img" />
+          <picture>
+            <source srcset="/me.webp" type="image/webp" />
+            <img
+              src="/me.png"
+              alt="Aman Singh Katal"
+              class="photo-img"
+              width="1080"
+              height="1080"
+              fetchpriority="high"
+              loading="eager"
+            />
+          </picture>
         </div>
 
         <!-- Content -->
         <div class="content">
           <div id="name-line" class="name-line" aria-label="Aman Singh Katal">AMAN SINGH KATAL</div>
+          <div class="status-line" aria-label="Available for advisory and contracts">
+            <span class="status-dot"></span>
+            <span>Available for fintech &amp; automation advisory</span>
+          </div>
 
           <!-- Bio box: relative container so it expands with content -->
           <div class="bio-box" id="bio-box">
             <div id="bio-default" class="bio-default">
               I am a seasoned full-stack developer
-              <span class="bio-icon"><i data-lucide="code-2" style="width: 18px; height: 18px; color: #2563eb"></i></span>
+              <span class="bio-icon" data-accent="code" title="Full-stack"><i data-lucide="code-2" style="width: 17px; height: 17px"></i></span>
               with a primary focus on fintech
-              <span class="bio-icon"><i data-lucide="dollar-sign" style="width: 18px; height: 18px; color: #16a34a"></i></span>
+              <span class="bio-icon" data-accent="fintech" title="Fintech"><i data-lucide="dollar-sign" style="width: 17px; height: 17px"></i></span>
               and automation
-              <span class="bio-icon"><i data-lucide="zap" style="width: 18px; height: 18px; color: #ca8a04"></i></span>
+              <span class="bio-icon" data-accent="automation" title="Automation"><i data-lucide="zap" style="width: 17px; height: 17px"></i></span>
               . Proficient in a wide range of programming languages
-              <span class="bio-icon"><i data-lucide="layers" style="width: 18px; height: 18px; color: #9333ea"></i></span>
+              <span class="bio-icon" data-accent="stack" title="Languages"><i data-lucide="layers" style="width: 17px; height: 17px"></i></span>
               , I have collaborated with 70+ organizations
-              <span class="bio-icon"><i data-lucide="users" style="width: 18px; height: 18px; color: #ea580c"></i></span>
+              <span class="bio-icon" data-accent="teams" title="70+ Organizations"><i data-lucide="users" style="width: 17px; height: 17px"></i></span>
               , delivering mission-critical applications handling substantial financial and sensitive data
-              <span class="bio-icon"><i data-lucide="shield-check" style="width: 18px; height: 18px; color: #dc2626"></i></span>
+              <span class="bio-icon" data-accent="security" title="Security & Compliance"><i data-lucide="shield-check" style="width: 17px; height: 17px"></i></span>
               .
             </div>
             <div id="bio-hover-text" class="bio-hover-text"></div>
@@ -549,14 +710,15 @@
 
           <!-- Social links -->
           <div class="socials-command">
-            <span class="socials-label"><span class="prompt">$</span> socials</span>
+            <span class="socials-label">socials</span>
             <div class="social-links" id="social-links"></div>
           </div>
 
           <!-- Email -->
           <div class="footer-links">
-            <a id="hero-email" href="mailto:a@besoeasy.com" class="mail-command">
-              <span class="prompt">$</span> mail <span id="hero-email-value">a@besoeasy.com</span>
+            <a id="hero-email" href="mailto:a@besoeasy.com" class="mail-command" title="Click to copy email address">
+              <span class="prompt">$</span>
+              <span id="hero-email-cmd">mail <span id="hero-email-value">a@besoeasy.com</span></span>
             </a>
           </div>
 
@@ -588,7 +750,7 @@
           url: "https://github.com/besoeasy?tab=repositories&q=&type=&language=&sort=stargazers",
           description: "Dive into my code, side projects, and experiments—steal ideas, get inspired, or just lurk 👀",
           lucide: "git-branch",
-          color: "#24292e",
+          color: "currentColor",
         },
         {
           name: "NOSTR",
@@ -602,7 +764,7 @@
           url: "https://steamcommunity.com/id/besoeasy",
           description: "Games I play, hours I've lost, and maybe our next co-op session",
           lucide: "joystick",
-          color: "#1b87c5",
+          color: "#0ea5e9",
         },
         {
           name: "Instagram",
@@ -658,16 +820,21 @@
         socialLinks.appendChild(a);
       });
 
-      // Hydrate all data-lucide elements (pass entire module — no named export guessing)
+      // Hydrate all data-lucide elements
       createIcons({ icons: lucide });
 
       // ── Scramble-decode name ──────────────────────────────────────────
       const nameLine = document.getElementById("name-line");
       const FULL_NAME = "AMAN SINGH KATAL";
       const SCRAMBLE_CHARS = "!<>-_\\/[]{}—=+*^?#________";
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       let scrambleTimer = null;
       function scrambleName(decay = 1 / 3) {
+        if (prefersReducedMotion) {
+          nameLine.textContent = FULL_NAME;
+          return;
+        }
         clearInterval(scrambleTimer);
         let iteration = 0;
         scrambleTimer = setInterval(() => {
@@ -685,9 +852,11 @@
         }, 30);
       }
 
-      nameLine.addEventListener("mouseenter", () => {
-        scrambleName(1 / 4);
-      });
+      if (!prefersReducedMotion) {
+        nameLine.addEventListener("mouseenter", () => {
+          scrambleName(1 / 4);
+        });
+      }
       scrambleName();
 
       // ── localStorage GET cache (15 min) ──────────────────────────────
@@ -772,14 +941,36 @@
 
       const locationPromise = fetchLocation();
 
-      // ── Dynamic email ────────────────────────────────────────────────
+      // ── Dynamic email & Click to copy ────────────────────────────────
+      const heroEmail = document.getElementById("hero-email");
+      const heroEmailCmd = document.getElementById("hero-email-cmd");
+      const heroEmailValue = document.getElementById("hero-email-value");
+      let copyFeedbackTimeout = null;
+
       locationPromise.then((loc) => {
         if (loc && loc.city) {
           const slug = loc.city.toLowerCase().replace(/[^a-z0-9]/g, "");
           const email = `${slug}@besoeasy.com`;
-          const anchor = document.getElementById("hero-email");
-          anchor.href = `mailto:${email}`;
-          document.getElementById("hero-email-value").textContent = email;
+          heroEmail.href = `mailto:${email}`;
+          heroEmailValue.textContent = email;
+        }
+      });
+
+      heroEmail.addEventListener("click", async (e) => {
+        const currentEmail = heroEmailValue ? heroEmailValue.textContent.trim() : "a@besoeasy.com";
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          try {
+            await navigator.clipboard.writeText(currentEmail);
+            e.preventDefault();
+            clearTimeout(copyFeedbackTimeout);
+            const savedHtml = `mail <span id="hero-email-value">${escapeHtml(currentEmail)}</span>`;
+            heroEmailCmd.innerHTML = `echo <span class="mail-copy-status">"copied ${escapeHtml(currentEmail)} to clipboard!"</span>`;
+            copyFeedbackTimeout = setTimeout(() => {
+              heroEmailCmd.innerHTML = savedHtml;
+            }, 2200);
+          } catch (err) {
+            // fallback to default mailto anchor navigation
+          }
         }
       });
 
@@ -820,6 +1011,10 @@
       let windowStart = 0;
       let rotationTimer = null;
       let advanceTimeout = null;
+      let updatesPaused = false;
+
+      updates.addEventListener("mouseenter", () => { updatesPaused = true; });
+      updates.addEventListener("mouseleave", () => { updatesPaused = false; });
 
       function truncateMsg(str) {
         const clean = (str || "").trim().replace(/\s+/g, " ");
@@ -827,10 +1022,11 @@
         return clean.slice(0, MAX_MSG_LEN - 1).trimEnd() + "…";
       }
 
-      function buildItemLi({ repoShort, label, url, created_at }) {
+      function buildItemLi({ repoShort, hash, label, url, created_at }) {
         const li = document.createElement("li");
         li.innerHTML = `
           <a class="updates-repo" href="${url}" target="_blank" rel="noopener noreferrer">${escapeHtml(repoShort)}</a>
+          ${hash ? `<span class="updates-hash">${escapeHtml(hash)}</span>` : ""}
           <span class="updates-msg" title="${escapeHtml(label)}">${escapeHtml(label)}</span>
           <span class="updates-time">${timeAgo(created_at)}</span>
         `;
@@ -859,6 +1055,7 @@
       }
 
       function fadeOutAndAdvance() {
+        if (updatesPaused) return;
         const leaving = updatesList.lastElementChild;
         if (!leaving) return;
         leaving.style.opacity = "0";
@@ -885,6 +1082,7 @@
             pushes.map(async (event) => {
               const repoShort = event.repo.name.split("/")[1];
               const head = event.payload?.head;
+              const shortHash = head ? head.slice(0, 7) : "";
               const branch = (event.payload?.ref || "").replace("refs/heads/", "");
               const url = `https://github.com/${event.repo.name}/commit/${head}`;
               let message = "";
@@ -900,6 +1098,7 @@
 
               return {
                 repoShort,
+                hash: shortHash,
                 label: message || `pushed to ${branch || "main"}`,
                 url,
                 created_at: event.created_at,
@@ -912,6 +1111,7 @@
           windowStart = Math.max(0, feedItems.length - WINDOW);
           updates.hidden = false;
           renderWindow("stagger");
+          requestAnimationFrame(() => updates.classList.add("is-visible"));
           if (feedItems.length > WINDOW) startRotation();
         } catch (err) {
           updates.remove();
@@ -927,6 +1127,10 @@
       let blogWindowStart = 0;
       let blogRotationTimer = null;
       let blogAdvanceTimeout = null;
+      let blogPaused = false;
+
+      blogSection.addEventListener("mouseenter", () => { blogPaused = true; });
+      blogSection.addEventListener("mouseleave", () => { blogPaused = false; });
 
       function formatTag(str) {
         if (!str) return "Blog";
@@ -966,6 +1170,7 @@
       }
 
       function fadeOutAndAdvanceBlog() {
+        if (blogPaused) return;
         const leaving = blogList.lastElementChild;
         if (!leaving) return;
         leaving.style.opacity = "0";
@@ -997,6 +1202,7 @@
           blogWindowStart = Math.max(0, blogItems.length - WINDOW);
           blogSection.hidden = false;
           renderBlogWindow("stagger");
+          requestAnimationFrame(() => blogSection.classList.add("is-visible"));
           if (blogItems.length > WINDOW) {
             setTimeout(startBlogRotation, 3000);
           }

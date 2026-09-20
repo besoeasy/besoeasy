@@ -83,6 +83,10 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         min-height: 100vh;
+        min-height: 100svh;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
         transition: background-color 0.3s ease, color 0.3s ease;
       }
 
@@ -116,8 +120,8 @@
         width: 100%;
         max-width: 42rem;
         min-width: 0;
-        margin: 0 auto;
-        padding: 2.5rem 1.25rem 5rem;
+        margin: auto;
+        padding: 2.5rem 1.25rem 4rem;
         overflow-x: clip;
         overflow-wrap: break-word;
       }
@@ -609,7 +613,7 @@
 
       @media (min-width: 640px) {
         .page {
-          padding: 3.5rem 1.5rem 5.5rem;
+          padding: 3rem 1.5rem;
         }
         .hero {
           gap: 2.25rem;
@@ -624,7 +628,7 @@
 
       @media (min-width: 768px) {
         .page {
-          padding: 4.5rem 1.5rem 6.5rem;
+          padding: 3.5rem 1.5rem;
         }
         .name-line {
           font-size: 2.25rem;

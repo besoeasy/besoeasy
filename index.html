@@ -138,24 +138,10 @@
         padding: 0;
       }
 
-      /* Identity */
-      .ident {
-        display: flex;
-        align-items: center;
-        gap: 0.875rem;
+      /* Photo */
+      .photo-wrap {
         width: 100%;
-        min-width: 0;
-      }
-
-      .ident-text {
-        flex: 1 1 auto;
-        min-width: 0;
-      }
-
-      .avatar-wrap {
-        flex: none;
-        width: 3.25rem;
-        height: 3.25rem;
+        aspect-ratio: 1 / 1;
         border-radius: var(--r-block);
         overflow: hidden;
         border: 1px solid var(--photo-border);
@@ -163,22 +149,18 @@
         background: var(--gray-200);
       }
 
-      .avatar-wrap picture {
+      .photo-wrap picture {
         display: block;
         width: 100%;
         height: 100%;
       }
 
-      .avatar-img {
+      .photo-img {
         display: block;
         width: 100%;
         height: 100%;
         object-fit: cover;
         object-position: center;
-      }
-
-      .ident-text .mail-command {
-        margin-top: 0.25rem;
       }
 
       .content {
@@ -498,11 +480,7 @@
           padding: 1.75rem 1rem 3.25rem;
         }
         .hero {
-          gap: 1.1rem;
-        }
-        .ident {
-          gap: 0.625rem;
-          align-items: flex-start;
+          gap: 1.25rem;
         }
         .activity-header {
           gap: 0.5rem;
@@ -535,7 +513,7 @@
           padding: 3rem 1.5rem;
         }
         .hero {
-          gap: 1.75rem;
+          gap: 2rem;
         }
       }
 
@@ -561,34 +539,33 @@
     <!-- Main -->
     <div class="page">
       <div class="hero">
-        <!-- Identity -->
-        <header class="ident">
-          <div class="avatar-wrap">
-            <picture>
-              <source srcset="/me.webp" type="image/webp" />
-              <img
-                src="/me.png"
-                alt="Aman Singh Katal"
-                class="avatar-img"
-                width="1080"
-                height="1080"
-                fetchpriority="high"
-                loading="eager"
-              />
-            </picture>
-          </div>
-          <div class="ident-text">
+        <!-- Photo -->
+        <div class="photo-wrap">
+          <picture>
+            <source srcset="/me.webp" type="image/webp" />
+            <img
+              src="/me.png"
+              alt="Aman Singh Katal"
+              class="photo-img"
+              width="1080"
+              height="1080"
+              fetchpriority="high"
+              loading="eager"
+            />
+          </picture>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+          <header class="ident">
             <h1 id="name-line" class="name-line" aria-label="Aman Singh Katal">AMAN SINGH KATAL</h1>
             <a id="hero-email" href="mailto:a@besoeasy.com" class="mail-command" title="Click to copy email address">
               <span class="mail-icon"><i data-lucide="mail" style="width: 15px; height: 15px"></i></span>
               <span id="hero-email-value">a@besoeasy.com</span>
               <span id="copy-status" class="copy-status" aria-live="polite"></span>
             </a>
-          </div>
-        </header>
+          </header>
 
-        <!-- Content -->
-        <div class="content">
           <p class="bio">
             Full-stack developer for <b>fintech</b> &amp; <b>automation</b> —
             <b>70+ organizations</b>, mission-critical systems since <b>2013</b>.

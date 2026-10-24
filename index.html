@@ -665,37 +665,6 @@
       // Hydrate all data-lucide elements
       createIcons({ icons: lucide });
 
-      // ── Scramble-decode name ──────────────────────────────────────────
-      const nameLine = document.getElementById("name-line");
-      const FULL_NAME = "AMAN SINGH KATAL";
-      const SCRAMBLE_CHARS = "!<>-_\\/[]{}—=+*^?#________";
-      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-      let scrambleTimer = null;
-      function scrambleName(decay = 1 / 3) {
-        if (prefersReducedMotion) {
-          nameLine.textContent = FULL_NAME;
-          return;
-        }
-        clearInterval(scrambleTimer);
-        let iteration = 0;
-        scrambleTimer = setInterval(() => {
-          nameLine.textContent = FULL_NAME.split("")
-            .map((char, index) => {
-              if (char === " " || index < iteration) return char;
-              return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
-            })
-            .join("");
-          iteration += decay;
-          if (iteration >= FULL_NAME.length) {
-            clearInterval(scrambleTimer);
-            nameLine.textContent = FULL_NAME;
-          }
-        }, 30);
-      }
-
-      scrambleName();
-
       // ── localStorage GET cache (15 min) ──────────────────────────────
       const CACHE_TTL_MS = 15 * 60 * 1000;
       const cacheKey = (url) => `besoeasy:cache:${url}`;

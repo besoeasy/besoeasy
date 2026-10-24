@@ -156,14 +156,20 @@
       }
 
       .content {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
         width: 100%;
         min-width: 0;
         max-width: 100%;
         overflow-wrap: break-word;
       }
 
-      .content > * + * {
-        margin-top: 1.5rem;
+      .ident {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
       }
 
       /* Name */
@@ -469,13 +475,13 @@
       /* Responsive */
       @media (max-width: 480px) {
         .page {
-          padding: 1.75rem 1rem 3.25rem;
+          padding: 1.75rem 1rem 3.5rem;
         }
         .hero {
           gap: 1.5rem;
         }
-        .content > * + * {
-          margin-top: 1.25rem;
+        .content {
+          gap: 1.25rem;
         }
         .activity-header {
           gap: 0.5rem;
@@ -505,7 +511,7 @@
 
       @media (min-width: 640px) {
         .page {
-          padding: 3rem 1.5rem;
+          padding: 3rem 1.5rem 4rem;
         }
         .hero {
           gap: 2.5rem;
@@ -514,7 +520,7 @@
 
       @media (min-width: 768px) {
         .page {
-          padding: 3.5rem 1.5rem;
+          padding: 3.5rem 1.5rem 4rem;
         }
       }
 
@@ -554,17 +560,18 @@
         <div class="content">
           <header class="ident">
             <h1 id="name-line" class="name-line" aria-label="Aman Singh Katal">AMAN SINGH KATAL</h1>
-            <a id="hero-email" href="mailto:a@besoeasy.com" class="mail-command" title="Click to copy email address">
-              <span class="mail-icon"><i data-lucide="mail" style="width: 15px; height: 15px"></i></span>
-              <span id="hero-email-value">a@besoeasy.com</span>
-              <span id="copy-status" class="copy-status" aria-live="polite"></span>
-            </a>
           </header>
 
           <p class="bio">
             Full-stack developer for <b>fintech</b> &amp; <b>automation</b> —
             <b>70+ organizations</b>, mission-critical systems since <b>2013</b>.
           </p>
+
+          <a id="hero-email" href="mailto:a@besoeasy.com" class="mail-command" title="Click to copy email address">
+            <span class="mail-icon"><i data-lucide="mail" style="width: 15px; height: 15px"></i></span>
+            <span id="hero-email-value">a@besoeasy.com</span>
+            <span id="copy-status" class="copy-status" aria-live="polite"></span>
+          </a>
 
           <!-- Social links -->
           <div class="social-links" id="social-links"></div>

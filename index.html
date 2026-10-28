@@ -190,17 +190,32 @@
         text-wrap: balance;
       }
 
-      /* Name legend */
-      .name-legend {
-        margin: 0;
-        font-size: 0.875rem;
-        line-height: 1.6;
-        color: var(--gray-600);
+      /* Name notes */
+      .name-part {
+        position: relative;
+        display: inline-block;
+        margin: 0 0.18em;
       }
 
-      .name-legend b {
-        color: var(--gray-900);
-        font-weight: 600;
+      .name-note {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.6875rem;
+        font-weight: 500;
+        letter-spacing: 0;
+        line-height: 1;
+        color: var(--gray-600);
+        white-space: nowrap;
+      }
+
+      .name-note.top {
+        bottom: calc(100% + 0.35rem);
+      }
+
+      .name-note.bottom {
+        top: calc(100% + 0.35rem);
       }
 
       /* Bio */
@@ -579,10 +594,11 @@
         <!-- Content -->
         <div class="content">
           <header class="ident">
-            <h1 id="name-line" class="name-line" aria-label="Aman Singh Katal">AMAN SINGH KATAL</h1>
-            <p class="name-legend">
-              <b>Aman</b> is my name · <b>Singh</b> is my surname · <b>Katal</b> is my house/living lineage.
-            </p>
+            <h1 id="name-line" class="name-line" aria-label="Aman Singh Katal">
+              <span class="name-part"><span class="name-note top">my name</span>AMAN</span>
+              <span class="name-part"><span class="name-note bottom">my surname</span>SINGH</span>
+              <span class="name-part"><span class="name-note top">my house/lineage</span>KATAL</span>
+            </h1>
           </header>
 
           <p class="bio">

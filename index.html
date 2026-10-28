@@ -686,15 +686,6 @@
         }
       }
 
-      locationPromise.then((loc) => {
-        if (loc && loc.city) {
-          const slug = loc.city.toLowerCase().replace(/[^a-z0-9]/g, "");
-          emailFallback = `${slug}@besoeasy.com`;
-          const emailLabel = document.getElementById("email-value");
-          if (emailLabel) emailLabel.textContent = emailFallback;
-        }
-      });
-
       SOCIALS.forEach(({ name, url, description, lucide, shade, copy }) => {
         const a = document.createElement("a");
         if (copy) {
@@ -807,6 +798,8 @@
         if (loc && loc.city) {
           const slug = loc.city.toLowerCase().replace(/[^a-z0-9]/g, "");
           emailFallback = `${slug}@besoeasy.com`;
+          const emailLabel = document.getElementById("email-value");
+          if (emailLabel) emailLabel.textContent = emailFallback;
         }
       });
 

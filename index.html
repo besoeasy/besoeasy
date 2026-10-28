@@ -693,6 +693,7 @@
 
       SOCIALS.forEach(({ name, url, description, lucide, shade, copy }) => {
         const a = document.createElement("a");
+        a.className = "social-link";
         if (copy) {
           const statusEl = document.createElement("span");
           statusEl.className = "copy-status";
@@ -707,7 +708,6 @@
         a.href = url;
         a.target = "_blank";
         a.rel = "noopener noreferrer";
-        a.className = "social-link";
         a.title = description;
         a.style.setProperty("--icon-shade", shade);
         a.innerHTML = `<span class="social-icon"><i data-lucide="${lucide}" style="width:18px;height:18px"></i></span><span>${name}</span>`;

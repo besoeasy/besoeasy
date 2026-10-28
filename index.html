@@ -235,6 +235,18 @@
         font-weight: 600;
       }
 
+      /* Binary border */
+      .bin-border {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.625rem;
+        line-height: 1;
+        color: var(--gray-200);
+        white-space: nowrap;
+        overflow: hidden;
+        user-select: none;
+        letter-spacing: 0.2em;
+      }
+
       /* Social links */
       .social-links {
         display: flex;
@@ -616,8 +628,12 @@
             <span id="copy-status" class="copy-status" aria-live="polite"></span>
           </a>
 
+          <div class="bin-border" data-bin></div>
+
           <!-- Social links -->
           <div class="social-links" id="social-links"></div>
+
+          <div class="bin-border" data-bin></div>
 
           <!-- Activity Section -->
           <div class="activity-section" id="activity-section" hidden>
@@ -828,6 +844,12 @@
             // fallback to default mailto anchor navigation
           }
         }
+      });
+
+      // ── Binary borders ───────────────────────────────────────────────
+      document.querySelectorAll("[data-bin]").forEach((el) => {
+        const bits = Array.from({ length: 400 }, () => (Math.random() < 0.5 ? "0" : "1")).join("");
+        el.textContent = bits;
       });
 
       // ── Activity Section (Writing & Commits) ──────────────────────────

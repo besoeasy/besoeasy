@@ -131,6 +131,11 @@
       }
 
       /* Photo */
+      .photo-frame {
+        position: relative;
+        width: 100%;
+      }
+
       .photo-wrap {
         width: 100%;
         aspect-ratio: 1 / 1;
@@ -237,22 +242,22 @@
         font-weight: 600;
       }
 
-      /* Binary border */
-      .bin-border {
+      /* Binary edge flow */
+      .bin-edges {
+        position: absolute;
+        inset: -7px;
         font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         font-size: 0.625rem;
         line-height: 1;
         color: var(--gray-600);
-        opacity: 0.55;
-        white-space: nowrap;
-        overflow: hidden;
+        pointer-events: none;
         user-select: none;
-        letter-spacing: 0.5em;
       }
 
-      .bin-border span {
-        transition: opacity 2.5s ease;
-        will-change: opacity;
+      .bin-edges span {
+        position: absolute;
+        opacity: 0;
+        transition: opacity 0.6s ease;
       }
 
       /* Social links */
@@ -549,19 +554,22 @@
     <div class="page">
       <div class="hero">
         <!-- Photo -->
-        <div class="photo-wrap">
-          <picture>
-            <source srcset="/me.webp" type="image/webp" />
-            <img
-              src="/me.png"
-              alt="Aman Singh Katal"
-              class="photo-img"
-              width="1080"
-              height="1080"
-              fetchpriority="high"
-              loading="eager"
-            />
-          </picture>
+        <div class="photo-frame">
+          <div class="photo-wrap">
+            <picture>
+              <source srcset="/me.webp" type="image/webp" />
+              <img
+                src="/me.png"
+                alt="Aman Singh Katal"
+                class="photo-img"
+                width="1080"
+                height="1080"
+                fetchpriority="high"
+                loading="eager"
+              />
+            </picture>
+          </div>
+          <div class="bin-edges" data-snake></div>
         </div>
 
         <!-- Content -->
@@ -582,12 +590,7 @@
             ship is free and open source 🆓
           </p>
 
-          <div class="bin-border" data-bin></div>
-
-          <!-- Social links -->
           <div class="social-links" id="social-links"></div>
-
-          <div class="bin-border" data-bin></div>
 
           <!-- Activity Section -->
           <div class="activity-section" id="activity-section" hidden>
@@ -818,24 +821,72 @@
         }
       });
 
-      // ── Binary borders ───────────────────────────────────────────────
-      document.querySelectorAll("[data-bin]").forEach((el) => {
-        const count = 160;
-        for (let i = 0; i < count; i++) {
-          const bit = document.createElement("span");
-          bit.textContent = Math.random() < 0.5 ? "0" : "1";
-          el.appendChild(bit);
+      // ── Binary snake along photo border ──────────────────────────────
+      const photoFrame = document.querySelector(".photo-frame");
+      const photoWrap = document.querySelector(".photo-wrap");
+      const snakeLayer = document.querySelector("[data-snake]");
+      const SNAKE_LEN = 14;
+
+      let snakeSpans = [];
+      let snakeSlots = 0;
+      let snakeHead = 0;
+      let snakeGeo = { w: 0, h: 0 };
+
+      function snakeSlot(i, w, h) {
+        const SLOT = 12;
+        const d = ((i * SLOT) % (2 * (w + h)) + 2 * (w + h)) % (2 * (w + h));
+        let x, y, rot = 0;
+        if (d < w) { x = d; y = 0; }
+        else if (d < w + h) { x = w; y = d - w; rot = 90; }
+        else if (d < 2 * w + h) { x = 2 * w + h - d; y = h; rot = 180; }
+        else { x = 0; y = 2 * (w + h) - d; rot = -90; }
+        return { x, y, rot };
+      }
+
+      function snakeBuild() {
+        const w = photoWrap.offsetWidth;
+        const h = photoWrap.offsetHeight;
+        if (!w || !h) return;
+        snakeGeo = { w, h };
+        snakeSlots = Math.floor(2 * (w + h) / 12);
+        snakeLayer.innerHTML = "";
+        snakeSpans = [];
+        for (let i = 0; i < snakeSlots; i++) {
+          const s = document.createElement("span");
+          snakeLayer.appendChild(s);
+          snakeSpans.push(s);
         }
-        const bits = [...el.children];
-        (function flicker() {
-          bits.forEach((bit) => {
-            if (Math.random() < 0.25) {
-              bit.style.opacity = Math.random() < 0.5 ? "0.15" : "1";
-            }
-          });
-          setTimeout(flicker, 1200 + Math.random() * 1500);
-        })();
-      });
+        snakeRender();
+      }
+
+      function snakeRender() {
+        const { w, h } = snakeGeo;
+        for (let i = 0; i < snakeSlots; i++) {
+          const dist = (snakeHead - i + snakeSlots) % snakeSlots;
+          const span = snakeSpans[i];
+          if (dist >= SNAKE_LEN) { span.style.opacity = "0"; span.textContent = ""; span.style.transform = ""; continue; }
+          const { x, y, rot } = snakeSlot(i, w, h);
+          span.textContent = Math.random() < 0.5 ? "0" : "1";
+          span.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%) rotate(${rot}deg)`;
+          span.style.opacity = String(1 - dist / SNAKE_LEN);
+        }
+      }
+
+      function snakeStep() {
+        snakeHead = (snakeHead + 1) % snakeSlots;
+        snakeRender();
+      }
+
+      if (photoFrame && photoWrap && snakeLayer) {
+        snakeBuild();
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          snakeHead = 4;
+          snakeRender();
+        } else {
+          setInterval(snakeStep, 180);
+        }
+        new ResizeObserver(() => snakeBuild()).observe(photoWrap);
+      }
 
       // ── Activity Section (Writing & Commits) ──────────────────────────
       const activitySection = document.getElementById("activity-section");

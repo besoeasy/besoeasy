@@ -289,53 +289,6 @@
         display: block;
       }
 
-      /* Mail command */
-      .mail-command {
-        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-        font-size: 1rem;
-        font-weight: 400;
-        color: var(--gray-600);
-        display: inline-flex;
-        align-items: center;
-        justify-content: flex-end;
-        align-self: flex-end;
-        gap: 0.4rem;
-        max-width: 100%;
-        overflow-wrap: anywhere;
-        word-break: break-word;
-        cursor: pointer;
-        user-select: none;
-        transition: color 0.2s ease;
-      }
-
-      .mail-command:hover {
-        color: var(--gray-900);
-      }
-
-      .mail-icon {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--gray-600);
-        transition: color 0.2s ease;
-      }
-
-      .mail-command:hover .mail-icon {
-        color: var(--rose-500);
-      }
-
-      #hero-email-value {
-        color: var(--gray-900);
-        text-decoration: underline;
-        text-decoration-color: var(--gray-200);
-        text-underline-offset: 4px;
-        transition: text-decoration-color 0.2s ease;
-      }
-
-      .mail-command:hover #hero-email-value {
-        text-decoration-color: var(--gray-900);
-      }
-
       .copy-status {
         font-size: 0.75rem;
         font-weight: 600;
@@ -552,8 +505,7 @@
         .social-links {
           gap: 0.875rem 1.125rem;
         }
-        .social-link,
-        .mail-command {
+        .social-link {
           font-size: 0.9375rem;
         }
       }
@@ -622,12 +574,6 @@
             express themselves 🗣️, and I'm a <b>serial open-source coder</b> 📦 — almost everything I
             ship is free and open source 🆓
           </p>
-
-          <a id="hero-email" href="mailto:a@besoeasy.com" class="mail-command" title="Click to copy email address">
-            <span class="mail-icon"><i data-lucide="mail" style="width: 15px; height: 15px"></i></span>
-            <span id="hero-email-value">a@besoeasy.com</span>
-            <span id="copy-status" class="copy-status" aria-live="polite"></span>
-          </a>
 
           <div class="bin-border" data-bin></div>
 
@@ -710,12 +656,58 @@
           lucide: "message-circle",
           shade: "#0d9488",
         },
+        {
+          name: "Mail",
+          description: "Click to copy my email address",
+          lucide: "mail",
+          shade: "#f43f5e",
+          copy: true,
+        },
       ];
 
       const socialLinks = document.getElementById("social-links");
+      const EMAIL_PARTS = [97, 64, 98, 101, 115, 111, 101, 97, 115, 121, 46, 99, 111, 109]; // obfuscated "a@besoeasy.com"
+      const emailFrom = (parts) => parts.map((c) => String.fromCharCode(c)).join("");
 
-      SOCIALS.forEach(({ name, url, description, lucide, shade }) => {
+      let emailFallback = emailFrom(EMAIL_PARTS);
+      let copyFeedbackTimeout = null;
+
+      function copyEmailToClipboard(e, statusEl) {
+        const email = emailFallback;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard
+            .writeText(email)
+            .then(() => {
+              e.preventDefault();
+              clearTimeout(copyFeedbackTimeout);
+              statusEl.textContent = "(copied!)";
+              statusEl.classList.add("is-copied");
+              copyFeedbackTimeout = setTimeout(() => {
+                statusEl.classList.remove("is-copied");
+                setTimeout(() => {
+                  statusEl.textContent = "";
+                }, 200);
+              }, 2000);
+            })
+            .catch(() => {
+              // fallback: default anchor behavior
+            });
+        }
+      }
+
+      SOCIALS.forEach(({ name, url, description, lucide, shade, copy }) => {
         const a = document.createElement("a");
+        if (copy) {
+          const statusEl = document.createElement("span");
+          statusEl.className = "copy-status";
+          statusEl.setAttribute("aria-live", "polite");
+          a.href = "mailto:";
+          a.addEventListener("click", (e) => copyEmailToClipboard(e, statusEl));
+          a.innerHTML = `<span class="social-icon"><i data-lucide="${lucide}" style="width:18px;height:18px"></i></span><span>${name}</span>`;
+          a.appendChild(statusEl);
+          socialLinks.appendChild(a);
+          return;
+        }
         a.href = url;
         a.target = "_blank";
         a.rel = "noopener noreferrer";
@@ -811,39 +803,10 @@
 
       const locationPromise = fetchLocation();
 
-      // ── Dynamic email & Click to copy ────────────────────────────────
-      const heroEmail = document.getElementById("hero-email");
-      const heroEmailValue = document.getElementById("hero-email-value");
-      const copyStatus = document.getElementById("copy-status");
-      let copyFeedbackTimeout = null;
-
       locationPromise.then((loc) => {
         if (loc && loc.city) {
           const slug = loc.city.toLowerCase().replace(/[^a-z0-9]/g, "");
-          const email = `${slug}@besoeasy.com`;
-          heroEmail.href = `mailto:${email}`;
-          heroEmailValue.textContent = email;
-        }
-      });
-
-      heroEmail.addEventListener("click", async (e) => {
-        const currentEmail = heroEmailValue ? heroEmailValue.textContent.trim() : "a@besoeasy.com";
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          try {
-            await navigator.clipboard.writeText(currentEmail);
-            e.preventDefault();
-            clearTimeout(copyFeedbackTimeout);
-            copyStatus.textContent = "(copied!)";
-            copyStatus.classList.add("is-copied");
-            copyFeedbackTimeout = setTimeout(() => {
-              copyStatus.classList.remove("is-copied");
-              setTimeout(() => {
-                copyStatus.textContent = "";
-              }, 200);
-            }, 2000);
-          } catch (err) {
-            // fallback to default mailto anchor navigation
-          }
+          emailFallback = `${slug}@besoeasy.com`;
         }
       });
 

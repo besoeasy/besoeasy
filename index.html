@@ -652,6 +652,7 @@
           lucide: "mail",
           shade: "#f43f5e",
           copy: true,
+          email: true,
         },
       ];
 
@@ -685,6 +686,15 @@
         }
       }
 
+      locationPromise.then((loc) => {
+        if (loc && loc.city) {
+          const slug = loc.city.toLowerCase().replace(/[^a-z0-9]/g, "");
+          emailFallback = `${slug}@besoeasy.com`;
+          const emailLabel = document.getElementById("email-value");
+          if (emailLabel) emailLabel.textContent = emailFallback;
+        }
+      });
+
       SOCIALS.forEach(({ name, url, description, lucide, shade, copy }) => {
         const a = document.createElement("a");
         if (copy) {
@@ -693,7 +703,7 @@
           statusEl.setAttribute("aria-live", "polite");
           a.href = "mailto:";
           a.addEventListener("click", (e) => copyEmailToClipboard(e, statusEl));
-          a.innerHTML = `<span class="social-icon"><i data-lucide="${lucide}" style="width:18px;height:18px"></i></span><span>${name}</span>`;
+          a.innerHTML = `<span class="social-icon"><i data-lucide="${lucide}" style="width:18px;height:18px"></i></span><span id="email-value">${emailFallback}</span>`;
           a.appendChild(statusEl);
           socialLinks.appendChild(a);
           return;

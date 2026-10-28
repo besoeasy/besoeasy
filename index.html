@@ -245,7 +245,7 @@
       /* Binary edge flow */
       .bin-edges {
         position: absolute;
-        inset: -7px;
+        inset: -16px;
         font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         font-size: 0.625rem;
         line-height: 1;
@@ -834,12 +834,13 @@
 
       function snakeSlot(i, w, h) {
         const SLOT = 12;
+        const OFF = 10; // center each bit just outside the border
         const d = ((i * SLOT) % (2 * (w + h)) + 2 * (w + h)) % (2 * (w + h));
         let x, y, rot = 0;
-        if (d < w) { x = d; y = 0; }
-        else if (d < w + h) { x = w; y = d - w; rot = 90; }
-        else if (d < 2 * w + h) { x = 2 * w + h - d; y = h; rot = 180; }
-        else { x = 0; y = 2 * (w + h) - d; rot = -90; }
+        if (d < w) { x = d; y = -OFF; }
+        else if (d < w + h) { x = w + OFF; y = d - w; rot = 90; }
+        else if (d < 2 * w + h) { x = 2 * w + h - d; y = h + OFF; rot = 180; }
+        else { x = -OFF; y = 2 * (w + h) - d; rot = -90; }
         return { x, y, rot };
       }
 

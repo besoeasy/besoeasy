@@ -219,24 +219,20 @@
         font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         font-size: 0.9375rem;
         font-weight: 600;
-        color: var(--gray-700);
-        background: var(--shade, var(--gray-200));
-        padding: 0.35rem 0.7rem;
-        border: 1px solid var(--shade-border, var(--gray-200));
+        color: var(--gray-600);
         white-space: nowrap;
-        transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        transition: color 0.2s ease;
       }
 
       .social-link:hover {
         color: var(--gray-900);
-        background: var(--shade-hover, var(--gray-900));
-        border-color: var(--shade-hover, var(--gray-900));
       }
 
       .social-icon {
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        color: var(--icon-shade, var(--gray-600));
       }
 
       .social-icon svg {
@@ -625,60 +621,48 @@
           url: "https://github.com/besoeasy?tab=repositories&q=&type=&language=&sort=stargazers",
           description: "Dive into my code, side projects, and experiments—steal ideas, get inspired, or just lurk 👀",
           lucide: "git-branch",
-          shade: "#f3f4f6",
-          shadeBorder: "#d1d5db",
-          shadeHover: "#e5e7eb",
+          shade: "#6b7280",
         },
         {
           name: "Nostr",
           url: "https://nosta.me/besoeasy@zaps.lol",
           description: "Find me on the decentralized side of the internet—uncensored thoughts and open conversations",
           lucide: "zap",
-          shade: "#fef9c3",
-          shadeBorder: "#fde68a",
-          shadeHover: "#fef08a",
+          shade: "#ca8a04",
         },
         {
           name: "Steam",
           url: "https://steamcommunity.com/id/besoeasy",
           description: "Games I play, hours I've lost, and maybe our next co-op session",
           lucide: "joystick",
-          shade: "#dbeafe",
-          shadeBorder: "#bfdbfe",
-          shadeHover: "#c7dbfe",
+          shade: "#3b82f6",
         },
         {
           name: "Instagram",
           url: "https://instagram.com/besoeasy",
           description: "Real life moments—if we've met or vibe, this is where we stay connected",
           lucide: "camera",
-          shade: "#ffe4e6",
-          shadeBorder: "#fecdd3",
-          shadeHover: "#ffd4d9",
+          shade: "#e11d48",
         },
         {
           name: "Telegram",
           url: "https://t.me/besoeasy",
           description: "Quick chats, random ideas, memes, or just say hi—I'm usually around here",
           lucide: "message-circle",
-          shade: "#ccfbf1",
-          shadeBorder: "#99f6e4",
-          shadeHover: "#a8f4e8",
+          shade: "#0d9488",
         },
       ];
 
       const socialLinks = document.getElementById("social-links");
 
-      SOCIALS.forEach(({ name, url, description, lucide, shade, shadeBorder, shadeHover }) => {
+      SOCIALS.forEach(({ name, url, description, lucide, shade }) => {
         const a = document.createElement("a");
         a.href = url;
         a.target = "_blank";
         a.rel = "noopener noreferrer";
         a.className = "social-link";
         a.title = description;
-        a.style.setProperty("--shade", shade);
-        a.style.setProperty("--shade-border", shadeBorder);
-        a.style.setProperty("--shade-hover", shadeHover);
+        a.style.setProperty("--icon-shade", shade);
         a.innerHTML = `<span class="social-icon"><i data-lucide="${lucide}" style="width:18px;height:18px"></i></span><span>${name}</span>`;
         socialLinks.appendChild(a);
       });

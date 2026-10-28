@@ -376,7 +376,8 @@
       }
 
       .activity-link {
-        margin-left: auto;
+        margin-top: 0.75rem;
+        align-self: center;
         color: var(--gray-600);
         display: inline-flex;
         align-items: center;
@@ -598,11 +599,6 @@
                   Commits
                 </button>
               </div>
-
-              <a class="activity-link" id="activity-link" href="https://blog.besoeasy.com" target="_blank" rel="noopener noreferrer">
-                <span id="activity-link-text">blog.besoeasy.com</span>
-                <i data-lucide="arrow-up-right" style="width: 13px; height: 13px"></i>
-              </a>
             </div>
 
             <div class="activity-panels">
@@ -613,6 +609,11 @@
                 <ul class="activity-list" id="commits-list"></ul>
               </div>
             </div>
+
+            <a class="activity-link" id="activity-link" href="https://blog.besoeasy.com" target="_blank" rel="noopener noreferrer">
+              <span id="activity-link-text">see all posts</span>
+              <i data-lucide="arrow-up-right" style="width: 13px; height: 13px"></i>
+            </a>
           </div>
         </div>
       </div>
@@ -942,7 +943,7 @@
           panelWriting.hidden = false;
           panelCommits.hidden = true;
           activityLink.href = "https://blog.besoeasy.com";
-          activityLinkText.textContent = "blog.besoeasy.com";
+          activityLinkText.textContent = "see all posts";
         } else {
           tabCommits.classList.add("is-active");
           tabCommits.setAttribute("aria-selected", "true");
@@ -951,7 +952,7 @@
           panelCommits.hidden = false;
           panelWriting.hidden = true;
           activityLink.href = "https://github.com/besoeasy?tab=repositories&q=&type=&language=&sort=stargazers";
-          activityLinkText.textContent = "github.com/besoeasy";
+          activityLinkText.textContent = "see all commits";
         }
       }
 

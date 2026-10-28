@@ -247,6 +247,11 @@
         letter-spacing: 0.5em;
       }
 
+      .bin-border span {
+        transition: opacity 2.5s ease;
+        will-change: opacity;
+      }
+
       /* Social links */
       .social-links {
         display: flex;
@@ -844,8 +849,21 @@
 
       // ── Binary borders ───────────────────────────────────────────────
       document.querySelectorAll("[data-bin]").forEach((el) => {
-        const bits = Array.from({ length: 400 }, () => (Math.random() < 0.5 ? "0" : "1")).join("");
-        el.textContent = bits;
+        const count = 160;
+        for (let i = 0; i < count; i++) {
+          const bit = document.createElement("span");
+          bit.textContent = Math.random() < 0.5 ? "0" : "1";
+          el.appendChild(bit);
+        }
+        const bits = [...el.children];
+        (function flicker() {
+          bits.forEach((bit) => {
+            if (Math.random() < 0.25) {
+              bit.style.opacity = Math.random() < 0.5 ? "0.15" : "1";
+            }
+          });
+          setTimeout(flicker, 1200 + Math.random() * 1500);
+        })();
       });
 
       // ── Activity Section (Writing & Commits) ──────────────────────────

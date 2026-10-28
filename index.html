@@ -285,6 +285,11 @@
         color: var(--icon-shade, var(--gray-600));
       }
 
+      .social-icon svg,
+      .social-link .email-label {
+        flex-shrink: 0;
+      }
+
       .social-icon svg {
         display: block;
       }
@@ -694,7 +699,7 @@
           statusEl.setAttribute("aria-live", "polite");
           a.href = "mailto:";
           a.addEventListener("click", (e) => copyEmailToClipboard(e, statusEl));
-          a.innerHTML = `<span class="social-icon"><i data-lucide="${lucide}" style="width:18px;height:18px"></i></span><span id="email-value">${emailFallback}</span>`;
+          a.innerHTML = `<span class="social-icon"><i data-lucide="${lucide}" style="width:18px;height:18px"></i></span><span class="email-label" id="email-value">${emailFallback}</span>`;
           a.appendChild(statusEl);
           socialLinks.appendChild(a);
           return;

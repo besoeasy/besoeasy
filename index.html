@@ -588,23 +588,9 @@
 
           <!-- Activity Section -->
           <div class="activity-section" id="activity-section" hidden>
-            <div class="activity-header">
-              <div class="activity-tabs" role="tablist" aria-label="Activity type">
-                <button class="activity-tab is-active" id="tab-writing" role="tab" aria-selected="true" aria-controls="panel-writing">
-                  Writing
-                </button>
-                <button class="activity-tab" id="tab-commits" role="tab" aria-selected="false" aria-controls="panel-commits">
-                  Commits
-                </button>
-              </div>
-            </div>
-
             <div class="activity-panels">
               <div class="activity-panel is-active" id="panel-writing" role="tabpanel" aria-labelledby="tab-writing">
                 <ul class="activity-list" id="writing-list"></ul>
-              </div>
-              <div class="activity-panel" id="panel-commits" role="tabpanel" aria-labelledby="tab-commits" hidden>
-                <ul class="activity-list" id="commits-list"></ul>
               </div>
             </div>
 
@@ -883,20 +869,13 @@
         new ResizeObserver(() => snakeBuild()).observe(photoWrap);
       }
 
-      // ── Activity Section (Writing & Commits) ──────────────────────────
+      // ── Activity Section (Writing) ──────────────────────────
       const activitySection = document.getElementById("activity-section");
-      const tabWriting = document.getElementById("tab-writing");
-      const tabCommits = document.getElementById("tab-commits");
-      const panelWriting = document.getElementById("panel-writing");
-      const panelCommits = document.getElementById("panel-commits");
       const writingList = document.getElementById("writing-list");
-      const commitsList = document.getElementById("commits-list");
       const activityLink = document.getElementById("activity-link");
       const activityLinkText = document.getElementById("activity-link-text");
 
-      let currentTab = "writing";
       const allBlogItems = [];
-      const allCommitItems = [];
 
       function escapeHtml(str) {
         return str.replace(/[&<>"']/g, (char) => ({
@@ -961,65 +940,11 @@
         });
       }
 
-      function renderCommits(randomize = false) {
-        if (!allCommitItems.length) return;
-        const items = randomize ? shuffleArray(allCommitItems).slice(0, 3) : allCommitItems.slice(0, 3);
-        commitsList.innerHTML = "";
-        items.forEach((item) => {
-          const li = document.createElement("li");
-          li.innerHTML = `
-            <a class="activity-item" href="${item.url}" target="_blank" rel="noopener noreferrer">
-              <span class="activity-tag">${escapeHtml(item.repoShort)}</span>
-              ${item.hash ? `<span class="activity-hash">${escapeHtml(item.hash)}</span>` : ""}
-              <span class="activity-title" title="${escapeHtml(item.label)}">${escapeHtml(item.label)}</span>
-              <span class="activity-time">${timeAgo(item.created_at)}</span>
-            </a>
-          `;
-          commitsList.appendChild(li);
-        });
-      }
-
-      function switchTab(tab) {
-        if (tab === currentTab) return;
-        currentTab = tab;
-        if (tab === "writing") {
-          tabWriting.classList.add("is-active");
-          tabWriting.setAttribute("aria-selected", "true");
-          tabCommits.classList.remove("is-active");
-          tabCommits.setAttribute("aria-selected", "false");
-          panelWriting.hidden = false;
-          panelCommits.hidden = true;
-          activityLink.href = "https://blog.besoeasy.com";
-          activityLinkText.textContent = "see all posts";
-        } else {
-          tabCommits.classList.add("is-active");
-          tabCommits.setAttribute("aria-selected", "true");
-          tabWriting.classList.remove("is-active");
-          tabWriting.setAttribute("aria-selected", "false");
-          panelCommits.hidden = false;
-          panelWriting.hidden = true;
-          activityLink.href = "https://github.com/besoeasy?tab=repositories&q=&type=&language=&sort=stargazers";
-          activityLinkText.textContent = "see all commits";
-        }
-      }
-
-      tabWriting.addEventListener("click", () => switchTab("writing"));
-      tabCommits.addEventListener("click", () => switchTab("commits"));
-
       function maybeShowActivity() {
-        if (!(allBlogItems.length || allCommitItems.length)) return;
+        if (!allBlogItems.length) return;
         activitySection.hidden = false;
         requestAnimationFrame(() => activitySection.classList.add("is-visible"));
         createIcons({ icons: lucide });
-        syncTabAvailability();
-      }
-
-      function syncTabAvailability() {
-        tabWriting.disabled = !allBlogItems.length;
-        tabCommits.disabled = !allCommitItems.length;
-        if (!allBlogItems.length && allCommitItems.length) {
-          switchTab("commits");
-        }
       }
 
       async function loadBlog() {
@@ -1040,49 +965,7 @@
         } catch (err) {}
       }
 
-      async function loadUpdates() {
-        try {
-          const events = await fetchJsonCached("https://api.github.com/users/besoeasy/events/public?per_page=30");
-          const pushes = events.filter((e) => e.type === "PushEvent").slice(0, 10);
-
-          if (!pushes.length) return;
-
-          const items = await Promise.all(
-            pushes.map(async (event) => {
-              const repoShort = event.repo.name.split("/")[1];
-              const head = event.payload?.head;
-              const shortHash = head ? head.slice(0, 7) : "";
-              const branch = (event.payload?.ref || "").replace("refs/heads/", "");
-              const url = `https://github.com/${event.repo.name}/commit/${head}`;
-              let message = "";
-
-              if (event.payload?.commits?.length) {
-                message = truncateMsg(event.payload.commits[0].message.split("\n")[0]);
-              } else if (head) {
-                try {
-                  const data = await fetchJsonCached(`https://api.github.com/repos/${event.repo.name}/commits/${head}`);
-                  message = truncateMsg(data.commit?.message?.split("\n")[0] || "");
-                } catch (err) {}
-              }
-
-              return {
-                repoShort,
-                hash: shortHash,
-                label: message || `pushed to ${branch || "main"}`,
-                url,
-                created_at: event.created_at,
-              };
-            })
-          );
-
-          allCommitItems.push(...items);
-          renderCommits(true);
-          maybeShowActivity();
-        } catch (err) {}
-      }
-
       loadBlog();
-      loadUpdates();
     </script>
   </body>
 </html>

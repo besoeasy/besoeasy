@@ -182,35 +182,21 @@
       /* Name */
       .name-line {
         margin: 0;
-        padding: 1.25rem 0;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: baseline;
-        gap: 0.35rem 0.6rem;
+        padding: 1.25rem 0 0;
+        font-size: clamp(2rem, 8vw, 3.25rem);
+        line-height: 1;
+        font-weight: 800;
+        letter-spacing: -0.05em;
         max-width: 100%;
-        min-width: 0;
         overflow-wrap: break-word;
-        text-align: left;
       }
 
-      .name-prompt {
+      .name-tagline {
         font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-        font-size: 0.8125rem;
+        font-size: 0.75rem;
         font-weight: 500;
-        letter-spacing: 0;
+        letter-spacing: 0.02em;
         color: var(--gray-600);
-        white-space: nowrap;
-        flex-shrink: 0;
-      }
-
-      .name-text {
-        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-        font-size: clamp(1.35rem, 5.5vw, 2rem);
-        line-height: 1.05;
-        font-weight: 700;
-        letter-spacing: -0.03em;
-        color: var(--gray-900);
-        min-width: 0;
       }
 
       /* Bio */
@@ -499,10 +485,8 @@
         <!-- Content -->
         <div class="content">
           <header class="ident">
-            <h1 id="name-line" class="name-line" aria-label="Aman Singh Katal">
-              <span class="name-prompt" aria-hidden="true">aman@besoeasy:~$</span>
-              <span class="name-text">Aman Singh Katal</span>
-            </h1>
+            <h1 id="name-line" class="name-line" aria-label="Aman Singh Katal">Aman Singh Katal</h1>
+            <div class="name-tagline">fintech · automation · security</div>
           </header>
 
           <p class="bio">

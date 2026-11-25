@@ -222,15 +222,38 @@
         color: var(--gray-600);
       }
 
+      .site-footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.25rem;
+        margin-top: 3rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--gray-200);
+        text-align: center;
+      }
+
+      .footer-about {
+        margin: 0;
+        max-width: 38em;
+        font-size: 0.875rem;
+        line-height: 1.7;
+        color: var(--gray-600);
+        text-wrap: pretty;
+        overflow-wrap: break-word;
+      }
+
+      .footer-about b {
+        color: var(--gray-900);
+        font-weight: 600;
+      }
+
       .social-footer {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
         justify-content: center;
         gap: 1.125rem 1.5rem;
-        margin-top: 3rem;
-        padding-top: 1.5rem;
-        border-top: 1px solid var(--gray-200);
         min-width: 0;
         max-width: 100%;
       }
@@ -415,9 +438,11 @@
         .activity-time {
           font-size: 0.75rem;
         }
+        .site-footer {
+          margin-top: 2.5rem;
+        }
         .social-footer {
           gap: 0.875rem 1.125rem;
-          margin-top: 2.5rem;
         }
         .social-link {
           font-size: 0.9375rem;
@@ -498,7 +523,14 @@
         </div>
       </div>
 
-      <footer class="social-footer" id="social-links"></footer>
+      <footer class="site-footer">
+        <p class="footer-about">
+          I build <b>efficient, redundant systems</b> that cut CO2 and electricity — and
+          <b>uncensorable tools</b> for free expression. Almost everything I ship is
+          <b>open source</b>.
+        </p>
+        <div class="social-footer" id="social-links"></div>
+      </footer>
     </div>
 
     <script type="module">

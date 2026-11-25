@@ -184,37 +184,33 @@
         margin: 0;
         padding: 1.25rem 0;
         display: flex;
-        flex-direction: column;
-        gap: 0.35rem;
-        align-items: flex-start;
-        max-width: 100%;
-        overflow-wrap: break-word;
-      }
-
-      .name-row {
-        display: flex;
+        flex-wrap: wrap;
         align-items: baseline;
-        gap: 0.85rem;
+        gap: 0.35rem 0.6rem;
+        max-width: 100%;
         min-width: 0;
+        overflow-wrap: break-word;
+        text-align: left;
       }
 
-      .name-label {
+      .name-prompt {
         font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-        font-size: 0.75rem;
+        font-size: 0.8125rem;
         font-weight: 500;
         letter-spacing: 0;
         color: var(--gray-600);
         white-space: nowrap;
         flex-shrink: 0;
-        min-width: 6.5rem;
       }
 
-      .name-value {
-        font-size: clamp(1.75rem, 7vw, 2.75rem);
-        line-height: 1;
-        font-weight: 800;
-        letter-spacing: -0.04em;
+      .name-text {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: clamp(1.35rem, 5.5vw, 2rem);
+        line-height: 1.05;
+        font-weight: 700;
+        letter-spacing: -0.03em;
         color: var(--gray-900);
+        min-width: 0;
       }
 
       /* Bio */
@@ -504,18 +500,8 @@
         <div class="content">
           <header class="ident">
             <h1 id="name-line" class="name-line" aria-label="Aman Singh Katal">
-              <span class="name-row">
-                <span class="name-label">my name</span>
-                <span class="name-value">AMAN</span>
-              </span>
-              <span class="name-row">
-                <span class="name-label">my surname</span>
-                <span class="name-value">SINGH</span>
-              </span>
-              <span class="name-row">
-                <span class="name-label">my house 👋</span>
-                <span class="name-value">KATAL</span>
-              </span>
+              <span class="name-prompt" aria-hidden="true">aman@besoeasy:~$</span>
+              <span class="name-text">Aman Singh Katal</span>
             </h1>
           </header>
 

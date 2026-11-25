@@ -222,14 +222,35 @@
         color: var(--gray-600);
       }
 
-      .social-links {
+      .social-marquee {
+        width: 100vw;
+        max-width: 100vw;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+        overflow: hidden;
+        border-top: 1px solid var(--gray-200);
+        border-bottom: 1px solid var(--gray-200);
+        padding: 0.65rem 0;
+        -webkit-mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
+        mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
+      }
+
+      .social-track {
         display: flex;
-        flex-wrap: wrap;
+        width: max-content;
+        animation: marquee-scroll var(--social-duration, 40s) linear infinite;
+      }
+
+      .social-marquee:hover .social-track {
+        animation-play-state: paused;
+      }
+
+      .social-group {
+        display: flex;
         align-items: center;
-        justify-content: space-between;
-        gap: 1.125rem 1.5rem;
-        min-width: 0;
-        max-width: 100%;
+        gap: 2.5rem;
+        padding-right: 2.5rem;
+        flex-shrink: 0;
       }
 
       .social-link {
@@ -412,8 +433,9 @@
         .activity-time {
           font-size: 0.75rem;
         }
-        .social-links {
-          gap: 0.875rem 1.125rem;
+        .social-group {
+          gap: 1.5rem;
+          padding-right: 1.5rem;
         }
         .social-link {
           font-size: 0.9375rem;
@@ -480,7 +502,9 @@
             <div class="email-row" id="email-row"></div>
           </header>
 
-          <div class="social-links" id="social-links"></div>
+          <div class="social-marquee">
+            <div class="social-track" id="social-links"></div>
+          </div>
 
           <!-- Activity Section -->
           <div class="activity-section" id="activity-section" hidden>
@@ -578,6 +602,9 @@
         }
       }
 
+      const socialGroup = document.createElement("div");
+      socialGroup.className = "social-group";
+
       SOCIALS.forEach(({ name, url, description, lucide, shade, copy }) => {
         const a = document.createElement("a");
         a.className = "social-link";
@@ -598,11 +625,25 @@
         a.title = description;
         a.style.setProperty("--icon-shade", shade);
         a.innerHTML = `<span class="social-icon"><i data-lucide="${lucide}" style="width:18px;height:18px"></i></span><span>${name}</span>`;
-        socialLinks.appendChild(a);
+        socialGroup.appendChild(a);
       });
+
+      const socialClone = socialGroup.cloneNode(true);
+      socialClone.setAttribute("aria-hidden", "true");
+      socialClone.querySelectorAll("a").forEach((a) => {
+        a.tabIndex = -1;
+      });
+      socialLinks.append(socialGroup, socialClone);
 
       // Hydrate all data-lucide elements
       createIcons({ icons: lucide });
+
+      requestAnimationFrame(() => {
+        const width = socialGroup.scrollWidth;
+        const speed = 80; // px per second
+        const duration = Math.max(20, width / speed);
+        socialLinks.style.setProperty("--social-duration", `${duration.toFixed(1)}s`);
+      });
 
       // ── localStorage GET cache (15 min) ──────────────────────────────
       const CACHE_TTL_MS = 15 * 60 * 1000;

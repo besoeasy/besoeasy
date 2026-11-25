@@ -320,9 +320,34 @@
         opacity: 1;
       }
 
+      .activity-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.75rem;
+      }
+
+      .activity-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--gray-600);
+      }
+
+      .activity-kicker::before {
+        content: "";
+        width: 0.4rem;
+        height: 0.4rem;
+        background: var(--rose-500);
+        flex-shrink: 0;
+      }
+
       .activity-link {
-        margin-top: 0.75rem;
-        align-self: center;
         color: var(--gray-600);
         display: inline-flex;
         align-items: center;
@@ -380,15 +405,17 @@
         justify-content: center;
         gap: 0.6rem;
         max-width: 100%;
+        padding: 0.25rem 0.5rem;
         font-size: 0.875rem;
         color: var(--gray-700);
         text-decoration: none;
         white-space: nowrap;
-        transition: color 0.2s ease;
+        transition: color 0.2s ease, background-color 0.2s ease;
       }
 
       .activity-item:hover {
         color: var(--gray-900);
+        background: var(--gray-200);
       }
 
       .activity-tag {
@@ -532,14 +559,17 @@
 
       <!-- Activity Section -->
       <div class="activity-section" id="activity-section" hidden>
+        <div class="activity-header">
+          <span class="activity-kicker">latest writing</span>
+          <a class="activity-link" id="activity-link" href="https://blog.besoeasy.com" target="_blank" rel="noopener noreferrer">
+            <span id="activity-link-text">all posts</span>
+            <i data-lucide="arrow-up-right" style="width: 13px; height: 13px"></i>
+          </a>
+        </div>
+
         <div class="marquee">
           <div class="marquee-track" id="marquee-track"></div>
         </div>
-
-        <a class="activity-link" id="activity-link" href="https://blog.besoeasy.com" target="_blank" rel="noopener noreferrer">
-          <span id="activity-link-text">see all posts</span>
-          <i data-lucide="arrow-up-right" style="width: 13px; height: 13px"></i>
-        </a>
       </div>
     </div>
 
@@ -812,8 +842,6 @@
       // ── Activity Section (Writing) ──────────────────────────
       const activitySection = document.getElementById("activity-section");
       const marqueeTrack = document.getElementById("marquee-track");
-      const activityLink = document.getElementById("activity-link");
-      const activityLinkText = document.getElementById("activity-link-text");
 
       const allBlogItems = [];
 

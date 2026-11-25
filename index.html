@@ -255,6 +255,13 @@
       }
 
       /* Social links */
+      .email-row {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        min-width: 0;
+      }
+
       .social-links {
         display: flex;
         flex-wrap: wrap;
@@ -514,6 +521,8 @@
             ship is free and open source 🆓
           </p>
 
+          <div class="email-row" id="email-row"></div>
+
           <div class="social-links" id="social-links"></div>
 
           <!-- Activity Section -->
@@ -625,7 +634,7 @@
           a.addEventListener("click", (e) => copyEmailToClipboard(e, statusEl));
           a.innerHTML = `<span class="social-icon"><i data-lucide="${lucide}" style="width:18px;height:18px"></i></span><span class="email-label" id="email-value">${emailFallback}</span>`;
           a.appendChild(statusEl);
-          socialLinks.appendChild(a);
+          document.getElementById("email-row").appendChild(a);
           return;
         }
         a.href = url;

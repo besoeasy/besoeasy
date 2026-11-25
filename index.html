@@ -306,11 +306,12 @@
 
       /* Activity Section */
       .activity-section {
-        width: 100vw;
-        max-width: 100vw;
-        margin-left: calc(50% - 50vw);
-        margin-right: calc(50% - 50vw);
+        width: 100%;
         min-width: 0;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--gray-200);
+        text-align: center;
         opacity: 0;
         transition: opacity 0.4s ease;
       }
@@ -348,17 +349,16 @@
         margin-top: 0.75rem;
         overflow: hidden;
         width: 100%;
-        border-top: 1px solid var(--gray-200);
-        border-bottom: 1px solid var(--gray-200);
-        padding: 0.65rem 0;
-        -webkit-mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
-        mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
+        height: 11rem;
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 62%, transparent 100%);
+        mask-image: linear-gradient(to bottom, transparent 0%, #000 12%, #000 62%, transparent 100%);
       }
 
       .marquee-track {
         display: flex;
-        width: max-content;
-        animation: marquee-scroll var(--marquee-duration, 60s) linear infinite;
+        flex-direction: column;
+        width: 100%;
+        animation: marquee-scroll var(--marquee-duration, 24s) linear infinite;
       }
 
       .marquee:hover .marquee-track {
@@ -367,16 +367,19 @@
 
       .marquee-group {
         display: flex;
+        flex-direction: column;
         align-items: center;
-        gap: 2.5rem;
-        padding-right: 2.5rem;
+        gap: 0.65rem;
+        padding-bottom: 0.65rem;
         flex-shrink: 0;
       }
 
       .activity-item {
-        display: inline-flex;
+        display: flex;
         align-items: baseline;
+        justify-content: center;
         gap: 0.6rem;
+        max-width: 100%;
         font-size: 0.875rem;
         color: var(--gray-700);
         text-decoration: none;
@@ -398,6 +401,10 @@
 
       .activity-title {
         color: inherit;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .activity-time {
@@ -409,10 +416,10 @@
 
       @keyframes marquee-scroll {
         from {
-          transform: translateX(0);
+          transform: translateY(-50%);
         }
         to {
-          transform: translateX(-50%);
+          transform: translateY(0);
         }
       }
 
@@ -427,9 +434,12 @@
         .content {
           gap: 1.25rem;
         }
+        .marquee {
+          height: 10rem;
+        }
         .marquee-group {
-          gap: 1.5rem;
-          padding-right: 1.5rem;
+          gap: 0.5rem;
+          padding-bottom: 0.5rem;
         }
         .activity-item {
           gap: 0.4rem;
@@ -509,17 +519,6 @@
             <div class="email-row" id="email-row"></div>
           </header>
 
-          <!-- Activity Section -->
-          <div class="activity-section" id="activity-section" hidden>
-            <div class="marquee">
-              <div class="marquee-track" id="marquee-track"></div>
-            </div>
-
-            <a class="activity-link" id="activity-link" href="https://blog.besoeasy.com" target="_blank" rel="noopener noreferrer">
-              <span id="activity-link-text">see all posts</span>
-              <i data-lucide="arrow-up-right" style="width: 13px; height: 13px"></i>
-            </a>
-          </div>
         </div>
       </div>
 
@@ -530,6 +529,18 @@
         </p>
         <div class="social-footer" id="social-links"></div>
       </footer>
+
+      <!-- Activity Section -->
+      <div class="activity-section" id="activity-section" hidden>
+        <div class="marquee">
+          <div class="marquee-track" id="marquee-track"></div>
+        </div>
+
+        <a class="activity-link" id="activity-link" href="https://blog.besoeasy.com" target="_blank" rel="noopener noreferrer">
+          <span id="activity-link-text">see all posts</span>
+          <i data-lucide="arrow-up-right" style="width: 13px; height: 13px"></i>
+        </a>
+      </div>
     </div>
 
     <script type="module">
@@ -867,9 +878,9 @@
         marqueeTrack.append(group, clone);
 
         requestAnimationFrame(() => {
-          const width = group.scrollWidth;
-          const speed = 70; // px per second
-          const duration = Math.max(20, width / speed);
+          const height = group.scrollHeight;
+          const speed = 8; // px per second
+          const duration = Math.max(24, height / speed);
           marqueeTrack.style.setProperty("--marquee-duration", `${duration.toFixed(1)}s`);
         });
       }

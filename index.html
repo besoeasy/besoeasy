@@ -191,14 +191,6 @@
         overflow-wrap: break-word;
       }
 
-      .name-tagline {
-        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-        font-size: 0.75rem;
-        font-weight: 500;
-        letter-spacing: 0.02em;
-        color: var(--gray-600);
-      }
-
       /* Bio */
       .bio {
         margin: 0;
@@ -236,9 +228,14 @@
       /* Social links */
       .email-row {
         display: flex;
-        justify-content: center;
-        width: 100%;
+        align-items: center;
         min-width: 0;
+      }
+
+      .email-row .social-link {
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: var(--gray-600);
       }
 
       .social-links {
@@ -486,7 +483,7 @@
         <div class="content">
           <header class="ident">
             <h1 id="name-line" class="name-line" aria-label="Aman Singh Katal">Aman Singh Katal</h1>
-            <div class="name-tagline">fintech · automation · security</div>
+            <div class="email-row" id="email-row"></div>
           </header>
 
           <p class="bio">
@@ -496,8 +493,6 @@
             express themselves 🗣️, and I'm a <b>serial open-source coder</b> 📦 — almost everything I
             ship is free and open source 🆓
           </p>
-
-          <div class="email-row" id="email-row"></div>
 
           <div class="social-links" id="social-links"></div>
 
